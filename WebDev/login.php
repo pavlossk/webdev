@@ -63,15 +63,11 @@
 </script>
 
 <body style="background-color:powderblue;">
-<center>   <head><center>Register Page</center></head>
-<sub>please fill the form to get an account</sub>
+<center>   <head><center>Login Page</center></head>
+<sub>please fill the form to login </sub>
 <br></br>
 <form ... onsubmit="return checkForm(this);">
 <p>Username: <input type="text" name="username"></p>
 <p>Password: <input type="password" name="pwd1"></p>
-<p>Confirm Password: <input type="password" name="pwd2"></p>
-<p>Email: <input type="text" name="mail"></p>
-<p>4+4 =  <input type="text" name="math"></p>
 <p><input type="submit"></p>
-    <a href="http://localhost/WebDev/WebDev/login.php">if you have already an account click here to login </a>
 </form></center></body>
