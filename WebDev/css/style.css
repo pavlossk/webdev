@@ -285,12 +285,26 @@ input[type=text] {
     color:black;
     min-width: 60%;
     max-width:80%;
-    width: 600px;
+    width: 300px;
     border-radius: 4px;
     font-size: 16px;
     align-content: center;
     background-color: white;
-    background-image: url(../img/search.png);
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+input[type=password]{
+    color:black;
+    min-width: 60%;
+    max-width:80%;
+    width: 300px;
+    border-radius: 4px;
+    font-size: 16px;
+    align-content: center;
+    background-color: white;
     background-position: 10px 10px; 
     background-repeat: no-repeat;
     -webkit-transition: width 0.4s ease-in-out;
