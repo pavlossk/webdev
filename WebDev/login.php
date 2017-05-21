@@ -4,9 +4,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <META HTTP-EQUIV="refresh" CONTENT="10">
 
-        <title>TableOn</title>
+        <title>WebDev</title>
         <link rel="icon" href="img/trasp.png">
 
         <meta name="description" content="Your Description Here">
@@ -50,82 +49,75 @@
                 form.username.focus();
                 return false;
             }
-            re = /^\w+$/;
-            if (!re.test(form.username.value)) {
-                alert("Error: Username must contain only letters, numbers and underscores!");
-                form.username.focus();
+            if(form.pwd1.value == ""){
+                alert("Error: Password cannot be blank!");
+                form.password.focus();
                 return false;
             }
-
-            if (form.pwd1.value != "" && form.pwd1.value == form.pwd2.value) {
-                if (form.pwd1.value.length < 6) {
-                    alert("Error: Password must contain at least six characters!");
-                    form.pwd1.focus();
-                    return false;
-                }
-                if (form.pwd1.value == form.username.value) {
-                    alert("Error: Password must be different from Username!");
-                    form.pwd1.focus();
-                    return false;
-                }
-                re = /[0-9]/;
-                if (!re.test(form.pwd1.value)) {
-                    alert("Error: password must contain at least one number (0-9)!");
-                    form.pwd1.focus();
-                    return false;
-                }
-                re = /[a-z]/;
-                if (!re.test(form.pwd1.value)) {
-                    alert("Error: password must contain at least one lowercase letter (a-z)!");
-                    form.pwd1.focus();
-                    return false;
-                }
-                re = /[A-Z]/;
-                if (!re.test(form.pwd1.value)) {
-                    alert("Error: password must contain at least one uppercase letter (A-Z)!");
-                    form.pwd1.focus();
-                    return false;
-                }
-                if (form.math.value != "8") {
-                    alert("Error: den kanei toso oute me aitisi !!!");
-                    form.math.focus();
-                    return false;
-                }
-
-            } else {
-                alert("Error: Please check that you've entered and confirmed your password!");
-                form.pwd1.focus();
-                return false;
-            }
-
-            alert("You entered a valid password: " + form.pwd1.value);
+            
             return true;
         }
 
     </script>
+    <?php
+                if (!empty($_POST["ready"])) {
+                    /*$username = $password="";
+                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                      $username = test_input($_POST["username"]);
+                      $password = test_input($_POST["pwd1"]);
+                    }*/
+                    function test_input($data) {
+                      $data = trim($data);
+                      $data = stripslashes($data);
+                      $data = htmlspecialchars($data);
+                      return $data;
+                    }
+                    $user = test_input($_POST["username"]);
+                    $password = test_input($_POST["pwd1"]);
+                    $servername = "localhost";
+                    $username = "root";
+                    $dbname = "webdev";
 
+                    $conn = new mysqli($servername, $username,'', $dbname);
+                    if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
+                    }
+
+
+                    $sql = "SELECT * FROM users WHERE username='$user' AND password='$password'";
+                    $result=mysqli_query($conn, $sql);
+                    $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+                    $count = mysqli_num_rows($result);
+                    if ($result) {
+                        echo "Connection is done";
+                    } else {
+                        echo "Connection Error " . mysqli_error($conn);
+                    }
+                    if($count==0){
+                        echo "Wrong credentials";
+                    }
+                    else if($count==1){
+                        echo "Connected";
+                    }
+                    mysqli_close($conn);
+                }
+            ?>
     <body>
         <div id="tf-service" style="background-color: #d6d6c2" >
-            <?php
-            ?>
-
-            <?php
-            ?>
-
             <div class="container " style="text-align: center">
                 <div class="content" style=" ">
 
                     <h3 style=" font-size:45px;">Login Page</h3>
                     <ul style="list-style-type:none; align-content:center; ">
 
-                        <form onsubmit="return checkForm(this);">
+                        <form onsubmit="return checkForm(this);" method="post">
                             <h3 style="font-size:20px; font:bold;">Username </h3> 
                             <input style="width:300px;" type="text" name="username">
-                            <h3 style="font-size:20px; font:bold;">Password  </h3> 
-                            <input style="width:300px;" type="password" style="width:300px;" name="pwd1">      
+                            <h3 style="font-size:20px; font:bold;">Password </h3> 
+                            <input style="width:300px;" type="password" style="width:300px; height:5000px"  name="pwd1">      
                             <br>
                             <br>
-                            <input class="button5" type="submit">
+                            <input name="ready" class="button5" type="submit">
                             <br>
                         </form>
                     </ul>

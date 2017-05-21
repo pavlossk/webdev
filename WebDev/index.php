@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-        <title>TableOn</title>
+        <title>WebDev</title>
         <link rel="icon" href="img/trasp.png">
 
         <meta name="description" content="Your Description Here">
@@ -107,6 +107,7 @@
     <body style="background-color:powderblue;">
         <div id="tf-service" style="background-color: #d6d6c2" >
             <?php
+            
             if (!empty($_POST["ready"])) {
 
                 $servername = "localhost";
