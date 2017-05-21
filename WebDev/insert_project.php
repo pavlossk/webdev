@@ -119,13 +119,21 @@
                     die("Connection failed: " . $conn->connect_error);
                 }
 
-                $user = $_POST["username"];
-                $pass = $_POST["password"];
-                $email = $_POST["email"];
+                $title = $_POST["title"];
+                $teacher = $_POST["teacher"];
+                $students= $_POST["students"];
+                $aim= $_POST["aim"];
+                $summary= $_POST["summ"];
+                $lessons= $_POST["lessons"];
+                $knowledge= $_POST["knowledge"];
+                $date_publish= $_POST["date_publish"];
+                $date_take= $_POST["date_take"];
+                $grade_= $_POST["grade"];
+                
 
 
 
-                $sql = "INSERT INTO users(username, password, email, type) VALUES('$user', '$pass', '$email', 'student')";
+                $sql = "INSERT INTO projects(teacher,projectname,summary) VALUES($teacher', '$title', '$summary')";
 
                 if (mysqli_query($conn, $sql)) {
 
@@ -141,25 +149,40 @@
             <div class="container " style="text-align: center">
                 <div class="content" style=" text-align: center">
 
-                    <h3 style=" text-align: center; font-size:45px;">Register Page</h3>
+                    <h3 style=" text-align: center; font-size:45px;">Εισαγωγή Διπλωματικής</h3>
                     <ul style="list-style-type:none; align-content:center; ">
 
                         <form onsubmit="return checkForm(this);" method="post">
-                            <h3 style="font-size:20px; font:bold;">Username: </h3>                           
-                            <input style="width:300px;" type="text" name="username">
+                            <h3 style="font-size:20px; font:bold;">Τίτλος: </h3>                           
+                            <input style="width:300px;" type="text" name="title">
 
-                            <h3 style="font-size:20px; font:bold;">Password:  </h3> 
-                            <input style="width:300px;" type="password" style="width:300px;" name="pwd1">
+                            <h3 style="font-size:20px; font:bold;">Καθηγητής:  </h3> 
+                            <input style="width:300px;" type="text" style="width:300px;" name="teacher">
 
-                            <h3 style="font-size:20px; font:bold;">Confirm Password:</h3>
-                            <input style="width:300px;"  type="password" name="pwd2">
+                            <h3 style="font-size:20px; font:bold;">Αριθμός Φοιτητών:</h3>
+                            <input style="width:300px;"  type="number" name="students">
 
-                            <h3 style="font-size:20px; font:bold;">Do the math: </h3>
-                            <input style="width:300px;" type="text" name="math">
+                            <h3 style="font-size:20px; font:bold;">Στόχος Διπλωματικής: </h3>
+                            <input style="width:300px;" type="text" name="aim">
 
-                            <h3 style="font-size:20px; font:bold;">Email:</h3>
-                            <input style="width:300px;" type="text"  name="mail">
+                            <h3 style="font-size:20px; font:bold;">Περίληψη:</h3>
+                            <input style="width:300px;" type="text"  name="summ">
 
+                            <h3 style="font-size:20px; font:bold;">Προαπαιτούμενα μαθήματα:</h3>
+                            <input style="width:300px;" type="text"  name="lessons">
+
+                            <h3 style="font-size:20px; font:bold;">Προαπαιτούμενες γνώσεις:</h3>
+                            <input style="width:300px;" type="text"  name="knowledge">
+
+                            <h3 style="font-size:20px; font:bold;">Ημερομηνία Δημοσιοποίησης:</h3>
+                            <input style="width:300px;" type="date"  name="date_publish">
+
+                            <h3 style="font-size:20px; font:bold;">Ημερομηνία Ανάληψης:</h3>
+                            <input style="width:300px;" type="date"  name="date_take">
+                                   
+                            <h3 style="font-size:20px; font:bold;">Βαθμός:</h3>
+                            <input style="width:300px;" type="number"  name="grade">
+                            
                             <br>
                             <br>
                             <input name="ready" class="button5" type="submit" value="Εισαγωγή Στοιχείων">
