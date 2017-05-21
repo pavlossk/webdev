@@ -85,9 +85,16 @@
                 $search = $_POST["search"];
                 $sql = "SELECT * FROM projects WHERE teacher='$search'";
                 $result = $conn->query($sql);
+                $choice=0;
             }else if(!empty($_POST["showall"])){
                 $sql = "SELECT * FROM projects";
                 $result = $conn->query($sql);
+                $choice=0;
+            }else if(!empty($_POST["showapplications"])){
+                $user=$_SESSION["username"];
+                $sql = "SELECT * FROM applications,projects WHERE projects.projectID=applications.projectID AND studentID='$user'";
+                $result = $conn->query($sql);
+                $choice=1;
             }
 
             
@@ -106,7 +113,11 @@
                     </div>
 
                     <div class="col-md-4 " >
+                    <?php if($choice==0){ ?>
                         <h3 style="font-size:18px; font:bold;">Summary</h3>
+                        <?php }else {?>
+                        <h3 style="font-size:18px; font:bold;">Status</h3>
+                        <?php }?>
                     </div>
 
                     <div class="col-md-4"   >
@@ -117,7 +128,7 @@
                 <?php
                 $counter = 0;
 
-                if ($result->num_rows > 0) {
+                if ($result->num_rows > 0 && $choice==0) {
                     // output data of   each row
                     while ($row = $result->fetch_assoc()) {
                         if ($counter % 2 == 0) {
@@ -170,7 +181,70 @@
                                         <input type="hidden" name="teacher" value="<?php echo $row["teacher"] ?>">
                                         <input type="hidden" name="pro_name" value="<?php echo $row["projectname"] ?>">
                                         <input type="hidden" name="summ" value="<?php echo $row["summary"] ?>">
-                                    </form>F
+                                    </form>
+                                </div>
+                            </div>  
+                            <br>
+
+                            <?php
+                        }
+                        $counter++;
+                    }
+                }
+                else if ($result->num_rows > 0 && $choice==1) {
+                    // output data of   each row
+                    while ($row = $result->fetch_assoc()) {
+                        if ($counter % 2 == 0) {
+                            ?>
+                            <div class="container" style=" border-radius: 4px;  border: 1px solid #ccccb3; background-color:white; padding:2%; text-align:center;" >
+                                <div class="row" style="min-height: 100px;" >
+                                    <form id="1" action="" method="post">
+                                        <div class="col-md-4">
+                                            <h3 style="font-size:20px;"><?php echo $row["teacher"] ?></h3>  
+                                        </div>    
+                                        <div class="col-md-4" >
+                                            <h3 style="font-size: 14px;">  <?php echo $row["projectname"] ?></h3>
+                                        </div>
+                                        <div class="col-md-4 ">
+                                            <h3 style="font-size: 14px;"> <?php echo $row["status"] ?></h3>
+                                        </div>
+                                        <div class="col-md-4 ">
+                                            <input name="epelekse" type="submit" class="button button4" style="align-content:center; border-color:#ffa31a;color:black; background-color:#ffa31a; font-color:black;" value="Επέλεξε">
+                                        </div>
+
+                                        <input type="hidden" name="id" value="<?php echo $row["projectID"] ?>">
+                                        <input type="hidden" name="teacher" value="<?php echo $row["teacher"] ?>">
+                                        <input type="hidden" name="pro_name" value="<?php echo $row["projectname"] ?>">
+                                        <input type="hidden" name="summ" value="<?php echo $row["summary"] ?>">
+                                    </form>
+                                </div>
+                            </div>
+                            <br>
+                            <?php
+                        } else {
+                            ?>
+                            <div class="container" style="  border-radius: 4px; border: 1px solid #ccccb3; background-color:#eaeae1; padding:2%; text-align:center;" >
+                                <div class="row" style="min-height: 100px; " >
+
+                                    <form id="2" action="" method="post">
+                                        <div class="col-md-4">
+                                            <h3 style="font-size:20px;"><?php echo $row["teacher"] ?></h3>  
+                                        </div>    
+                                        <div class="col-md-4" >
+                                            <h3 style="font-size: 14px;">  <?php echo $row["projectname"] ?></h3>
+                                        </div>
+                                        <div class="col-md-4 ">
+                                            <h3 style="font-size: 14px;"> <?php echo $row["status"] ?></h3>
+                                        </div>
+                                        <div class="col-md-4 ">
+                                            <input name="epelekse" type="submit" class="button button4" style="align-content:center; border-color:#ffa31a;color:black; background-color:#ffa31a; font-color:black;" value="Επέλεξε">
+                                        </div>
+
+                                        <input type="hidden" name="id" value="<?php echo $row["projectID"] ?>">
+                                        <input type="hidden" name="teacher" value="<?php echo $row["teacher"] ?>">
+                                        <input type="hidden" name="pro_name" value="<?php echo $row["projectname"] ?>">
+                                        <input type="hidden" name="summ" value="<?php echo $row["summary"] ?>">
+                                    </form>
                                 </div>
                             </div>  
                             <br>

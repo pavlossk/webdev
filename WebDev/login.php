@@ -88,7 +88,12 @@
                         session_start();
                         $_SESSION["username"] = $row["username"];
                         $_SESSION["type"] = $row["type"];
-                        header('Location: /webdev/WebDev/students_menu.php');    
+                        if($_SESSION["type"] =="student"){
+                            header('Location: /webdev/WebDev/students_menu.php'); 
+                        }
+                        else if($_SESSION["type"] =="teacher"){
+                            header('Location: /webdev/WebDev/teacher_menu.php'); 
+                        }
                     } else {
                         echo "Connection Error " . mysqli_error($conn);
                     }
