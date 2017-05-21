@@ -62,7 +62,7 @@
                             <div class="col-md-12" style="padding:2%; zoom:80%;">
                                 <div id="demo1" class="collapse">
 
-                                    <form id="search_project" action="" method="post">
+                                    <form id="search_project" action="all_projects.php" method="post">
                                         Δώσε κριτήριο αναζήτησης:<br>
                                         <input style="font-size:20px;" type="text" size="20" name="search">   
                                         <br></br>
