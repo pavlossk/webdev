@@ -61,11 +61,6 @@
     </script>
     <?php
                 if (!empty($_POST["ready"])) {
-                    /*$username = $password="";
-                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                      $username = test_input($_POST["username"]);
-                      $password = test_input($_POST["pwd1"]);
-                    }*/
                     function test_input($data) {
                       $data = trim($data);
                       $data = stripslashes($data);
@@ -88,8 +83,12 @@
                     $result=mysqli_query($conn, $sql);
                     $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
                     $count = mysqli_num_rows($result);
-                    if ($result) {
+                    if ($count>0) {
                         echo "Connection is done";
+                        session_start();
+                        $_SESSION["username"] = $row["username"];
+                        $_SESSION["type"] = $row["type"];
+                        header('Location: /webdev/WebDev/students_menu.php');    
                     } else {
                         echo "Connection Error " . mysqli_error($conn);
                     }

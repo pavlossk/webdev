@@ -1,4 +1,4 @@
-
+<?php session_start(); ?>
 <html lang="en">
     <head>
         <!-- Basic Page Needs
@@ -7,7 +7,7 @@
         <!--[if IE]><meta http-equiv="x-ua-compatible" content="IE=9" /><![endif]-->
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>TableOn</title>
+        <title>WebDev</title>
         <link rel="icon" href="img/trasp.png">
         <meta name="description" content="Your Description Here">
         <meta name="keywords" content="bootstrap themes, portfolio, responsive theme">
@@ -35,26 +35,62 @@
         <link href='http://fonts.googleapis.com/css?family=Playball' rel='stylesheet' type='text/css'>
 
     </head>
+    <?php
+            if (!empty($_POST["epelekse"]) && $_SESSION["type"]=="student") {
+                    $servername = "localhost";
+                    $username = "root";
+                    $dbname = "webdev";
+                    $conn = new mysqli($servername, $username, '', $dbname);
+                    if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
+                    }
+                    function test_input($data) {
+                      $data = trim($data);
+                      $data = stripslashes($data);
+                      $data = htmlspecialchars($data);
+                      return $data;
+                    }
 
+                    $id = test_input($_POST["id"]);
+                    $teacher = test_input($_POST["teacher"]);
+                    $pro_name = test_input($_POST["pro_name"]);
+                    $summ = test_input($_POST["summ"]);
+                    $conn = new mysqli($servername, $username,'', $dbname);
+                    if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
+                    }
+                    $user=$_SESSION["username"];
+                    $sql1 = "INSERT INTO applications(projectID, studentID, status) VALUES ('$id','$user','applied')";
+                    if(mysqli_query($conn, $sql1)){
+                        header('Location: /webdev/WebDev/students_menu.php');  
+                    }
+                    mysqli_close($conn);
+                }
+            ?>
     <body>
         <div class="container">
             <br></br>
             <?php
+            /*if (!empty($_POST["search"])) {
+
+            }*/
             $servername = "localhost";
             $username = "root";
             $dbname = "webdev";
-            //kokkino 0 prasino 1
-
             $conn = new mysqli($servername, $username, '', $dbname);
-            // Check connection
             if ($conn->connect_error) {
                 die("Connection failed: " . $conn->connect_error);
             }
+            if (!empty($_POST["ready"])) {
+                $search = $_POST["search"];
+                $sql = "SELECT * FROM projects WHERE teacher='$search'";
+                $result = $conn->query($sql);
+            }else if(!empty($_POST["showall"])){
+                $sql = "SELECT * FROM projects";
+                $result = $conn->query($sql);
+            }
 
-            $search = $_POST["search"];
-            $sql = "SELECT * FROM projects WHERE teacher='$search'";
-
-            $result = $conn->query($sql);
+            
             ?>
 
             <div id="tf-service" style="zoom:90%;" >

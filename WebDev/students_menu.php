@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<?php session_start(); ?>
+<?php session_start(); 
+    //if($_SESSION["username"]==null)
+?>
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <META HTTP-EQUIV="refresh" CONTENT="10">
 
-        <title>TableOn</title>
+        <title>WebDev</title>
         <link rel="icon" href="img/trasp.png">
 
         <meta name="description" content="Your Description Here">
@@ -46,6 +48,7 @@
 
         <div id="tf-service" style="background-color: #d6d6c2" >
             <?php
+                echo "Καλώς ήρθες ".$_SESSION["username"];
             ?>
 
             <?php
@@ -64,9 +67,10 @@
 
                                     <form id="search_project" action="all_projects.php" method="post">
                                         Δώσε κριτήριο αναζήτησης:<br>
-                                        <input style="font-size:20px;" type="text" size="20" name="search">   
+                                        <input style="font-size:20px;" type="text" size="20" name="search"> 
                                         <br></br>
                                         <input name="ready" type="submit" class="button button4" style="align-content:center; border-color:#ffa31a;color:black; background-color:#ffa31a; font-color:black;" value="Αναζήτησε">
+                                        <input name="showall" type="submit" class="button button4" style="align-content:center; border-color:#ffa31a;color:black; background-color:#ffa31a; font-color:black;" value="Εμφάνισέ τα όλα">
                                     </form>
                                 </div>
                             </div>
