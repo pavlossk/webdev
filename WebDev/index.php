@@ -139,7 +139,7 @@
             }
             ?>
 
-            <div class="container " style="text-align: center">
+            <div class="container " style="text-align: center; zoom:70%;" >
                 <div class="content" style=" text-align: center">
 
                     <h3 style=" text-align: center; font-size:45px;">Register Page</h3>

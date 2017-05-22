@@ -51,9 +51,9 @@
                     <ul style="list-style-type:none; align-content:center;">
                         <h3 style="font-size:45px;">Dashboard Καθηγητή</h3>
                         <br>
-                        <li><button class="button5" onclick="location.href = 'index.php';" style=" width:300px; vertical-align:middle">Διπλωματικές ανά τρέχουσα κατάσταση</button></li>
+                        <li><button class="button5" onclick="location.href = 'show_applications.php';" style=" width:300px; vertical-align:middle">Διπλωματικές ανά τρέχουσα κατάσταση</button></li>
                         <br>
-                        <li><button class="button5" onclick="location.href = 'index.php';" style=" width:300px; vertical-align:middle">Αιτήσεις Διπλωματικών / Έγκριση</button></li>
+                        <li><button class="button5" onclick="location.href = 'intresting_project.php'"  style=" width:300px; vertical-align:middle">Αιτήσεις Διπλωματικών / Έγκριση</button></li>
                         <br>
                         <li><button class="button5" onclick="location.href = 'index.php';" style=" width:300px; vertical-align:middle">Chat με φοιτητές</button></li>
                         <br>
