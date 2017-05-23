@@ -89,10 +89,10 @@
                         $_SESSION["username"] = $row["username"];
                         $_SESSION["type"] = $row["type"];
                         if($_SESSION["type"] =="student"){
-                            header('Location: /WebDev/students_menu.php'); 
+                            header('Location: /webdev/WebDev/students_menu.php'); 
                         }
                         else if($_SESSION["type"] =="teacher"){
-                            header('Location: /WebDev/teacher_menu.php'); 
+                            header('Location: /webdev/WebDev/teacher_menu.php'); 
                         }
                     } else {
                         echo "Connection Error " . mysqli_error($conn);

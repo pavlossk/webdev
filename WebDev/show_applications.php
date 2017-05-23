@@ -29,7 +29,6 @@
         <link rel="stylesheet" type="text/css" href="css/responsive.css">
 
         <script type="text/javascript" src="js/modernizr.custom.js"></script>
-        <script type="text/javascript" src="./fbapp/fb.js"></script>
 
         <link href='http://fonts.googleapis.com/css?family=Raleway:500,600,700,100,800,900,400,200,300' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Playball' rel='stylesheet' type='text/css'>
@@ -40,9 +39,7 @@
     </head>
 
     <body>
-
-
-        <div class="container">
+        <div class="container" style="zoom:70%;">
             <br></br>
             <?php
             $servername = "localhost";
@@ -56,217 +53,134 @@
                 die("Connection failed: " . $conn->connect_error);
             }
             $teacher = $_SESSION["username"];
-
-            $sql = "SELECT applicationID,studentID,status,projectname FROM applications,projects WHERE  applications.projectID = projects.projectID AND projects.teacher = '$teacher'";
+            $sql = "SELECT applicationID, projectname, studentID FROM applications,users,projects WHERE applications.projectID = projects.projectID AND users.type='teacher' AND users.username='$teacher' AND applications.status='applied'";
             $result = $conn->query($sql);
             ?>
-            <h3 style=" text-align:center; font-weight: bold; font-size:45px;"> Όι διπλωματικές του: <?php echo $teacher;?></h3>
+
+
+            <div class="hidden-xs container" style=" padding:1%; text-align:center;" >
+                <div class="col-md-3" >
+                    <h3 style="font-size:18px; font:bold;">ID Αίτησης</h3>
+                </div>
+
+                <div class="col-md-3 "   >
+                    <h3 style="font-size:18px; font:bold;">Όνομα Διπλωματικής</h3>
+                </div>
+
+                <div class="col-md-3 " >
+                    <h3 style="font-size:18px; font:bold;">ID Φοιτητή</h3>
+                </div>
+
+                <div class="col-md-3"   >   
+                    <h3 style="font-size:18px; font:bold"> </h3>
+                </div>
+            </div>
+
+
             <?php
             $counter = 0;
-            
-
+            $array = array();
             if ($result->num_rows > 0) {
-                $array = array($result->num_rows);
-                $cout = 0;
+                // output data of   each row
                 while ($row = $result->fetch_assoc()) {
-
-                    if ($row["status"] == 'not_applied') {
-
-                        if ($cout == 0) {
-                            $cout++;
-                            ?>
-                            <br>
-                            <br>
-                            <h3 style="font-weight: bold;">Διπλωματικές που δεν έχουν ανατεθεί.</h3>
-                        <?php } ?>
-
+                    if ($counter % 2 == 0) {
+                        ?>
                         <div class="container" style=" border-radius: 4px;  border: 1px solid #ccccb3; background-color:#b8b894; padding:2%; text-align:center;" >
                             <div class="row" style="min-height: 100px;" >
 
-
                                 <form id="1" action="" method="post">
-                                    <div class="col-md-4" >
+                                    <div class="col-md-3" >
                                         <h3 style="font-size:25px;  font-weight: bold;"><?php echo $row["applicationID"] ?></h3> 
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3 ">
                                         <h3 style="font-size: 16px;">  <?php echo $row["projectname"] ?> </h3>
                                     </div>
 
-                                    <div class="col-md-4">
+                                    <div class="col-md-3 ">
                                         <h3 style="padding-top: 18px; font-size: 18px;">  <?php echo $row["studentID"] ?></h3>
                                     </div>
+                                    <div class="col-md-3">
+                                        <input name="egkrish" type="submit" class="button button4" style="padding-top:18px; align-content:center; border-color:#ffa31a;background-color:#ffa31a; color:black;" value="Έγκριση">
+                                    </div>
 
-
-                                    <input type="hidden" name="applicationid" value="<?php echo $row["applications.studentID"] ?>">
-                                    <input type="hidden" name="studentid" value="<?php echo $row["applications.studentID"] ?>">
+                                    <input type="hidden" name="applicationid" value="<?php echo $row["applicationID"] ?>">
+                                    <input type="hidden" name="studentid" value="<?php echo $row["studentID"] ?>">
                                 </form>
                             </div>
                         </div>
                         <br>
+                        <?php
+                    } else {
+                        ?>
+                        <div class="container" style="  border-radius: 4px; border: 1px solid #ccccb3; background-color:#ccccb3; padding:2%; text-align:center;" >
+                            <div class="row" style="min-height: 100px;">
+
+                                <form id="2" action="" method="post">
+                                    <div class="col-md-3" >
+                                        <h3 style="font-size:25px;  font-weight: bold;"><?php echo $row["applicationID"] ?></h3> 
+                                    </div>
+                                    <div class="col-md-3 ">
+                                        <h3 style="font-size: 16px;">  <?php echo $row["projectname"] ?> </h3>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <h3 style="padding-top: 18px; font-size: 18px;">  <?php echo $row["studentID"] ?></h3>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input name="egkrish" type="submit" class="button button4" style="padding-top:18px; align-content:center; border-color:#ffa31a;background-color:#ffa31a; color:black;" value="Έγκριση">
+                                    </div>
+
+                                    <input type="hidden" name="applicationid" value="<?php echo $row["applicationID"] ?>">
+                                    <input type="hidden" name="studentid" value="<?php echo $row["studentID"] ?>">
+                                </form>
+                            </div>
+                        </div>  
+                        <br>
 
                         <?php
                     }
-
-                    $array[$counter] = $row;
                     $counter++;
                 }
-                $result = count($array);
-                $cout = 0;
-                for ($i = 0; $i < $result; $i++) {
-
-                    if ($array[$i]['status'] == 'applied') {
-
-                        if ($cout == 0) {
-                            $cout++;
-                            ?>
-                            <br>
-                            <br>
-                            <h3 style="font-weight: bold;">Διπλωματικές που βρίσκονται υπό έγκριση.</h3>
-                        <?php } ?>
-
-                        <div class="container" style=" border-radius: 4px;  border: 1px solid #ccccb3; background-color:#b8b894; padding:2%; text-align:center;" >
-                            <div class="row" style="min-height: 100px;" >
-
-                                <form id="1" action="" method="post">
-                                    <div class="col-md-4" >
-                                        <h3 style="font-size:25px;  font-weight: bold;"><?php echo $array[$i]["applicationID"] ?></h3> 
-                                    </div>
-                                    <div class="col-md-4">
-                                        <h3 style="font-size: 16px;">  <?php echo $array[$i]["projectname"] ?> </h3>
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <h3 style="padding-top: 18px; font-size: 18px;">  <?php echo $array[$i]["studentID"] ?></h3>
-                                    </div>
-
-
-                                    <input type="hidden" name="applicationid" value="<?php echo $array[$i]["studentID"] ?>">
-                                    <input type="hidden" name="studentid" value="<?php echo $array[$i]["studentID"] ?>">
-                                </form>
-                            </div>
-                        </div>
-                        <br>
-                        <?php
-                    }
-                }
-                $cout = 0;
-                for ($i = 0; $i < $result; $i++) {
-
-                    if ($array[$i]['status'] == 'approved') {
-
-                        if ($cout == 0) {
-                            $cout++;
-                            ?>
-                            <br>
-                            <br>
-                            <h3 style="font-weight: bold;" >Διπλωματικές που έχουν ανατεθεί.</h3>
-                        <?php } ?>
-
-                        <div class="container" style=" border-radius: 4px;  border: 1px solid #ccccb3; background-color:#b8b894; padding:2%; text-align:center;" >
-                            <div class="row" style="min-height: 100px;" >
-                                <form id="1" action="" method="post">
-                                    <div class="col-md-4" >
-                                        <h3 style="font-size:25px;  font-weight: bold;"><?php echo $array[$i]["applicationID"] ?></h3> 
-                                    </div>
-                                    <div class="col-md-4">
-                                        <h3 style="font-size: 16px;">  <?php echo $array[$i]["projectname"] ?> </h3>
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <h3 style="padding-top: 18px; font-size: 18px;">  <?php echo $array[$i]["studentID"] ?></h3>
-                                    </div>
-
-
-                                    <input type="hidden" name="applicationid" value="<?php echo $array[$i]["studentID"] ?>">
-                                    <input type="hidden" name="studentid" value="<?php echo $array[$i]["studentID"] ?>">
-                                </form>
-                            </div>
-                        </div>
-                        <br>
-                        <?php
-                    }
-                }
-                $cout = 0;
-                for ($i = 0; $i < $result; $i++) {
-
-                    if ($array[$i]['status'] == 'ready') {
-
-                        if ($cout == 0) {
-                            $cout++;
-                            ?>
-                            <br>
-                            <br>
-                            <h3 style="font-weight: bold;" >Διπλωματικές που έτοιμες για παρουσίαση.</h3>
-                        <?php } ?>
-                        <div class="container" style=" border-radius: 4px;  border: 1px solid #ccccb3; background-color:#b8b894; padding:2%; text-align:center;" >
-                            <div class="row" style="min-height: 100px;" >
-                                <form id="1" action="" method="post">
-
-                                    <div class="col-md-4" >
-                                        <h3 style="font-size:25px;  font-weight: bold;"><?php echo $array[$i]["applicationID"] ?></h3> 
-                                    </div>
-                                    <div class="col-md-4">
-                                        <h3 style="font-size: 16px;">  <?php echo $array[$i]["projectname"] ?> </h3>
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <h3 style="padding-top: 18px; font-size: 18px;">  <?php echo $array[$i]["studentID"] ?></h3>
-                                    </div>
-
-
-                                    <input type="hidden" name="applicationid" value="<?php echo $row["studentID"] ?>">
-                                    <input type="hidden" name="studentid" value="<?php echo $row["studentID"] ?>">
-                                </form>
-                            </div>
-                        </div>
-                        <br>
-                        <?php
-                    }
-                }
-                $cout = 0;
-                for ($i = 0; $i < $result; $i++) {
-
-                    if ($array[$i]['status'] == 'complete') {
-
-                        if ($cout == 0) {
-                            $cout++;
-                            ?>
-                            <br>
-                            <br>
-                            <h3 style="font-weight: bold;" >Διπλωματικές που έχουν ολοκληρωθεί πλήρως.</h3>
-                        <?php } ?>
-
-                        <div class="container" style=" border-radius: 4px;  border: 1px solid #ccccb3; background-color:#b8b894; padding:2%; text-align:center;" >
-                            <div class="row" style="min-height: 100px;" >
-                                <form id="1" action="" method="post">
-                                    <div class="col-md-4" >
-                                        <h3 style="font-size:25px;  font-weight: bold;"><?php echo $array[$i]["applicationID"] ?></h3> 
-                                    </div>
-                                    <div class="col-md-4">
-                                        <h3 style="font-size: 16px;">  <?php echo $array[$i]["projectname"] ?> </h3>
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <h3 style="padding-top: 18px; font-size: 18px;">  <?php echo $array[$i]["studentID"] ?></h3>
-                                    </div>
-
-
-                                    <input type="hidden" name="applicationid" value="<?php echo $row["studentID"] ?>">
-                                    <input type="hidden" name="studentid" value="<?php echo $row["studentID"] ?>">
-                                </form>
-                            </div>
-                        </div>
-                        <br>
-
-                        <?php
-                    }
-                }
+            } else {
+                ?>
+                <h3 style="color:red;">Δεν βρέθηκαν αποτελέσματα.</h3>
+                <?php
             }
             $conn->close();
+            ?>
+
+            <?php
+            if (!empty($_POST["egkrish"])) {
+
+                $servername = "localhost";
+                $username = "root";
+                $dbname = "webdev";
+
+                $appid = $_POST["applicationid"];
+                $studentid = $_POST["studentid"];
+
+// Create connection
+                $conn = new mysqli($servername, $username, '', $dbname);
+// Check connection
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                }
+
+                $sql = "UPDATE applications SET status='approved' WHERE applicationID='$appid' AND studentID='$studentid'";
+
+                if (mysqli_query($conn, $sql)) {
+                    $str = 1;
+                } else {
+                    echo "Έγινε κάποιο λάθος στην καταχώρηση σας.";
+                }
+                $conn->close();
+                header('Location: /WebDev/teacher_menu.php');
+            }
             ?>
 
 
         </div>
 
     </body>
-</html>
+</htmnl>
+
