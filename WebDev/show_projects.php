@@ -57,7 +57,7 @@
             }
             $teacher = $_SESSION["username"];
 
-            $sql = "SELECT applicationID,studentID,projects.status,projectname FROM applications,projects WHERE  applications.projectID = projects.projectID AND projects.teacher = '$teacher'";
+            $sql = "SELECT applicationID,studentID,projects.status as status,projectname FROM applications,projects WHERE  applications.projectID = projects.projectID AND projects.teacher = '$teacher' ";
             $result = $conn->query($sql);
             ?>
             <h3 style=" text-align:center; font-weight: bold; font-size:45px;"> Όι διπλωματικές του: <?php echo $teacher;?></h3>
@@ -70,7 +70,7 @@
                 $cout = 0;
                 while ($row = $result->fetch_assoc()) {
 
-                    if ($row["projects.status"] == 'not applied') {
+                    if ($row["status"] == 'not applied') {
 
                         if ($cout == 0) {
                             $cout++;
@@ -114,7 +114,7 @@
                 $cout = 0;
                 for ($i = 0; $i < $result; $i++) {
 
-                    if ($array[$i]['projects.status'] == 'applied') {
+                    if ($array[$i]['status'] == 'applied') {
 
                         if ($cout == 0) {
                             $cout++;
@@ -152,7 +152,7 @@
                 $cout = 0;
                 for ($i = 0; $i < $result; $i++) {
 
-                    if ($array[$i]['projects.status'] == 'approved') {
+                    if ($array[$i]['status'] == 'approved') {
 
                         if ($cout == 0) {
                             $cout++;
@@ -189,7 +189,7 @@
                 $cout = 0;
                 for ($i = 0; $i < $result; $i++) {
 
-                    if ($array[$i]['projects.status'] == 'ready') {
+                    if ($array[$i]['status'] == 'ready') {
 
                         if ($cout == 0) {
                             $cout++;
@@ -226,7 +226,7 @@
                 $cout = 0;
                 for ($i = 0; $i < $result; $i++) {
 
-                    if ($array[$i]['projects.status'] == 'complete') {
+                    if ($array[$i]['status'] == 'complete') {
 
                         if ($cout == 0) {
                             $cout++;
