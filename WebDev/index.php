@@ -151,7 +151,7 @@
 
                 //KWDIKAS GIA MAIL 
 
-                require '/Applications/XAMPP/xamppfiles/htdocs/PHPMailer-master/PHPMailerAutoload.php';
+                require '/PHPMailer-master/PHPMailerAutoload.php';
 
                 $mail = new PHPMailer;
 
@@ -165,14 +165,14 @@
                 $mail->Port = 25;                                       // TCP port to connect to
 
                 $mail->setFrom('skpa3201@gmail.com', 'Mailer');
-                $mail->addAddress('pavlos_sk@hotmail.com', 'Joe User');     // Add a recipient
+                $mail->addAddress($email, $user);     // Add a recipient
                 // Name is optional
                 $mail->addReplyTo('skpa3201@gmail.com', 'Information');
 
                 // Set email format to HTML
 
                 $mail->Subject = 'Account Confirmation';
-                $mail->Body = $user.' hello, enter this link to verify your account'.' href="http://localhost/webdev/WebDev/confirm.php?confirm='.$random;
+                $mail->Body = $user.' hello, enter this link to verify your account'.'  http://localhost/webdev/WebDev/confirm.php?confirm='.$random;
                 $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
                 if (!$mail->send()) {

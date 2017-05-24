@@ -42,45 +42,32 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
 
-
+    <?php 
+        if (!empty($_GET["confirm"])){
+            $_SESSION["confirm"]=$_GET["confirm"];
+        }
+    ?>
     <body style="background-color: #d6d6c2">
         <div id="tf-service" style="background-color: #d6d6c2" >
             <?php
             if (!empty($_POST["ready"])) {
 
-
-
                 $servername = "localhost";
                 $username = "root";
                 $dbname = "webdev";
-
+                echo $_POST["typed"];
                 $conn = new mysqli($servername, $username, '', $dbname);
                 // Check connection
                 if ($conn->connect_error) {
                     die("Connection failed: " . $conn->connect_error);
                 }
 
-                $user = $_POST["username"];
-                $pass = $_POST["password"];
-                $email = $_POST["email"];
-
-                function generateRandomString($length = 10) {
-                    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-                    $charactersLength = strlen($characters);
-                    $randomString = '';
-                    for ($i = 0; $i < $length; $i++) {
-                        $randomString .= $characters[rand(0, $charactersLength - 1)];
-                    }
-                    return $randomString;
-                }
-
-                $random = generateRandomString();
-
-                $sql = "INSERT INTO users(username, password, email, confirm) VALUES('$user', '$pass', '$email','$random')";
+                $confirm=$_SESSION["confirm"];
+                $sql = "UPDATE users SET type='student',confirm='confirmed' WHERE confirm='$confirm'";
 
                 if (mysqli_query($conn, $sql)) {
-
-                    echo "Record updated successfully";
+                    $message = "Η εγγραφή έγινε με επιτυχία";
+                    echo "<script type='text/javascript'>alert('$message'); window.location.href = '/webdev/WebDev/login.php';</script>";
                 } else {
                     echo "Error updating record: " . mysqli_error($conn);
                 }
@@ -96,16 +83,13 @@
                     
                     <ul style="list-style-type:none; align-content:center; ">
                         <br>
-
-
-
-                        <select style=" text-align: center;">
-                            <option value="prof">Καθηγητής</option>
+                        <select style=" text-align: center;" form="type" name="typed"> 
+                            <option value="teacher">Καθηγητής</option>
                             <option value="student">Μαθητής</option>
                            
                         </select>
                         <br>
-                        <form onsubmit="return checkForm(this);" method="post">
+                        <form onsubmit="return checkForm(this);" method="post" id="type">
                             <br>
                             <input name="ready" class="button5" type="submit" value="Εισαγωγή Στοιχείων">
                             <br>
