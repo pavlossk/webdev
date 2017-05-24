@@ -42,33 +42,41 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     
-    
+    <?php 
+        if (!empty($_POST["confirm"])){
+            $_SESSION["confirm"]=$_POST["confirm"];
+        }
+    ?>
     <h3 style=" text-align: center; font-size:45px;">Ανέβασε ένα αρχείο</h3>
                     <ul style="list-style-type:none; align-content:center; ">
     <body style="background-color: #d6d6c2">
         <div id="tf-service" style="background-color: #d6d6c2" >
-<table width="80%" border="1">
-    <tr>
-    <td>File Name</td>
-    <td>File Type</td>
-    <td>File Size(KB)</td>
-    <td>View</td>
-    </tr>
-    <?php
- $sql="/localhost/WebDev/CitySens.pdf";
- $result_set=mysql_query($sql);
+            <table width="80%" border="1">
+                <tr>
+                <td>File Name</td>
+                <td>File Type</td>
+                <td>File Size(KB)</td>
+                <td>View</td>
+                </tr>
+                <?php
+             $sql="/localhost/WebDev/CitySens.pdf";
+             $result_set=mysql_query($sql);
 
-  ?>
-        <tr>
-        <td><?php echo 'CitySens' ?></td>
-        <td><?php echo 'PDF' ?></td>
-        <td><?php echo '12TB' ?></td>
-        <td><a href="/WebDev/CitySens.pdf<?php echo '' ?>" >view file</a></td>
-        </tr>
-        <?php
- 
- ?>
-</table>
-             </div>
+              ?>
+                    <tr>
+                    <td><?php echo 'CitySens' ?></td>
+                    <td><?php echo 'PDF' ?></td>
+                    <td><?php echo '12TB' ?></td>
+                    <td><a href="/WebDev/CitySens.pdf<?php echo '' ?>" >view file</a></td>
+                    </tr>
+                    <?php
+             ?>
+            </table>
+        </div>
+        <form action="upload.php" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" size="50" />
+            <br />
+            <input type="submit" value="Upload" />
+        </form>
     </body>
 </html>
