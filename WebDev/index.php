@@ -107,11 +107,12 @@
     <body style="">
         <div id="tf-service" style="background-color: #d6d6c2" >
             <?php
-            
             if (!empty($_POST["ready"])) {
 
+
+
                 $servername = "localhost";
-                $username = "root@localhost";
+                $username = "root";
                 $dbname = "webdev";
 
                 $conn = new mysqli($servername, $username, '', $dbname);
@@ -124,9 +125,18 @@
                 $pass = $_POST["password"];
                 $email = $_POST["email"];
 
+                function generateRandomString($length = 10) {
+                    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                    $charactersLength = strlen($characters);
+                    $randomString = '';
+                    for ($i = 0; $i < $length; $i++) {
+                        $randomString .= $characters[rand(0, $charactersLength - 1)];
+                    }
+                    return $randomString;
+                }
+                $random = generateRandomString();
 
-
-                $sql = "INSERT INTO users(username, password, email, type) VALUES('$user', '$pass', '$email', 'student')";
+                $sql = "INSERT INTO users(username, password, email, confirm) VALUES('$user', '$pass', '$email','$random')";
 
                 if (mysqli_query($conn, $sql)) {
 
@@ -136,10 +146,48 @@
                 }
 
                 mysqli_close($conn);
+
+
+
+                //KWDIKAS GIA MAIL 
+
+                require '/PHPMailer-master/PHPMailerAutoload.php';
+
+                $mail = new PHPMailer;
+
+//$mail->SMTPDebug = 3;                               // Enable verbose debug output
+
+                $mail->isSMTP();                                      // Set mailer to use SMTP
+                $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+                $mail->SMTPAuth = TRUE; // Authentication must be disabled
+                $mail->Username = 'skpa3201@gmail.com';
+                $mail->Password = '%Z57y0@3'; // Leave this blank
+                $mail->Port = 25;                                       // TCP port to connect to
+
+                $mail->setFrom('skpa3201@gmail.com', 'Mailer');
+                $mail->addAddress($email, $user);     // Add a recipient
+                // Name is optional
+                $mail->addReplyTo('skpa3201@gmail.com', 'Information');
+
+                // Set email format to HTML
+
+                $mail->Subject = 'Account Confirmation';
+                $mail->Body = $user.' hello, enter this link to verify your account'.'  http://localhost/webdev/WebDev/confirm.php?confirm='.$random;
+                $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+                if (!$mail->send()) {
+                    echo 'Message could not be sent.';
+                    echo 'Mailer Error: ' . $mail->ErrorInfo;
+                } else {
+                    echo 'Message has been sent';
+                }
+
+
+// KWDIKAS GIA MAIL
             }
             ?>
 
-            <div class="container " style="text-align: center; zoom:70%;" >
+            <div class="container " style="text-align: center">
                 <div class="content" style=" text-align: center">
 
                     <h3 style=" text-align: center; font-size:45px;">Register Page</h3>
@@ -150,16 +198,16 @@
                             <input style="width:300px;" type="text" name="username">
 
                             <h3 style="font-size:20px; font:bold;">Password:  </h3> 
-                            <input style="width:300px;" type="password" style="width:300px;" name="pwd1">
+                            <input style="width:300px;" type="password" style="width:300px;" name="password">
 
                             <h3 style="font-size:20px; font:bold;">Confirm Password:</h3>
-                            <input style="width:300px;"  type="password" name="pwd2">
+                            <input style="width:300px;"  type="password" name="password">
 
                             <h3 style="font-size:20px; font:bold;">Do the math: </h3>
                             <input style="width:300px;" type="text" name="math">
 
                             <h3 style="font-size:20px; font:bold;">Email:</h3>
-                            <input style="width:300px;" type="text"  name="mail">
+                            <input style="width:300px;" type="text"  name="email">
 
                             <br>
                             <br>
