@@ -49,9 +49,9 @@
         <div id="tf-service" style="background-color: #d6d6c2" >
             <?php
                 echo "Καλώς ήρθες ".$_SESSION["username"];
-            ?>
-
-            <?php
+                if (!empty($_POST["file_handler"])){
+                    $_SESSION["file_handler"]=;
+                }
             ?>
 
             <div class="container">
@@ -76,18 +76,23 @@
                             </div>
                         </li>
 
-                        <li><form id="search_project" action="all_projects.php" method="post">
-                                        <input name="showapplications" type="submit" class=" button5" style=" width:300px; vertical-align:middle" value="Εμφάνισε τις αιτήσεις μου">
-                                    </form>
-                                    </li>
+                        <li>
+                            <form id="search_project" action="all_projects.php" method="post">
+                                <input name="showapplications" type="submit" class=" button5" style=" width:300px; vertical-align:middle" value="Εμφάνισε τις αιτήσεις μου">
+                            </form>
+                        </li>
                         <br>
                         <li><button class="button5" onclick="location.href = 'index.php';" style=" width:300px; vertical-align:middle">Αιτήσεις Διπλωματικών / Έγκριση</button></li>
                         <br>
                         <li><button class="button5" onclick="location.href = 'index.php';" style=" width:300px; vertical-align:middle">Chat με καθηγητή</button></li>
                         <br>
-                        <li><button class="button5" onclick="location.href = 'index.php';" style=" width:300px; vertical-align:middle">Αποστολή Αρχείων</button></li>
+                        <li><button class="button5" onclick="location.href = 'file_handler.php';" style=" width:300px; vertical-align:middle">Αποστολή Αρχείων</button></li>
                         <br>                          
-                        <li><button class="button5" onclick="location.href = 'index.php';" style=" width:300px; vertical-align:middle">Ανέβασμα αρχείων για διπλωματική</button></li>
+                        <li>
+                            <form id="file_handler" action="file_handler.php" method="post">
+                                <input name="file_handler" type="submit" class=" button5" style=" width:300px; vertical-align:middle" value="Ανέβασμα αρχείων για διπλωματική">
+                            </form>
+                        </li>
                         <br>    
                         <li><button class="button5" onclick="location.href = 'index.php';" style=" width:300px; vertical-align:middle">Charts</button></li>
                         <br> 
