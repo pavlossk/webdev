@@ -36,44 +36,66 @@
 
     </head>
     <?php
-            if (!empty($_POST["epelekse"]) && $_SESSION["type"]=="student") {
-                    $servername = "localhost";
-                    $username = "root";
-                    $dbname = "webdev";
-                    $conn = new mysqli($servername, $username, '', $dbname);
-                    if ($conn->connect_error) {
-                        die("Connection failed: " . $conn->connect_error);
-                    }
-                    function test_input($data) {
-                      $data = trim($data);
-                      $data = stripslashes($data);
-                      $data = htmlspecialchars($data);
-                      return $data;
-                    }
+    $valid = 0;
+    $choice = 0;
+    if (!empty($_POST["epelekse"]) && $_SESSION["type"] == "student") {
+        $servername = "localhost";
+        $username = "root";
+        $dbname = "webdev";
+        $conn = new mysqli($servername, $username, '', $dbname);
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
 
-                    $id = test_input($_POST["id"]);
-                    $teacher = test_input($_POST["teacher"]);
-                    $pro_name = test_input($_POST["pro_name"]);
-                    $summ = test_input($_POST["summ"]);
-                    $conn = new mysqli($servername, $username,'', $dbname);
-                    if ($conn->connect_error) {
-                        die("Connection failed: " . $conn->connect_error);
-                    }
-                    $user=$_SESSION["username"];
-                    $sql1 = "INSERT INTO applications(projectID, studentID, status) VALUES ('$id','$user','applied')";
-                    if(mysqli_query($conn, $sql1)){
-                        header('Location: /webdev/WebDev/students_menu.php');  
-                    }
-                    mysqli_close($conn);
-                }
-            ?>
+        function test_input($data) {
+            $data = trim($data);
+            $data = stripslashes($data);
+            $data = htmlspecialchars($data);
+            return $data;
+        }
+
+        $id = test_input($_POST["id"]);
+        $teacher = test_input($_POST["teacher"]);
+        $pro_name = test_input($_POST["pro_name"]);
+        $summ = test_input($_POST["summ"]);
+        $conn = new mysqli($servername, $username, '', $dbname);
+
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+        $user = $_SESSION["username"];
+
+
+
+        $sql1 = "SELECT COUNT(*) as count FROM applications WHERE studentID='$user' AND projectID='$id'";
+        $result1 = $conn->query($sql1);
+
+
+        while ($row1 = $result1->fetch_assoc()) {
+            if ($row1["count"] == 1) {
+                $valid = 1;
+            }
+        }
+
+        if ($valid == 0) {
+            $sql = "INSERT INTO applications(projectID, studentID, status) VALUES ('$id','$user','applied')";
+            if (mysqli_query($conn, $sql)) {
+                //header('Location: /webdev/WebDev/students_menu.php');
+                $message = "Η αίτηση σου καταχωρήθηκε.";
+                echo "<script type='text/javascript'>alert('$message'); window.location.href = '/webdev/WebDev/students_menu.php';</script>";
+            }
+        }
+        mysqli_close($conn);
+    }
+    ?>
     <body>
         <div class="container">
             <br></br>
             <?php
-            /*if (!empty($_POST["search"])) {
+            /* if (!empty($_POST["search"])) {
 
-            }*/
+              } */
+
             $servername = "localhost";
             $username = "root";
             $dbname = "webdev";
@@ -85,179 +107,188 @@
                 $search = $_POST["search"];
                 $sql = "SELECT * FROM projects WHERE teacher='$search'";
                 $result = $conn->query($sql);
-                $choice=0;
-            }else if(!empty($_POST["showall"])){
+                $choice = 1;
+            } else if (!empty($_POST["showall"])) {
                 $sql = "SELECT * FROM projects";
                 $result = $conn->query($sql);
-                $choice=0;
-            }else if(!empty($_POST["showapplications"])){
-                $user=$_SESSION["username"];
-                $sql = "SELECT * FROM applications,projects WHERE projects.projectID=applications.projectID AND studentID='$user'";
+                $choice = 1;
+            } else if (!empty($_POST["showapplications"])) {
+                $user = $_SESSION["username"];
+                $sql = "SELECT teacher,projectname,applications.status as status FROM applications,projects WHERE projects.projectID=applications.projectID AND studentID='$user'";
                 $result = $conn->query($sql);
-                $choice=1;
+                $choice = 2;
+            } else {
+                
             }
-
-            
             ?>
 
             <div id="tf-service" style="zoom:90%;" >
 
 
                 <div class="hidden-xs container" style=" padding:1%; text-align:center;" >
-                    <div class="col-md-4" >
-                        <h3 style="font-size:18px; font:bold;">Teacher</h3>
-                    </div>
 
-                    <div class="col-md-4 "   >
-                        <h3 style="font-size:18px; font:bold;">Project Name</h3>
-                    </div>
+                    <?php if ($choice == 1) { ?>
+                        <h3 style="color:black; font-weight:bold; font-size:40px; "> Όλες οι διπλωματικές.</h3>
+                    <?php } else if ($choice == 2) { ?>    
+                        <h3 style="color:black; font-weight:bold; font-size:40px; ">Όλες οι αιτήσεις μου.</h3>
+                        <?php
+                    }
+                    if ($valid == 0) {
+                        ?>    
+                        <div class="col-md-4" >
+                            <h3 style="font-size:18px; font:bold;">Teacher</h3>
+                        </div>
 
-                    <div class="col-md-4 " >
-                    <?php if($choice==0){ ?>
-                        <h3 style="font-size:18px; font:bold;">Summary</h3>
-                        <?php }else {?>
-                        <h3 style="font-size:18px; font:bold;">Status</h3>
-                        <?php }?>
+                        <div class="col-md-4 "   >
+                            <h3 style="font-size:18px; font:bold;">Project Name</h3>
+                        </div>
+
+                        <div class="col-md-4 " >
+                        <?php } if ($choice == 1) { ?>
+                            <h3 style="font-size:18px; font:bold;">Summary</h3>
+                        <?php } else if ($choice == 2) { ?>
+                            <h3 style="font-size:18px; font:bold;">Status</h3>
+                        <?php } ?>
                     </div>
 
                     <div class="col-md-4"   >
-                       
+
                     </div>
                 </div>
 
                 <?php
                 $counter = 0;
+                if ($valid == 0) {
+                    if ($result->num_rows > 0 && $choice == 1) {
+                        // output data of   each row
+                        while ($row = $result->fetch_assoc()) {
+                            if ($counter % 2 == 0) {
+                                ?>
 
-                if ($result->num_rows > 0 && $choice==0) {
-                    // output data of   each row
-                    while ($row = $result->fetch_assoc()) {
-                        if ($counter % 2 == 0) {
-                            ?>
-                            <div class="container" style=" border-radius: 4px;  border: 1px solid #ccccb3; background-color:white; padding:2%; text-align:center;" >
-                                <div class="row" style="min-height: 100px;" >
-                                    <form id="1" action="" method="post">
-                                        <div class="col-md-4">
-                                            <h3 style="font-size:20px;"><?php echo $row["teacher"] ?></h3>  
-                                        </div>    
-                                        <div class="col-md-4" >
-                                            <h3 style="font-size: 14px;">  <?php echo $row["projectname"] ?></h3>
-                                        </div>
-                                        <div class="col-md-4 ">
-                                            <h3 style="font-size: 14px;"> <?php echo $row["summary"] ?></h3>
-                                        </div>
-                                        <div class="col-md-4 ">
-                                            <input name="epelekse" type="submit" class="button button4" style="align-content:center; border-color:#ffa31a;color:black; background-color:#ffa31a; font-color:black;" value="Επέλεξε">
-                                        </div>
+                                <div class="container" style=" border-radius: 4px;  border: 1px solid #ccccb3; background-color:white; padding:2%; text-align:center;" >
+                                    <div class="row" style="min-height: 100px;" >
+                                        <form id="1" action="" method="post">
+                                            <div class="col-md-4">
+                                                <h3 style="font-size:20px;"><?php echo $row["teacher"] ?></h3>  
+                                            </div>    
+                                            <div class="col-md-4" >
+                                                <h3 style="font-size: 14px;">  <?php echo $row["projectname"] ?></h3>
+                                            </div>
+                                            <div class="col-md-4 ">
+                                                <h3 style="font-size: 14px;"> <?php echo $row["summary"] ?></h3>
+                                            </div>
+                                            <div class="col-md-4 ">
+                                                <input name="epelekse" type="submit" class="button button4" style="align-content:center; border-color:#ffa31a;color:black; background-color:#ffa31a; font-color:black;" value="Επέλεξε">
+                                            </div>
 
-                                        <input type="hidden" name="id" value="<?php echo $row["projectID"] ?>">
-                                        <input type="hidden" name="teacher" value="<?php echo $row["teacher"] ?>">
-                                        <input type="hidden" name="pro_name" value="<?php echo $row["projectname"] ?>">
-                                        <input type="hidden" name="summ" value="<?php echo $row["summary"] ?>">
-                                    </form>
+                                            <input type="hidden" name="id" value="<?php echo $row["projectID"] ?>">
+                                            <input type="hidden" name="teacher" value="<?php echo $row["teacher"] ?>">
+                                            <input type="hidden" name="pro_name" value="<?php echo $row["projectname"] ?>">
+                                            <input type="hidden" name="summ" value="<?php echo $row["summary"] ?>">
+                                        </form>
+                                    </div>
                                 </div>
-                            </div>
-                            <br>
-                            <?php
-                        } else {
-                            ?>
-                            <div class="container" style="  border-radius: 4px; border: 1px solid #ccccb3; background-color:#eaeae1; padding:2%; text-align:center;" >
-                                <div class="row" style="min-height: 100px; " >
+                                <br>
+                                <?php
+                            } else {
+                                ?>
+                                <div class="container" style="  border-radius: 4px; border: 1px solid #ccccb3; background-color:#eaeae1; padding:2%; text-align:center;" >
+                                    <div class="row" style="min-height: 100px; " >
 
-                                    <form id="2" action="" method="post">
-                                        <div class="col-md-4">
-                                            <h3 style="font-size:20px;"><?php echo $row["teacher"] ?></h3>  
-                                        </div>    
-                                        <div class="col-md-4" >
-                                            <h3 style="font-size: 14px;">  <?php echo $row["projectname"] ?></h3>
-                                        </div>
-                                        <div class="col-md-4 ">
-                                            <h3 style="font-size: 14px;"> <?php echo $row["summary"] ?></h3>
-                                        </div>
-                                        <div class="col-md-4 ">
-                                            <input name="epelekse" type="submit" class="button button4" style="align-content:center; border-color:#ffa31a;color:black; background-color:#ffa31a; font-color:black;" value="Επέλεξε">
-                                        </div>
+                                        <form id="2" action="" method="post">
+                                            <div class="col-md-4">
+                                                <h3 style="font-size:20px;"><?php echo $row["teacher"] ?></h3>  
+                                            </div>    
+                                            <div class="col-md-4" >
+                                                <h3 style="font-size: 14px;">  <?php echo $row["projectname"] ?></h3>
+                                            </div>
+                                            <div class="col-md-4 ">
+                                                <h3 style="font-size: 14px;"> <?php echo $row["summary"] ?></h3>
+                                            </div>
+                                            <div class="col-md-4 ">
+                                                <input name="epelekse" type="submit" class="button button4" style="align-content:center; border-color:#ffa31a;color:black; background-color:#ffa31a; font-color:black;" value="Επέλεξε">
+                                            </div>
 
-                                        <input type="hidden" name="id" value="<?php echo $row["projectID"] ?>">
-                                        <input type="hidden" name="teacher" value="<?php echo $row["teacher"] ?>">
-                                        <input type="hidden" name="pro_name" value="<?php echo $row["projectname"] ?>">
-                                        <input type="hidden" name="summ" value="<?php echo $row["summary"] ?>">
-                                    </form>
-                                </div>
-                            </div>  
-                            <br>
+                                            <input type="hidden" name="id" value="<?php echo $row["projectID"] ?>">
+                                            <input type="hidden" name="teacher" value="<?php echo $row["teacher"] ?>">
+                                            <input type="hidden" name="pro_name" value="<?php echo $row["projectname"] ?>">
+                                            <input type="hidden" name="summ" value="<?php echo $row["summary"] ?>">
+                                        </form>
+                                    </div>
+                                </div>  
+                                <br>
 
-                            <?php
+                                <?php
+                            }
+                            $counter++;
                         }
-                        $counter++;
-                    }
-                }
-                else if ($result->num_rows > 0 && $choice==1) {
-                    // output data of   each row
-                    while ($row = $result->fetch_assoc()) {
-                        if ($counter % 2 == 0) {
-                            ?>
-                            <div class="container" style=" border-radius: 4px;  border: 1px solid #ccccb3; background-color:white; padding:2%; text-align:center;" >
-                                <div class="row" style="min-height: 100px;" >
-                                    <form id="1" action="" method="post">
-                                        <div class="col-md-4">
-                                            <h3 style="font-size:20px;"><?php echo $row["teacher"] ?></h3>  
-                                        </div>    
-                                        <div class="col-md-4" >
-                                            <h3 style="font-size: 14px;">  <?php echo $row["projectname"] ?></h3>
-                                        </div>
-                                        <div class="col-md-4 ">
-                                            <h3 style="font-size: 14px;"> <?php echo $row["status"] ?></h3>
-                                        </div>
-                                        <div class="col-md-4 ">
-                                            <input name="epelekse" type="submit" class="button button4" style="align-content:center; border-color:#ffa31a;color:black; background-color:#ffa31a; font-color:black;" value="Επέλεξε">
-                                        </div>
+                    } else if ($result->num_rows > 0 && $choice == 2) {
+                        // output data of   each row
+                        while ($row = $result->fetch_assoc()) {
+                            if ($counter % 2 == 0) {
+                                ?>
+                                <div class="container" style=" border-radius: 4px;  border: 1px solid #ccccb3; background-color:white; padding:2%; text-align:center;" >
+                                    <div class="row" style="min-height: 100px;" >
+                                        <form id="1" action="" method="post">
+                                            <div class="col-md-4">
+                                                <h3 style="font-size:20px;"><?php echo $row["teacher"] ?></h3>  
+                                            </div>    
+                                            <div class="col-md-4" >
+                                                <h3 style="font-size: 14px;">  <?php echo $row["projectname"] ?></h3>
+                                            </div>
+                                            <div class="col-md-4 ">
+                                                <h3 style="font-size: 14px;"> <?php echo $row["status"] ?></h3>
+                                            </div>
+                                            <div class="col-md-4 ">
+                                            </div>
 
-                                        <input type="hidden" name="id" value="<?php echo $row["projectID"] ?>">
-                                        <input type="hidden" name="teacher" value="<?php echo $row["teacher"] ?>">
-                                        <input type="hidden" name="pro_name" value="<?php echo $row["projectname"] ?>">
-                                        <input type="hidden" name="summ" value="<?php echo $row["summary"] ?>">
-                                    </form>
+                                            <input type="hidden" name="id" value="<?php echo $row["projectID"] ?>">
+                                            <input type="hidden" name="teacher" value="<?php echo $row["teacher"] ?>">
+                                            <input type="hidden" name="pro_name" value="<?php echo $row["projectname"] ?>">
+                                            <input type="hidden" name="summ" value="<?php echo $row["summary"] ?>">
+                                        </form>
+                                    </div>
                                 </div>
-                            </div>
-                            <br>
-                            <?php
-                        } else {
-                            ?>
-                            <div class="container" style="  border-radius: 4px; border: 1px solid #ccccb3; background-color:#eaeae1; padding:2%; text-align:center;" >
-                                <div class="row" style="min-height: 100px; " >
+                                <br>
+                                <?php
+                            } else {
+                                ?>
+                                <div class="container" style="  border-radius: 4px; border: 1px solid #ccccb3; background-color:#eaeae1; padding:2%; text-align:center;" >
+                                    <div class="row" style="min-height: 100px; " >
 
-                                    <form id="2" action="" method="post">
-                                        <div class="col-md-4">
-                                            <h3 style="font-size:20px;"><?php echo $row["teacher"] ?></h3>  
-                                        </div>    
-                                        <div class="col-md-4" >
-                                            <h3 style="font-size: 14px;">  <?php echo $row["projectname"] ?></h3>
-                                        </div>
-                                        <div class="col-md-4 ">
-                                            <h3 style="font-size: 14px;"> <?php echo $row["status"] ?></h3>
-                                        </div>
-                                        <div class="col-md-4 ">
-                                            <input name="epelekse" type="submit" class="button button4" style="align-content:center; border-color:#ffa31a;color:black; background-color:#ffa31a; font-color:black;" value="Επέλεξε">
-                                        </div>
+                                        <form id="2" action="" method="post">
+                                            <div class="col-md-4">
+                                                <h3 style="font-size:20px;"><?php echo $row["teacher"] ?></h3>  
+                                            </div>    
+                                            <div class="col-md-4" >
+                                                <h3 style="font-size: 14px;">  <?php echo $row["projectname"] ?></h3>
+                                            </div>
+                                            <div class="col-md-4 ">
+                                                <h3 style="font-size: 14px;"> <?php echo $row["status"] ?></h3>
+                                            </div>
+                                            <div class="col-md-4 ">
+                                            </div>
 
-                                        <input type="hidden" name="id" value="<?php echo $row["projectID"] ?>">
-                                        <input type="hidden" name="teacher" value="<?php echo $row["teacher"] ?>">
-                                        <input type="hidden" name="pro_name" value="<?php echo $row["projectname"] ?>">
-                                        <input type="hidden" name="summ" value="<?php echo $row["summary"] ?>">
-                                    </form>
-                                </div>
-                            </div>  
-                            <br>
+                                            <input type="hidden" name="id" value="<?php echo $row["projectID"] ?>">
+                                            <input type="hidden" name="teacher" value="<?php echo $row["teacher"] ?>">
+                                            <input type="hidden" name="pro_name" value="<?php echo $row["projectname"] ?>">
+                                            <input type="hidden" name="summ" value="<?php echo $row["summary"] ?>">
+                                        </form>
+                                    </div>
+                                </div>  
+                                <br>
 
-                            <?php
+                                <?php
+                            }
+                            $counter++;
                         }
-                        $counter++;
                     }
-                } else {
+                } else if ($valid == 1) {
                     ?>
-                    <h3 style="color:red;">Δεν βρέθηκαν αποτελέσματα.</h3>
+                    <h3 style="color:red;">Έχεις ξανακάνει αίτηση.</h3>
                     <?php
                 }
+
                 $conn->close();
                 ?>
 

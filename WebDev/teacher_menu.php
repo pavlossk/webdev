@@ -57,9 +57,9 @@
                         <br>
                         <li><button class="button5" onclick="location.href = 'index.php';" style=" width:300px; vertical-align:middle">Chat με φοιτητές</button></li>
                         <br>
-                        <li><button class="button5" onclick="location.href = 'index.php';" style=" width:300px; vertical-align:middle">Πρόοδος Διπλωματικών </button></li>
+                        <li><button class="button5" onclick="location.href = 'gantt.php';" style=" width:300px; vertical-align:middle">Πρόοδος Διπλωματικών </button></li>
                         <br>                          
-                        <li><button class="button5" onclick="location.href = 'index.php';" style=" width:300px; vertical-align:middle">Στατιστικά Στοιχεία</button></li>
+                        <li><button class="button5" onclick="location.href = 'gantt2.php';" style=" width:300px; vertical-align:middle">Στατιστικά Στοιχεία</button></li>
                         <br>
                         <li><button class="button5" onclick="location.href = 'index.php';" style="width:300px; vertical-align:middle">Δημιουργία Εγγράφου PDF</button></li>
                         <br>

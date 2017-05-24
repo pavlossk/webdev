@@ -104,7 +104,7 @@
 
     </script>
 
-    <body style="background-color:powderblue;">
+    <body style="">
         <div id="tf-service" style="background-color: #d6d6c2" >
             <?php
             
