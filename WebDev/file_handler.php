@@ -47,29 +47,7 @@
         if (!empty($_POST["confirm"])){
             $_SESSION["confirm"]=$_POST["confirm"];
         }
-        if (!empty($_POST["folder"])){
-            $servername = "localhost";
-            $username = "root";
-            $dbname = "webdev";
-
-            $conn = new mysqli($servername, $username,'', $dbname);
-            if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
-            }
-
-            $username=$_SESSION["username"];
-            $sql = "SELECT folder FROM users,projects WHERE username='$username' AND username=student1 ";
-            $result = $conn->query($sql);
-            if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
-                    $_SESSION["folder"]=$row["folder"];
-                }
-            } else {
-                echo "0 results";
-            }
-            $conn->close();
-                    
-        }
+        
     ?>
     <h3 style=" text-align: center; font-size:45px;">Ανέβασε ένα αρχείο</h3>
                     <ul style="list-style-type:none; align-content:center; ">

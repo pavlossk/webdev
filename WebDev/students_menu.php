@@ -49,6 +49,27 @@
         <div id="tf-service" style="background-color: #d6d6c2" >
             <?php
             echo "Καλώς ήρθες ".$_SESSION["username"];
+            $servername = "localhost";
+            $username = "root";
+            $dbname = "webdev";
+
+            $conn = new mysqli($servername, $username,'', $dbname);
+            if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+            }
+
+            $username=$_SESSION["username"];
+            $sql = "SELECT folder,projectID FROM users,projects WHERE username='$username' AND (username=student1 OR username=student2)";
+            $result = $conn->query($sql);
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    $_SESSION["folder"]=$row["folder"];
+                    $_SESSION["projectID"]=$row["projectID"];
+                }
+            } else {
+                echo "0 results";
+            }
+            $conn->close();
             if (!empty($_POST["file_handler"])){
                 $servername = "localhost";
                 $username = "root";
@@ -95,10 +116,13 @@
                         <br>
                         <li><button class="button5" onclick="location.href = 'index.php';" style=" width:300px; vertical-align:middle">Αιτήσεις Διπλωματικών / Έγκριση</button></li>
                         <br>
-                        <li><button class="button5" onclick="location.href = 'index.php';" style=" width:300px; vertical-align:middle">Chat με καθηγητή</button></li>
-                        <br>
-                        <li><button class="button5" onclick="location.href = 'file_handler.php';" style=" width:300px; vertical-align:middle">Αποστολή Αρχείων</button></li>
-                        <br>                          
+                        <li>
+                            <form id="chat" action="chat.php" method="post">
+                                <input name="chat" type="submit" class=" button5" style=" width:300px; vertical-align:middle" value="Πλατφόρμα επικοινωνίας">
+                            </form>
+                        </li>
+
+                        <br>                        
                         <li>
                             <form id="file_handler" action="file_handler.php" method="post">
                                 <input name="folder" type="submit" class=" button5" style=" width:300px; vertical-align:middle" value="Ανέβασμα αρχείων για διπλωματική">

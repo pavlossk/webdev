@@ -1,6 +1,7 @@
 <?php session_start(); ?>
 <?php
     $folder=$_SESSION["folder"];
+    $projectID=$_SESSION["projectID"];
     $targetfolder = "uploads/".$folder."/";
     $targetfolder = $targetfolder . basename( $_FILES['file']['name']) ;
     $file_type=$_FILES['file']['type'];
@@ -14,15 +15,6 @@
     }
 
     $username=$_SESSION["username"];
-    $sql = "SELECT projectID FROM projects WHERE student1='$username'";
-    $result = $conn->query($sql);
-    if ($result->num_rows > 0) {
-        while($row = $result->fetch_assoc()) {
-            $projectID=$row["projectID"];
-        }
-    } else {
-        echo "0 results";
-    }
     $file=$_FILES['file']['name'];
     echo $projectID." ".$folder." ".$file." ".$username;
     $sql = "INSERT INTO `uploads`( `uploader`, `project`, `date_creation`, `folder`, `file`) VALUES ('$username','$projectID',CURRENT_DATE,'$folder','$file')";
