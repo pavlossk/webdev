@@ -3,10 +3,10 @@
     //if($_SESSION["username"]==null)
 ?>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <META HTTP-EQUIV="refresh" CONTENT="10">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <META HTTP-EQUIV="refresh" CONTENT="10">
 
         <title>WebDev</title>
         <link rel="icon" href="img/trasp.png">
@@ -48,10 +48,21 @@
 
         <div id="tf-service" style="background-color: #d6d6c2" >
             <?php
-                echo "Καλώς ήρθες ".$_SESSION["username"];
-                if (!empty($_POST["file_handler"])){
-                    $_SESSION["file_handler"]=;
+            echo "Καλώς ήρθες ".$_SESSION["username"];
+            if (!empty($_POST["file_handler"])){
+                $servername = "localhost";
+                $username = "root";
+                $dbname = "webdev";
+
+                $conn = new mysqli($servername, $username,'', $dbname);
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
                 }
+
+                $username=$_SESSION["username"];
+                $sql = "SELECT folder FROM users,projects WHERE username='$username' AND username=student1 ";
+                $_SESSION["file"]=mysqli_query($conn, $sql);
+            }
             ?>
 
             <div class="container">
@@ -90,7 +101,7 @@
                         <br>                          
                         <li>
                             <form id="file_handler" action="file_handler.php" method="post">
-                                <input name="file_handler" type="submit" class=" button5" style=" width:300px; vertical-align:middle" value="Ανέβασμα αρχείων για διπλωματική">
+                                <input name="folder" type="submit" class=" button5" style=" width:300px; vertical-align:middle" value="Ανέβασμα αρχείων για διπλωματική">
                             </form>
                         </li>
                         <br>    
@@ -108,5 +119,5 @@
 
 
     </body>
-</html>
+    </html>
 

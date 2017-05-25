@@ -1,5 +1,5 @@
-
 <!DOCTYPE html>
+<?php session_start(); ?>
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -42,9 +42,33 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     
-    <?php 
+    <?php
+        
         if (!empty($_POST["confirm"])){
             $_SESSION["confirm"]=$_POST["confirm"];
+        }
+        if (!empty($_POST["folder"])){
+            $servername = "localhost";
+            $username = "root";
+            $dbname = "webdev";
+
+            $conn = new mysqli($servername, $username,'', $dbname);
+            if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+            }
+
+            $username=$_SESSION["username"];
+            $sql = "SELECT folder FROM users,projects WHERE username='$username' AND username=student1 ";
+            $result = $conn->query($sql);
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    $_SESSION["folder"]=$row["folder"];
+                }
+            } else {
+                echo "0 results";
+            }
+            $conn->close();
+                    
         }
     ?>
     <h3 style=" text-align: center; font-size:45px;">Ανέβασε ένα αρχείο</h3>
@@ -59,18 +83,36 @@
                 <td>View</td>
                 </tr>
                 <?php
+                $servername = "localhost";
+                $username = "root";
+                $dbname = "webdev";
+                $conn = new mysqli($servername, $username,'', $dbname);
+                    if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
+                    }
+
+                    $username=$_SESSION["username"];
+                    $sql = "SELECT uploads.folder as folder,uploads.file as file FROM users,projects,uploads WHERE users.username='nikos' AND username=projects.student1 and uploads.project=projects.projectID";
+                    $result = $conn->query($sql);
+                    if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+                            $_SESSION["file"]=$row["folder"];
+                            ?>
+                            <tr>
+                            <td><?php echo $row["file"] ?></td>
+                            <td><?php echo 'PDF' ?></td>
+                            <td><?php echo '12TB' ?></td>
+                            <td><a href="/webdev/WebDev/uploads/<?php echo $row["folder"] ?>/<?php echo $row["file"] ?><?php echo '' ?>" >view file</a></td>
+                            </tr>
+                            <?php
+                        }
+                    } else {
+                        echo "0 results";
+                    }
              $sql="/localhost/WebDev/CitySens.pdf";
              $result_set=mysql_query($sql);
 
               ?>
-                    <tr>
-                    <td><?php echo 'CitySens' ?></td>
-                    <td><?php echo 'PDF' ?></td>
-                    <td><?php echo '12TB' ?></td>
-                    <td><a href="/WebDev/CitySens.pdf<?php echo '' ?>" >view file</a></td>
-                    </tr>
-                    <?php
-             ?>
             </table>
         </div>
         <form action="upload.php" method="post" enctype="multipart/form-data">

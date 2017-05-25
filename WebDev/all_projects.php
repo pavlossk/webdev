@@ -1,6 +1,6 @@
 <?php session_start(); ?>
 <html lang="en">
-    <head>
+<head>
         <!-- Basic Page Needs
         ================================================== -->
         <meta charset="utf-8">
@@ -94,7 +94,7 @@
             <?php
             /* if (!empty($_POST["search"])) {
 
-              } */
+            } */
 
             $servername = "localhost";
             $username = "root";
@@ -128,26 +128,26 @@
                 <div class="hidden-xs container" style=" padding:1%; text-align:center;" >
 
                     <?php if ($choice == 1) { ?>
-                        <h3 style="color:black; font-weight:bold; font-size:40px; "> Όλες οι διπλωματικές.</h3>
+                    <h3 style="color:black; font-weight:bold; font-size:40px; "> Όλες οι διπλωματικές.</h3>
                     <?php } else if ($choice == 2) { ?>    
-                        <h3 style="color:black; font-weight:bold; font-size:40px; ">Όλες οι αιτήσεις μου.</h3>
-                        <?php
-                    }
-                    if ($valid == 0) {
-                        ?>    
-                        <div class="col-md-4" >
-                            <h3 style="font-size:18px; font:bold;">Teacher</h3>
-                        </div>
+                    <h3 style="color:black; font-weight:bold; font-size:40px; ">Όλες οι αιτήσεις μου.</h3>
+                    <?php
+                }
+                if ($valid == 0) {
+                    ?>    
+                    <div class="col-md-4" >
+                        <h3 style="font-size:18px; font:bold;">Teacher</h3>
+                    </div>
 
-                        <div class="col-md-4 "   >
-                            <h3 style="font-size:18px; font:bold;">Project Name</h3>
-                        </div>
+                    <div class="col-md-4 "   >
+                        <h3 style="font-size:18px; font:bold;">Project Name</h3>
+                    </div>
 
-                        <div class="col-md-4 " >
+                    <div class="col-md-4 " >
                         <?php } if ($choice == 1) { ?>
-                            <h3 style="font-size:18px; font:bold;">Summary</h3>
+                        <h3 style="font-size:18px; font:bold;">Summary</h3>
                         <?php } else if ($choice == 2) { ?>
-                            <h3 style="font-size:18px; font:bold;">Status</h3>
+                        <h3 style="font-size:18px; font:bold;">Status</h3>
                         <?php } ?>
                     </div>
 
@@ -296,4 +296,4 @@
             </div>
         </div>
     </body>
-</html>
+    </html>
