@@ -7,7 +7,7 @@
         <!--[if IE]><meta http-equiv="x-ua-compatible" content="IE=9" /><![endif]-->
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>WebDev</title>
+        <title>WebDev - Projects</title>
         <link rel="icon" href="img/trasp.png">
         <meta name="description" content="Your Description Here">
         <meta name="keywords" content="bootstrap themes, portfolio, responsive theme">

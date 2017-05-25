@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <?php session_start(); ?>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-        <title>TableOn</title>
-        <link rel="icon" href="img/trasp.png">
+    <title>WebDev - Insert Project</title>
+    <link rel="icon" href="img/trasp.png">
 
-        <meta name="description" content="Your Description Here">
-        <meta name="keywords" content="bootstrap themes, portfolio, responsive theme">
-        <meta name="author" content="ThemeForces.Com">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <meta name="description" content="Your Description Here">
+    <meta name="keywords" content="bootstrap themes, portfolio, responsive theme">
+    <meta name="author" content="ThemeForces.Com">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
         <!-- Favicons
         ================================================== -->
@@ -179,7 +179,7 @@
 
                             <h3 style="font-size:20px; font:bold;">Ημερομηνία Ανάληψης:</h3>
                             <input style="width:300px;" type="date"  name="date_take">
-                                   
+
                             <h3 style="font-size:20px; font:bold;">Βαθμός:</h3>
                             <input style="width:300px;" type="number"  name="grade">
                             
@@ -193,5 +193,5 @@
                     </ul>
                 </div>
             </div>
-    </body>
-</html>
+        </body>
+        </html>

@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <?php session_start(); ?>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-        <title>WebDev</title>
-        <link rel="icon" href="img/trasp.png">
+    <title>WebDev - index</title>
+    <link rel="icon" href="img/trasp.png">
 
-        <meta name="description" content="Your Description Here">
-        <meta name="keywords" content="bootstrap themes, portfolio, responsive theme">
-        <meta name="author" content="ThemeForces.Com">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <meta name="description" content="Your Description Here">
+    <meta name="keywords" content="bootstrap themes, portfolio, responsive theme">
+    <meta name="author" content="ThemeForces.Com">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
         <!-- Favicons
         ================================================== -->
@@ -219,5 +219,5 @@
                     </ul>
                 </div>
             </div>
-    </body>
-</html>
+        </body>
+        </html>

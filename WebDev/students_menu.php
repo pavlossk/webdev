@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <META HTTP-EQUIV="refresh" CONTENT="10">
 
-        <title>WebDev</title>
+        <title>WebDev - Students Menu</title>
         <link rel="icon" href="img/trasp.png">
 
         <meta name="description" content="Your Description Here">

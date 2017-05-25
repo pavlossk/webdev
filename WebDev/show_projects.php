@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>WebDev</title>
+        <title>WebDev - Projects</title>
         <meta name="description" content="Your Description Here">
         <meta name="keywords" content="bootstrap themes, portfolio, responsive theme">
         <meta name="author" content="ThemeForces.Com">

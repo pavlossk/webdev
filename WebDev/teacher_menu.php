@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>TableOn</title>
+        <title>WebDev - Teacher Menu</title>
         <link rel="icon" href="img/trasp.png">
 
         <meta name="description" content="Your Description Here">

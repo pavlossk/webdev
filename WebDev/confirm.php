@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <?php session_start(); ?>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-        <title>WebDev</title>
-        <link rel="icon" href="img/trasp.png">
+    <title>WebDev - Confirm</title>
+    <link rel="icon" href="img/trasp.png">
 
-        <meta name="description" content="Your Description Here">
-        <meta name="keywords" content="bootstrap themes, portfolio, responsive theme">
-        <meta name="author" content="ThemeForces.Com">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <meta name="description" content="Your Description Here">
+    <meta name="keywords" content="bootstrap themes, portfolio, responsive theme">
+    <meta name="author" content="ThemeForces.Com">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
         <!-- Favicons
         ================================================== -->
@@ -43,9 +43,9 @@
     </head>
 
     <?php 
-        if (!empty($_GET["confirm"])){
-            $_SESSION["confirm"]=$_GET["confirm"];
-        }
+    if (!empty($_GET["confirm"])){
+        $_SESSION["confirm"]=$_GET["confirm"];
+    }
     ?>
     <body style="background-color: #d6d6c2">
         <div id="tf-service" style="background-color: #d6d6c2" >
@@ -86,7 +86,7 @@
                         <select style=" text-align: center;" form="type" name="typed"> 
                             <option value="teacher">Καθηγητής</option>
                             <option value="student">Μαθητής</option>
-                           
+                            
                         </select>
                         <br>
                         <form onsubmit="return checkForm(this);" method="post" id="type">
@@ -94,10 +94,10 @@
                             <input name="ready" class="button5" type="submit" value="Εισαγωγή Στοιχείων">
                             <br>
                             <br>
-                           
+                            
                         </form>
                     </ul>
                 </div>
             </div>
-    </body>
-</html>
+        </body>
+        </html>
