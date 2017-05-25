@@ -109,7 +109,7 @@
                 $result = $conn->query($sql);
                 $choice = 1;
             } else if (!empty($_POST["showall"])) {
-                $sql = "SELECT * FROM projects";
+                $sql = "SELECT * FROM projects WHERE status='applied' OR projects.status='not applied'";
                 $result = $conn->query($sql);
                 $choice = 1;
             } else if (!empty($_POST["showapplications"])) {

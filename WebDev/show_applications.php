@@ -53,7 +53,7 @@
                 die("Connection failed: " . $conn->connect_error);
             }
             $teacher = $_SESSION["username"];
-            $sql = "SELECT applicationID, projectname, studentID FROM applications,users,projects WHERE applications.projectID = projects.projectID AND users.type='teacher' AND users.username='$teacher' AND applications.status='applied'";
+            $sql = "SELECT applicationID, projectname, studentID FROM applications,users,projects WHERE applications.projectID = projects.projectID AND users.type='teacher' AND users.username='$teacher' AND applications.status='applied' AND users.username=projects.teacher";
             $result = $conn->query($sql);
             ?>
 
@@ -173,8 +173,15 @@
                 } else {
                     echo "Έγινε κάποιο λάθος στην καταχώρηση σας.";
                 }
+                $sql = "UPDATE projects,applications SET projects.status='approved',student1='$studentid' WHERE applicationID='$appid' AND applications.projectID=projects.projectID";
+
+                if (mysqli_query($conn, $sql)) {
+                    $str = 1;
+                } else {
+                    echo "Έγινε κάποιο λάθος στην καταχώρηση σας.";
+                }
                 $conn->close();
-                header('Location: /WebDev/teacher_menu.php');
+                header('Location: /webdev/WebDev/teacher_menu.php');
             }
             ?>
 

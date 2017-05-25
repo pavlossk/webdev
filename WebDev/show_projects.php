@@ -57,7 +57,7 @@
             }
             $teacher = $_SESSION["username"];
 
-            $sql = "SELECT applicationID,studentID,projects.status as status,projectname FROM applications,projects WHERE  applications.projectID = projects.projectID AND projects.teacher = '$teacher' ";
+            $sql = "SELECT status,projectname,summary FROM projects WHERE teacher = '$teacher' ";
             $result = $conn->query($sql);
             ?>
             <h3 style=" text-align:center; font-weight: bold; font-size:45px;"> Όι διπλωματικές του: <?php echo $teacher;?></h3>
@@ -86,17 +86,14 @@
 
                                 <form id="1" action="" method="post">
                                     <div class="col-md-4" >
-                                        <h3 style="font-size:25px;  font-weight: bold;"><?php echo $row["applicationID"] ?></h3> 
+                                        <h3 style="font-size:25px;  font-weight: bold;"><?php echo $row["projectname"] ?></h3> 
                                     </div>
                                     <div class="col-md-4">
-                                        <h3 style="font-size: 16px;">  <?php echo $row["projectname"] ?> </h3>
+                                        <h3 style="font-size: 16px;">  <?php echo $row["summary"] ?> </h3>
                                     </div>
-
                                     <div class="col-md-4">
-                                        <h3 style="padding-top: 18px; font-size: 18px;">  <?php echo $row["studentID"] ?></h3>
+                                        <h3 style="padding-top: 18px; font-size: 18px;">  <?php echo $row["status"] ?></h3>
                                     </div>
-
-
                                     <input type="hidden" name="applicationid" value="<?php echo $row["applications.studentID"] ?>">
                                     <input type="hidden" name="studentid" value="<?php echo $row["applications.studentID"] ?>">
                                 </form>
@@ -129,14 +126,14 @@
 
                                 <form id="1" action="" method="post">
                                     <div class="col-md-4" >
-                                        <h3 style="font-size:25px;  font-weight: bold;"><?php echo $array[$i]["applicationID"] ?></h3> 
+                                        <h3 style="font-size:25px;  font-weight: bold;"><?php echo $array[$i]["projectname"] ?></h3> 
                                     </div>
                                     <div class="col-md-4">
-                                        <h3 style="font-size: 16px;">  <?php echo $array[$i]["projectname"] ?> </h3>
+                                        <h3 style="font-size: 16px;">  <?php echo $array[$i]["summary"] ?> </h3>
                                     </div>
 
                                     <div class="col-md-4">
-                                        <h3 style="padding-top: 18px; font-size: 18px;">  <?php echo $array[$i]["studentID"] ?></h3>
+                                        <h3 style="padding-top: 18px; font-size: 18px;">  <?php echo $array[$i]["status"] ?></h3>
                                     </div>
 
 
@@ -166,14 +163,14 @@
                             <div class="row" style="min-height: 100px;" >
                                 <form id="1" action="" method="post">
                                     <div class="col-md-4" >
-                                        <h3 style="font-size:25px;  font-weight: bold;"><?php echo $array[$i]["applicationID"] ?></h3> 
+                                        <h3 style="font-size:25px;  font-weight: bold;"><?php echo $array[$i]["projectname"] ?></h3> 
                                     </div>
                                     <div class="col-md-4">
-                                        <h3 style="font-size: 16px;">  <?php echo $array[$i]["projectname"] ?> </h3>
+                                        <h3 style="font-size: 16px;">  <?php echo $array[$i]["summary"] ?> </h3>
                                     </div>
 
                                     <div class="col-md-4">
-                                        <h3 style="padding-top: 18px; font-size: 18px;">  <?php echo $array[$i]["studentID"] ?></h3>
+                                        <h3 style="padding-top: 18px; font-size: 18px;">  <?php echo $array[$i]["status"] ?></h3>
                                     </div>
 
 
@@ -203,14 +200,14 @@
                                 <form id="1" action="" method="post">
 
                                     <div class="col-md-4" >
-                                        <h3 style="font-size:25px;  font-weight: bold;"><?php echo $array[$i]["applicationID"] ?></h3> 
+                                        <h3 style="font-size:25px;  font-weight: bold;"><?php echo $array[$i]["projectname"] ?></h3> 
                                     </div>
                                     <div class="col-md-4">
-                                        <h3 style="font-size: 16px;">  <?php echo $array[$i]["projectname"] ?> </h3>
+                                        <h3 style="font-size: 16px;">  <?php echo $array[$i]["summary"] ?> </h3>
                                     </div>
 
                                     <div class="col-md-4">
-                                        <h3 style="padding-top: 18px; font-size: 18px;">  <?php echo $array[$i]["studentID"] ?></h3>
+                                        <h3 style="padding-top: 18px; font-size: 18px;">  <?php echo $array[$i]["status"] ?></h3>
                                     </div>
 
 
@@ -240,14 +237,14 @@
                             <div class="row" style="min-height: 100px;" >
                                 <form id="1" action="" method="post">
                                     <div class="col-md-4" >
-                                        <h3 style="font-size:25px;  font-weight: bold;"><?php echo $array[$i]["applicationID"] ?></h3> 
+                                        <h3 style="font-size:25px;  font-weight: bold;"><?php echo $array[$i]["projectname"] ?></h3> 
                                     </div>
                                     <div class="col-md-4">
-                                        <h3 style="font-size: 16px;">  <?php echo $array[$i]["projectname"] ?> </h3>
+                                        <h3 style="font-size: 16px;">  <?php echo $array[$i]["summary"] ?> </h3>
                                     </div>
 
                                     <div class="col-md-4">
-                                        <h3 style="padding-top: 18px; font-size: 18px;">  <?php echo $array[$i]["studentID"] ?></h3>
+                                        <h3 style="padding-top: 18px; font-size: 18px;">  <?php echo $array[$i]["status"] ?></h3>
                                     </div>
 
 
