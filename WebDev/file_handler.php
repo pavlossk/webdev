@@ -70,7 +70,7 @@
                     }
 
                     $username=$_SESSION["username"];
-                    $sql = "SELECT uploads.folder as folder,uploads.file as file FROM users,projects,uploads WHERE users.username='nikos' AND username=projects.student1 and uploads.project=projects.projectID";
+                    $sql = "SELECT uploads.folder as folder,uploads.file as file FROM users,projects,uploads WHERE users.username='$username' AND username=projects.student1 and uploads.project=projects.projectID";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
@@ -87,9 +87,6 @@
                     } else {
                         echo "0 results";
                     }
-             $sql="/localhost/WebDev/CitySens.pdf";
-             $result_set=mysql_query($sql);
-
               ?>
             </table>
         </div>

@@ -38,56 +38,33 @@
     <?php
     $valid = 0;
     $choice = 0;
-    if (!empty($_POST["epelekse"]) && $_SESSION["type"] == "student") {
-        $servername = "localhost";
-        $username = "root";
-        $dbname = "webdev";
-        $conn = new mysqli($servername, $username, '', $dbname);
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
+    if (!empty($_POST["epelekse"]) && $_SESSION["type"] == "teacher") {
+        if($_SESSION["location"] == "chat"){
+            $servername = "localhost";
+            $username = "root";
+            $dbname = "webdev";
 
-        function test_input($data) {
-            $data = trim($data);
-            $data = stripslashes($data);
-            $data = htmlspecialchars($data);
-            return $data;
-        }
-
-        $id = test_input($_POST["id"]);
-        $teacher = test_input($_POST["teacher"]);
-        $pro_name = test_input($_POST["pro_name"]);
-        $summ = test_input($_POST["summ"]);
-        $conn = new mysqli($servername, $username, '', $dbname);
-
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
-        $user = $_SESSION["username"];
-
-
-
-        $sql1 = "SELECT COUNT(*) as count FROM applications WHERE studentID='$user' AND projectID='$id'";
-        $result1 = $conn->query($sql1);
-
-
-        while ($row1 = $result1->fetch_assoc()) {
-            if ($row1["count"] == 1) {
-                $valid = 1;
+            $conn = new mysqli($servername, $username,'', $dbname);
+            if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
             }
-        }
-
-        if ($valid == 0) {
-            $sql = "INSERT INTO applications(projectID, studentID, status) VALUES ('$id','$user','applied')";
-            if (mysqli_query($conn, $sql)) {
-                //header('Location: /webdev/WebDev/students_menu.php');
-                $message = "Η αίτηση σου καταχωρήθηκε.";
-                echo "<script type='text/javascript'>alert('$message'); window.location.href = '/webdev/WebDev/students_menu.php';</script>";
+            $id = test_input($_POST["id"]);
+            $username=$_SESSION["username"];
+            $sql = "SELECT folder,projectID FROM users,projects WHERE username='$username' AND username=teacher AND projectID=$id" ;
+            $result = $conn->query($sql);
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    $_SESSION["folder"]=$row["folder"];
+                    $_SESSION["projectID"]=$row["projectID"];
+                }
+            } else {
+                echo "0 results";
             }
-            $sql = "UPDATE projects SET status='applied' WHERE projectID='$id'";
-            mysqli_query($conn, $sql);
+            $conn->close();
+            echo "<script type='text/javascript'> window.location.href = '/webdev/WebDev/chat.php';</script>";
         }
-        mysqli_close($conn);
+        
+        
     }
     ?>
     <body>
@@ -97,30 +74,31 @@
             /* if (!empty($_POST["search"])) {
 
             } */
-
+            function test_input($data) {
+                $data = trim($data);
+                $data = stripslashes($data);
+                $data = htmlspecialchars($data);
+                return $data;
+            }
             $servername = "localhost";
             $username = "root";
             $dbname = "webdev";
             $conn = new mysqli($servername, $username, '', $dbname);
+            $username=$_SESSION["username"];
             if ($conn->connect_error) {
                 die("Connection failed: " . $conn->connect_error);
             }
-            if (!empty($_POST["ready"])) {
+            if (!empty($_POST["chat"])) {
+                $_SESSION["location"] = "chat";
+                $sql = "SELECT * FROM projects WHERE teacher='$username'";
+                $result = $conn->query($sql);
+                $location="chat";
+            }
+            else if (!empty($_POST["file_handler"])) {
                 $search = $_POST["search"];
-                $sql = "SELECT * FROM projects WHERE teacher='$search'";
+                $sql = "SELECT * FROM projects WHERE teacher='$username'";
                 $result = $conn->query($sql);
-                $choice = 1;
-            } else if (!empty($_POST["showall"])) {
-                $sql = "SELECT * FROM projects WHERE status='applied' OR projects.status='not applied'";
-                $result = $conn->query($sql);
-                $choice = 1;
-            } else if (!empty($_POST["showapplications"])) {
-                $user = $_SESSION["username"];
-                $sql = "SELECT teacher,projectname,applications.status as status FROM applications,projects WHERE projects.projectID=applications.projectID AND studentID='$user'";
-                $result = $conn->query($sql);
-                $choice = 2;
-            } else {
-                
+                $location='file_handler';
             }
             ?>
 
@@ -161,7 +139,7 @@
                 <?php
                 $counter = 0;
                 if ($valid == 0) {
-                    if ($result->num_rows > 0 && $choice == 1) {
+                    if ($result->num_rows > 0 ) {
                         // output data of   each row
                         while ($row = $result->fetch_assoc()) {
                             if ($counter % 2 == 0) {
@@ -224,67 +202,7 @@
                             }
                             $counter++;
                         }
-                    } else if ($result->num_rows > 0 && $choice == 2) {
-                        // output data of   each row
-                        while ($row = $result->fetch_assoc()) {
-                            if ($counter % 2 == 0) {
-                                ?>
-                                <div class="container" style=" border-radius: 4px;  border: 1px solid #ccccb3; background-color:white; padding:2%; text-align:center;" >
-                                    <div class="row" style="min-height: 100px;" >
-                                        <form id="1" action="" method="post">
-                                            <div class="col-md-4">
-                                                <h3 style="font-size:20px;"><?php echo $row["teacher"] ?></h3>  
-                                            </div>    
-                                            <div class="col-md-4" >
-                                                <h3 style="font-size: 14px;">  <?php echo $row["projectname"] ?></h3>
-                                            </div>
-                                            <div class="col-md-4 ">
-                                                <h3 style="font-size: 14px;"> <?php echo $row["status"] ?></h3>
-                                            </div>
-                                            <div class="col-md-4 ">
-                                            </div>
-
-                                            <input type="hidden" name="id" value="<?php echo $row["projectID"] ?>">
-                                            <input type="hidden" name="teacher" value="<?php echo $row["teacher"] ?>">
-                                            <input type="hidden" name="pro_name" value="<?php echo $row["projectname"] ?>">
-                                            <input type="hidden" name="summ" value="<?php echo $row["summary"] ?>">
-                                        </form>
-                                    </div>
-                                </div>
-                                <br>
-                                <?php
-                            } else {
-                                ?>
-                                <div class="container" style="  border-radius: 4px; border: 1px solid #ccccb3; background-color:#eaeae1; padding:2%; text-align:center;" >
-                                    <div class="row" style="min-height: 100px; " >
-
-                                        <form id="2" action="" method="post">
-                                            <div class="col-md-4">
-                                                <h3 style="font-size:20px;"><?php echo $row["teacher"] ?></h3>  
-                                            </div>    
-                                            <div class="col-md-4" >
-                                                <h3 style="font-size: 14px;">  <?php echo $row["projectname"] ?></h3>
-                                            </div>
-                                            <div class="col-md-4 ">
-                                                <h3 style="font-size: 14px;"> <?php echo $row["status"] ?></h3>
-                                            </div>
-                                            <div class="col-md-4 ">
-                                            </div>
-
-                                            <input type="hidden" name="id" value="<?php echo $row["projectID"] ?>">
-                                            <input type="hidden" name="teacher" value="<?php echo $row["teacher"] ?>">
-                                            <input type="hidden" name="pro_name" value="<?php echo $row["projectname"] ?>">
-                                            <input type="hidden" name="summ" value="<?php echo $row["summary"] ?>">
-                                        </form>
-                                    </div>
-                                </div>  
-                                <br>
-
-                                <?php
-                            }
-                            $counter++;
-                        }
-                    }
+                    } 
                 } else if ($valid == 1) {
                     ?>
                     <h3 style="color:red;">Έχεις ξανακάνει αίτηση.</h3>

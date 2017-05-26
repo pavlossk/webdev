@@ -55,7 +55,10 @@
                         <br>
                         <li><button class="button5" onclick="location.href = 'show_applications.php'"  style=" width:300px; vertical-align:middle">Αιτήσεις Διπλωματικών / Έγκριση</button></li>
                         <br>
-                        <li><button class="button5" onclick="location.href = 'index.php';" style=" width:300px; vertical-align:middle">Chat με φοιτητές</button></li>
+                        <li>
+                            <form id="chat" action="select_project.php" method="post">
+                                <input name="chat" type="submit" class=" button5" style=" width:300px; vertical-align:middle" value="Πλατφόρμα επικοινωνίας">
+                            </form>
                         <br>
                         <li><button class="button5" onclick="location.href = 'gantt.php';" style=" width:300px; vertical-align:middle">Πρόοδος Διπλωματικών </button></li>
                         <br>                          
