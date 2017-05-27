@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 25, 2017 at 05:50 PM
+-- Generation Time: May 27, 2017 at 01:12 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -39,7 +39,8 @@ CREATE TABLE `applications` (
 
 INSERT INTO `applications` (`applicationID`, `projectID`, `studentID`, `status`) VALUES
 (8, 2, 'Nikos', 'approved'),
-(9, 3, 'Nikos', 'applied');
+(9, 3, 'Nikos', 'applied'),
+(11, 2, 'nikos2', 'approved');
 
 -- --------------------------------------------------------
 
@@ -68,8 +69,8 @@ CREATE TABLE `projects` (
 
 INSERT INTO `projects` (`projectID`, `teacher`, `student1`, `student2`, `projectname`, `summary`, `status`, `grade`, `folder`, `date_creation`, `date_approved`, `date_finished`) VALUES
 (0, 'maragkoudakis', 'nikos', 'pavlos', 'data mining techniqu', 'Modern techniques of data mining and information retrieval via rapid miner', 'complete', 10, 'project0', '2017-05-25 10:07:37', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(2, 'Soras', 'Soras', 'Soras', 'EllhnwnSynelefsh', 'Polla Lefta', 'not applied', NULL, '', '2017-05-25 10:07:41', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(3, 'Soras', 'nikos', 'Soras', 'thes na se dhrw', 'polu ksulo h fash', 'approved', NULL, '', '2017-05-25 12:14:18', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, 'Soras', 'nikos2', 'Soras', 'EllhnwnSynelefsh', 'Polla Lefta', 'approved', NULL, 'project2', '2017-05-26 18:00:04', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(3, 'Soras', 'nikos', 'Soras', 'thes na se dhrw', 'polu ksulo h fash', 'approved', NULL, 'project3', '2017-05-26 18:00:10', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (4, 'Maragkoudakis', 'Maragkoudakis', 'Maragkoudakis', 'WebDev', 'Project sta plaisia tou programmatismou sto diadiktio', 'approved', NULL, 'project4', '2017-05-25 10:07:50', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (7, 'Soras', 'Soras', 'Soras', 'opou se vrw', 'fapes mia zwh', 'ready', NULL, 'project7', '2017-05-25 10:07:54', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
@@ -93,16 +94,8 @@ CREATE TABLE `uploads` (
 --
 
 INSERT INTO `uploads` (`uploadID`, `uploader`, `project`, `date_creation`, `folder`, `file`) VALUES
-(1, 'nikos', 0, '2017-05-25 08:16:26', 'project0', 'NickFourtounisCV.pdf'),
-(3, 'nikos', 0, '2017-05-25 08:16:30', 'project0', 'Project_web_dev_2017.pdf'),
-(4, 'nikos', 0, '2017-05-25 08:37:13', 'project0', 'afm.pdf'),
-(5, 'Nikos', 0, '2017-05-24 21:00:00', 'project0', 'cloud_report.pdf'),
-(7, 'Nikos', 0, '2017-05-24 21:00:00', 'project0', ''),
-(8, 'pavlos', 0, '2017-05-24 21:00:00', 'project0', 'IMG_20170124_135205.jpg'),
-(9, 'Nikos', 3, '2017-05-24 21:00:00', '', 'exe1.c'),
-(10, 'Nikos', 3, '2017-05-24 21:00:00', '', 'Untitled.png'),
-(11, 'Nikos', 3, '2017-05-24 21:00:00', '', 'english 2.pdf'),
-(12, 'Nikos', 3, '2017-05-24 21:00:00', '', 'Preview - English for Information Technology - Ics');
+(17, 'Soras', 2, '2017-05-26 21:00:00', 'project2', 'IMG_20170124_135205.jpg'),
+(18, 'Soras', 3, '2017-05-26 21:00:00', 'project3', 'IMG_20170304_143547.jpg');
 
 -- --------------------------------------------------------
 
@@ -113,7 +106,7 @@ INSERT INTO `uploads` (`uploadID`, `uploader`, `project`, `date_creation`, `fold
 CREATE TABLE `users` (
   `username` varchar(20) NOT NULL,
   `password` varchar(20) NOT NULL,
-  `email` varchar(20) NOT NULL,
+  `email` varchar(50) NOT NULL,
   `type` varchar(20) NOT NULL,
   `confirm` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -123,14 +116,13 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`username`, `password`, `email`, `type`, `confirm`) VALUES
-('asass', 'asd', 'nisoso', '', 'WtRu19lQzS'),
-('gf', '', '', '', '7E8cHocpfe'),
 ('Maragkoudakis', '123', 'maragkoudakis@gmail.', 'teacher', 'confirmed'),
-('Nikos', '123', 'nickfortune@windowsl', 'student', 'confirmed'),
+('Nikos', '123', 'nickfortune@windowslive.com', 'student', 'confirmed'),
+('nikos2', 'E#4acyxg', 'nikos.fourtounis95@gmail.com', 'student', 'confirmed'),
 ('pavlos', '123', 'pavlaras@gmail', 'student', 'confirmed'),
-('Soras', '123', 'soras123@gmail.com', 'teacher', 'confirmed'),
-('user', '123', 'asd', '', '7ahOACYltY'),
-('user1', '123', 'iiiididk', '', 'E1xx4lOEKH');
+('sd', '', '', '', '2mDljTIpH8'),
+('sdasdd', 'asd123A', 'dd', '', 'WoCwBkwOVz'),
+('Soras', '123', 'soras123@gmail.com', 'teacher', 'confirmed');
 
 --
 -- Indexes for dumped tables
@@ -166,7 +158,8 @@ ALTER TABLE `uploads`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`username`);
+  ADD PRIMARY KEY (`username`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -176,12 +169,12 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `applications`
 --
 ALTER TABLE `applications`
-  MODIFY `applicationID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `applicationID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `uploads`
 --
 ALTER TABLE `uploads`
-  MODIFY `uploadID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `uploadID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- Constraints for dumped tables
 --
