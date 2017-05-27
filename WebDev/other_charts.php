@@ -51,21 +51,45 @@ if ($result->num_rows > 0) {
                     ]);
 
 
-<?php }
+    <?php
+}
+$servername = "localhost";
+$username = "root";
+$dbname = "webdev";
+$conn = new mysqli($servername, $username, '', $dbname);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$teacher = $_SESSION["username"];
+$sql2 = "SELECT teacher, YEAR(date_creation) as year,COUNT(*) as avg FROM `projects` GROUP BY teacher,YEAR(date_creation) ";
+$result2 = $conn->query($sql2);
 ?>
 
                 // Create the data table.
-                var data2 = new google.visualization.DataTable();
-                data2.addColumn('string', 'Topping');
-                data2.addColumn('number', 'Slices');
-                data2.addRows([
-                    ['Mushrooms', 3],
-                    ['Onions', 1],
-                    ['Olives', 15],
-                    ['Zucchini', 1],
-                    ['Pepperoni', 2]
-                ]);
 
+
+<?php
+$counter = 0;
+if ($result2->num_rows > 0) {
+    // output data of   each row
+    while ($row1 = $result2->fetch_assoc()) {
+        ?>
+                        var data2 = google.visualization.arrayToDataTable([
+        <?php if ($counter == 0) { ?>
+                                ['Year', 'Sales', 'Expenses', 'Expenses'],
+                                ['<?php echo $row1["year"]; ?>', <?php echo (int) $row1["avg"]; ?>, 0, 0],
+        <?php } else { ?>
+                                ['<?php echo $row1["year"]; ?>', <?php echo (int) $row1["avg"]; ?>, 0, 0],
+        <?php } ?>
+
+                        ]);
+
+        <?php
+        $counter++;
+    }
+}
+?>
 
 <?php
 $servername = "localhost";
@@ -77,7 +101,7 @@ if ($conn->connect_error) {
 }
 
 $teacher = $_SESSION["username"];
-$sql2 = "SELECT * FROM projects WHERE teacher='$teacher' ";
+$sql2 = "SELECT teacher,AVG(grade) as avg From projects GROUP BY teacher ";
 $result2 = $conn->query($sql2);
 ?>
 
@@ -88,36 +112,16 @@ $result2 = $conn->query($sql2);
                 data3.addColumn('number', 'Percent');
 
 <?php
-$counter4 = 0;
-$counter5 = 0;
-$counter6 = 0;
-$counter7 = 0;
-$counter8 = 0;
 if ($result2->num_rows > 0) {
     // output data of   each row
     while ($row1 = $result2->fetch_assoc()) {
+        ?>
+                        data3.addRows([
+                            ['<?php echo $row1["teacher"]; ?>', <?php echo (int) $row1["avg"]; ?>]
 
-        if ($row1["status"] == 'applied') {
-            $counter4++;
-        } else if ($row1["status"] == 'complete') {
-            $counter5++;
-        } else if ($row1["status"] == 'not applied') {
-            $counter6++;
-        } else if ($row1["status"] == 'ready') {
-            $counter7++;
-        } else if ($row1["status"] == 'approved') {
-            $counter8++;
-        }
+                        ]);
+        <?php
     }
-    ?>
-                    data3.addRows([
-                        ['not applied', <?php echo ($counter6 / $result2->num_rows); ?>],
-                        ['applied', <?php echo ($counter4 / $result2->num_rows); ?>],
-                        ['approved', <?php echo ($counter8 / $result2->num_rows); ?>],
-                        ['ready', <?php echo ($counter7 / $result2->num_rows); ?>],
-                        ['complete', <?php echo ($counter5 / $result2->num_rows); ?>]
-                    ]);
-    <?php
 }
 ?>
                 // Set chart options
@@ -125,7 +129,7 @@ if ($result2->num_rows > 0) {
                     'width': 600,
                     'height': 500};
                 // Set chart options
-                var options2 = {'title': 'How Much Pizza You Ate Last Night',
+                var options2 = {'title': 'Περισσότερες διπλωματικές ανά έτος και συνολικά',
                     'width': 600,
                     'height': 500};
                 // Set chart options
@@ -135,10 +139,22 @@ if ($result2->num_rows > 0) {
                 // Instantiate and draw our chart, passing in some options.
                 var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
                 chart.draw(data, options);
-                var chart2 = new google.visualization.PieChart(document.getElementById('chart_div2'));
+                var chart2 = new google.visualization.BarChart(document.getElementById('chart_div2'));
                 chart2.draw(data2, options2);
                 var chart3 = new google.visualization.BarChart(document.getElementById('chart_div3'));
                 chart3.draw(data3, options3);
+
+
+                var options4 = {
+                    chart: {
+                        title: 'Company Performance',
+                        subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+                    }
+                };
+
+                var chart4 = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+                chart4.draw(data2, google.charts.Bar.convertOptions(options4));
             }
         </script>
     </head>
@@ -149,12 +165,12 @@ if ($result2->num_rows > 0) {
 
         <div id="chart_div"></div>
         <div id="chart_div2"></div>
+        <div id="columnchart_material" style="width: 800px; height: 500px;"></div>
         <div id="chart_div3"></div>
-
         <div class="container">
             <div class="col-md-12" style="padding:3%">
 
-                <form id="pp" action="teacher_menu.php" method="post">
+                <form id="pp" action="" method="post">
                     <input name="log" type="submit" class="button5" style="align-content:center; border-color:#ffa31a;color:black; background-color:orange;" value="LogOut">
                 </form>
 

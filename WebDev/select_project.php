@@ -1,6 +1,6 @@
 <?php session_start(); ?>
 <html lang="en">
-<head>
+    <head>
         <!-- Basic Page Needs
         ================================================== -->
         <meta charset="utf-8">
@@ -43,94 +43,92 @@
         $username = "root";
         $dbname = "webdev";
 
-        $conn = new mysqli($servername, $username,'', $dbname);
+        $conn = new mysqli($servername, $username, '', $dbname);
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
         $id = test_input($_POST["id"]);
-        $username=$_SESSION["username"];
-        $sql = "SELECT folder,projectID FROM users,projects WHERE username='$username' AND username=teacher AND projectID=$id" ;
+        $username = $_SESSION["username"];
+        $sql = "SELECT folder,projectID FROM users,projects WHERE username='$username' AND username=teacher AND projectID=$id";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
-                $_SESSION["folder"]=$row["folder"];
-                $_SESSION["projectID"]=$row["projectID"];
+            while ($row = $result->fetch_assoc()) {
+                $_SESSION["folder"] = $row["folder"];
+                $_SESSION["projectID"] = $row["projectID"];
             }
         } else {
             echo "0 results";
         }
         $conn->close();
-        if($_SESSION["location"] == "chat"){
+        if ($_SESSION["location"] == "chat") {
             echo "<script type='text/javascript'> window.location.href = '/webdev/WebDev/chat.php';</script>";
-        }
-        else if($_SESSION["location"] == "file_handler"){
+        } else if ($_SESSION["location"] == "file_handler") {
             echo "<script type='text/javascript'> window.location.href = '/webdev/WebDev/file_handler.php';</script>";
         }
-        
-        
     }
     ?>
     <body>
         <div class="container">
             <br></br>
-            <?php
-            /* if (!empty($_POST["search"])) {
+<?php
+/* if (!empty($_POST["search"])) {
 
-            } */
-            function test_input($data) {
-                $data = trim($data);
-                $data = stripslashes($data);
-                $data = htmlspecialchars($data);
-                return $data;
-            }
-            $servername = "localhost";
-            $username = "root";
-            $dbname = "webdev";
-            $conn = new mysqli($servername, $username, '', $dbname);
-            $username=$_SESSION["username"];
-            if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
-            }
-            if (!empty($_POST["chat"])) {
-                $_SESSION["location"] = "chat";
-                $sql = "SELECT * FROM projects WHERE teacher='$username'";
-                $result = $conn->query($sql);
-                $location="chat";
-            }
-            else if (!empty($_POST["file_handler"])) {
-                $_SESSION["location"] = "file_handler";
-                $sql = "SELECT * FROM projects WHERE teacher='$username'";
-                $result = $conn->query($sql);
-                $location='file_handler';
-            }
-            ?>
+  } */
+
+function test_input($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+
+$servername = "localhost";
+$username = "root";
+$dbname = "webdev";
+$conn = new mysqli($servername, $username, '', $dbname);
+$username = $_SESSION["username"];
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+if (!empty($_POST["chat"])) {
+    $_SESSION["location"] = "chat";
+    $sql = "SELECT * FROM projects WHERE teacher='$username'";
+    $result = $conn->query($sql);
+    $location = "chat";
+} else if (!empty($_POST["file_handler"])) {
+    $_SESSION["location"] = "file_handler";
+    $sql = "SELECT * FROM projects WHERE teacher='$username'";
+    $result = $conn->query($sql);
+    $location = 'file_handler';
+}
+?>
 
             <div id="tf-service" style="zoom:90%;" >
 
 
                 <div class="hidden-xs container" style=" padding:1%; text-align:center;" >
 
-                    <?php if ($choice == 1) { ?>
-                    <h3 style="color:black; font-weight:bold; font-size:40px; "> Όλες οι διπλωματικές.</h3>
+<?php if ($choice == 1) { ?>
+                        <h3 style="color:black; font-weight:bold; font-size:40px; "> Όλες οι διπλωματικές.</h3>
                     <?php } else if ($choice == 2) { ?>    
-                    <h3 style="color:black; font-weight:bold; font-size:40px; ">Όλες οι αιτήσεις μου.</h3>
-                    <?php
-                }
-                if ($valid == 0) {
-                    ?>    
-                    <div class="col-md-4" >
-                        <h3 style="font-size:18px; font:bold;">Teacher</h3>
-                    </div>
+                        <h3 style="color:black; font-weight:bold; font-size:40px; ">Όλες οι αιτήσεις μου.</h3>
+                        <?php
+                    }
+                    if ($valid == 0) {
+                        ?>    
+                        <div class="col-md-4" >
+                            <h3 style="font-size:18px; font:bold;">Teacher</h3>
+                        </div>
 
-                    <div class="col-md-4 "   >
-                        <h3 style="font-size:18px; font:bold;">Project Name</h3>
-                    </div>
+                        <div class="col-md-4 "   >
+                            <h3 style="font-size:18px; font:bold;">Project Name</h3>
+                        </div>
 
-                    <div class="col-md-4 " >
-                        <?php } if ($choice == 1) { ?>
-                        <h3 style="font-size:18px; font:bold;">Summary</h3>
+                        <div class="col-md-4 " >
+<?php } if ($choice == 1) { ?>
+                            <h3 style="font-size:18px; font:bold;">Summary</h3>
                         <?php } else if ($choice == 2) { ?>
-                        <h3 style="font-size:18px; font:bold;">Status</h3>
+                            <h3 style="font-size:18px; font:bold;">Status</h3>
                         <?php } ?>
                     </div>
 
@@ -139,14 +137,14 @@
                     </div>
                 </div>
 
-                <?php
-                $counter = 0;
-                if ($valid == 0) {
-                    if ($result->num_rows > 0 ) {
-                        // output data of   each row
-                        while ($row = $result->fetch_assoc()) {
-                            if ($counter % 2 == 0) {
-                                ?>
+<?php
+$counter = 0;
+if ($valid == 0) {
+    if ($result->num_rows > 0) {
+        // output data of   each row
+        while ($row = $result->fetch_assoc()) {
+            if ($counter % 2 == 0) {
+                ?>
 
                                 <div class="container" style=" border-radius: 4px;  border: 1px solid #ccccb3; background-color:white; padding:2%; text-align:center;" >
                                     <div class="row" style="min-height: 100px;" >
@@ -172,9 +170,9 @@
                                     </div>
                                 </div>
                                 <br>
-                                <?php
-                            } else {
-                                ?>
+                <?php
+            } else {
+                ?>
                                 <div class="container" style="  border-radius: 4px; border: 1px solid #ccccb3; background-color:#eaeae1; padding:2%; text-align:center;" >
                                     <div class="row" style="min-height: 100px; " >
 
@@ -201,13 +199,13 @@
                                 </div>  
                                 <br>
 
-                                <?php
-                            }
-                            $counter++;
-                        }
-                    } 
-                } else if ($valid == 1) {
-                    ?>
+                <?php
+            }
+            $counter++;
+        }
+    }
+} else if ($valid == 1) {
+    ?>
                     <h3 style="color:red;">Έχεις ξανακάνει αίτηση.</h3>
                     <?php
                 }
@@ -218,5 +216,15 @@
 
             </div>
         </div>
+        <div class="container">
+            <div class="col-md-12" style="padding:3%">
+
+                <form id="pp" action="students_menu.php" method="post">
+                    <input name="log" type="submit" class="button5" style="align-content:center; border-color:#ffa31a;color:black; background-color:orange;" value="LogOut">
+                </form>
+
+
+            </div>
+        </div>
     </body>
-    </html>
+</html>

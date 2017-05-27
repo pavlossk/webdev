@@ -60,10 +60,10 @@
             $sql = "SELECT status,projectname,summary FROM projects WHERE teacher = '$teacher' ";
             $result = $conn->query($sql);
             ?>
-            <h3 style=" text-align:center; font-weight: bold; font-size:45px;"> Όι διπλωματικές του: <?php echo $teacher;?></h3>
+            <h3 style=" text-align:center; font-weight: bold; font-size:45px;"> Όι διπλωματικές του: <?php echo $teacher; ?></h3>
             <?php
             $counter = 0;
-            
+
 
             if ($result->num_rows > 0) {
                 $array = array($result->num_rows);
@@ -263,6 +263,16 @@
             ?>
 
 
+        </div>
+        <div class="container">
+            <div class="col-md-12" style="padding:3%">
+
+                <form id="pp" action="students_menu.php" method="post">
+                    <input name="log" type="submit" class="button5" style="align-content:center; border-color:#ffa31a;color:black; background-color:orange;" value="LogOut">
+                </form>
+
+
+            </div>
         </div>
 
     </body>

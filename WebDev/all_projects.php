@@ -1,6 +1,6 @@
 <?php session_start(); ?>
 <html lang="en">
-<head>
+    <head>
         <!-- Basic Page Needs
         ================================================== -->
         <meta charset="utf-8">
@@ -58,6 +58,7 @@
         $teacher = test_input($_POST["teacher"]);
         $pro_name = test_input($_POST["pro_name"]);
         $summ = test_input($_POST["summ"]);
+        $add_students = test_input($_POST[""]);
         $conn = new mysqli($servername, $username, '', $dbname);
 
         if ($conn->connect_error) {
@@ -96,7 +97,7 @@
             <?php
             /* if (!empty($_POST["search"])) {
 
-            } */
+              } */
 
             $servername = "localhost";
             $username = "root";
@@ -105,6 +106,7 @@
             if ($conn->connect_error) {
                 die("Connection failed: " . $conn->connect_error);
             }
+
             if (!empty($_POST["ready"])) {
                 $search = $_POST["search"];
                 $sql = "SELECT * FROM projects WHERE teacher='$search'";
@@ -130,26 +132,26 @@
                 <div class="hidden-xs container" style=" padding:1%; text-align:center;" >
 
                     <?php if ($choice == 1) { ?>
-                    <h3 style="color:black; font-weight:bold; font-size:40px; "> Όλες οι διπλωματικές.</h3>
+                        <h3 style="color:black; font-weight:bold; font-size:40px; "> Όλες οι διπλωματικές.</h3>
                     <?php } else if ($choice == 2) { ?>    
-                    <h3 style="color:black; font-weight:bold; font-size:40px; ">Όλες οι αιτήσεις μου.</h3>
-                    <?php
-                }
-                if ($valid == 0) {
-                    ?>    
-                    <div class="col-md-4" >
-                        <h3 style="font-size:18px; font:bold;">Teacher</h3>
-                    </div>
+                        <h3 style="color:black; font-weight:bold; font-size:40px; ">Όλες οι αιτήσεις μου.</h3>
+                        <?php
+                    }
+                    if ($valid == 0) {
+                        ?>    
+                        <div class="col-md-4" >
+                            <h3 style="font-size:18px; font:bold;">Teacher</h3>
+                        </div>
 
-                    <div class="col-md-4 "   >
-                        <h3 style="font-size:18px; font:bold;">Project Name</h3>
-                    </div>
+                        <div class="col-md-4 "   >
+                            <h3 style="font-size:18px; font:bold;">Project Name</h3>
+                        </div>
 
-                    <div class="col-md-4 " >
+                        <div class="col-md-4 " >
                         <?php } if ($choice == 1) { ?>
-                        <h3 style="font-size:18px; font:bold;">Summary</h3>
+                            <h3 style="font-size:18px; font:bold;">Add Students</h3>
                         <?php } else if ($choice == 2) { ?>
-                        <h3 style="font-size:18px; font:bold;">Status</h3>
+                            <h3 style="font-size:18px; font:bold;">Status</h3>
                         <?php } ?>
                     </div>
 
@@ -169,19 +171,51 @@
 
                                 <div class="container" style=" border-radius: 4px;  border: 1px solid #ccccb3; background-color:white; padding:2%; text-align:center;" >
                                     <div class="row" style="min-height: 100px;" >
-                                        <form id="1" action="" method="post">
+                                        
+                                        <form id="users" action="" method="post">
                                             <div class="col-md-4">
                                                 <h3 style="font-size:20px;"><?php echo $row["teacher"] ?></h3>  
                                             </div>    
                                             <div class="col-md-4" >
                                                 <h3 style="font-size: 14px;">  <?php echo $row["projectname"] ?></h3>
-                                            </div>
-                                            <div class="col-md-4 ">
                                                 <h3 style="font-size: 14px;"> <?php echo $row["summary"] ?></h3>
                                             </div>
+
+                                            <div class="col-md-4 ">
+                                                <div class="dropdmenu" class="nav navbar-left" style="font-size:17px; font-weight:bold; color: #C5C5C5; " >
+                                                    <select form="users" autocomplete="off" name="add_students" class="dropdm">  
+                                                        <?php
+                                                        $servername = "localhost";
+                                                        $username = "root";
+                                                        $dbname = "webdev";
+                                                        $conn = new mysqli($servername, $username, '', $dbname);
+                                                        if ($conn->connect_error) {
+                                                            die("Connection failed: " . $conn->connect_error);
+                                                        }
+
+
+                                                        $sql1 = "SELECT * FROM users WHERE type='student' ";
+                                                        $result1 = $conn->query($sql1);
+
+                                                        if ($result1->num_rows > 0) {
+                                                            // output data of   each row
+                                                            while ($row1 = $result1->fetch_assoc()) {
+                                                                if ($user != $row1["username"]) {
+                                                                    ?>
+                                                                    <option value="<?php echo $row1["username"]; ?>"><?php echo $row1["username"]; ?></option>                
+                                                                    <?php
+                                                                }
+                                                            }
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+
                                             <div class="col-md-4 ">
                                                 <input name="epelekse" type="submit" class="button button4" style="align-content:center; border-color:#ffa31a;color:black; background-color:#ffa31a; font-color:black;" value="Επέλεξε">
                                             </div>
+
 
                                             <input type="hidden" name="id" value="<?php echo $row["projectID"] ?>">
                                             <input type="hidden" name="teacher" value="<?php echo $row["teacher"] ?>">
@@ -197,19 +231,50 @@
                                 <div class="container" style="  border-radius: 4px; border: 1px solid #ccccb3; background-color:#eaeae1; padding:2%; text-align:center;" >
                                     <div class="row" style="min-height: 100px; " >
 
-                                        <form id="2" action="" method="post">
+                                        <form id="users1" action="" method="post">
                                             <div class="col-md-4">
                                                 <h3 style="font-size:20px;"><?php echo $row["teacher"] ?></h3>  
                                             </div>    
                                             <div class="col-md-4" >
                                                 <h3 style="font-size: 14px;">  <?php echo $row["projectname"] ?></h3>
-                                            </div>
-                                            <div class="col-md-4 ">
                                                 <h3 style="font-size: 14px;"> <?php echo $row["summary"] ?></h3>
                                             </div>
+
+                                            <div class="col-md-4 ">
+                                                <div class="dropdmenu" class="nav navbar-left" style="font-size:17px; font-weight:bold; color: #C5C5C5; " >
+                                                    <select form="users1" autocomplete="off" name="add_students" class="dropdm">  
+                                                        <?php
+                                                        $servername = "localhost";
+                                                        $username = "root";
+                                                        $dbname = "webdev";
+                                                        $conn = new mysqli($servername, $username, '', $dbname);
+                                                        if ($conn->connect_error) {
+                                                            die("Connection failed: " . $conn->connect_error);
+                                                        }
+
+
+                                                        $sql1 = "SELECT * FROM users WHERE type='student' ";
+                                                        $result1 = $conn->query($sql1);
+
+                                                        if ($result1->num_rows > 0) {
+                                                            // output data of   each row
+                                                            while ($row1 = $result1->fetch_assoc()) {
+                                                                if ($user != $row1["username"]) {
+                                                                    ?>
+                                                                    <option value="<?php echo $row1["username"]; ?>"><?php echo $row1["username"]; ?></option>                
+                                                                    <?php
+                                                                }
+                                                            }
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+
                                             <div class="col-md-4 ">
                                                 <input name="epelekse" type="submit" class="button button4" style="align-content:center; border-color:#ffa31a;color:black; background-color:#ffa31a; font-color:black;" value="Επέλεξε">
                                             </div>
+
 
                                             <input type="hidden" name="id" value="<?php echo $row["projectID"] ?>">
                                             <input type="hidden" name="teacher" value="<?php echo $row["teacher"] ?>">
@@ -297,5 +362,15 @@
 
             </div>
         </div>
+        <div class="container">
+            <div class="col-md-12" style="padding:3%">
+
+                <form id="pp" action="students_menu.php" method="post">
+                    <input name="log" type="submit" class="button5" style="align-content:center; border-color:#ffa31a;color:black; background-color:orange;" value="Back Menu">
+                </form>
+
+
+            </div>
+        </div>
     </body>
-    </html>
+</html>
