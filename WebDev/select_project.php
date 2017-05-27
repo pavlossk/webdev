@@ -39,29 +39,32 @@
     $valid = 0;
     $choice = 0;
     if (!empty($_POST["epelekse"]) && $_SESSION["type"] == "teacher") {
-        if($_SESSION["location"] == "chat"){
-            $servername = "localhost";
-            $username = "root";
-            $dbname = "webdev";
+        $servername = "localhost";
+        $username = "root";
+        $dbname = "webdev";
 
-            $conn = new mysqli($servername, $username,'', $dbname);
-            if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
+        $conn = new mysqli($servername, $username,'', $dbname);
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+        $id = test_input($_POST["id"]);
+        $username=$_SESSION["username"];
+        $sql = "SELECT folder,projectID FROM users,projects WHERE username='$username' AND username=teacher AND projectID=$id" ;
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                $_SESSION["folder"]=$row["folder"];
+                $_SESSION["projectID"]=$row["projectID"];
             }
-            $id = test_input($_POST["id"]);
-            $username=$_SESSION["username"];
-            $sql = "SELECT folder,projectID FROM users,projects WHERE username='$username' AND username=teacher AND projectID=$id" ;
-            $result = $conn->query($sql);
-            if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
-                    $_SESSION["folder"]=$row["folder"];
-                    $_SESSION["projectID"]=$row["projectID"];
-                }
-            } else {
-                echo "0 results";
-            }
-            $conn->close();
+        } else {
+            echo "0 results";
+        }
+        $conn->close();
+        if($_SESSION["location"] == "chat"){
             echo "<script type='text/javascript'> window.location.href = '/webdev/WebDev/chat.php';</script>";
+        }
+        else if($_SESSION["location"] == "file_handler"){
+            echo "<script type='text/javascript'> window.location.href = '/webdev/WebDev/file_handler.php';</script>";
         }
         
         
@@ -95,7 +98,7 @@
                 $location="chat";
             }
             else if (!empty($_POST["file_handler"])) {
-                $search = $_POST["search"];
+                $_SESSION["location"] = "file_handler";
                 $sql = "SELECT * FROM projects WHERE teacher='$username'";
                 $result = $conn->query($sql);
                 $location='file_handler';

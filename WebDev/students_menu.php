@@ -107,14 +107,12 @@
                                 </div>
                             </div>
                         </li>
-
+                        
                         <li>
                             <form id="search_project" action="all_projects.php" method="post">
                                 <input name="showapplications" type="submit" class=" button5" style=" width:300px; vertical-align:middle" value="Εμφάνισε τις αιτήσεις μου">
                             </form>
                         </li>
-                        <br>
-                        <li><button class="button5" onclick="location.href = 'index.php';" style=" width:300px; vertical-align:middle">Αιτήσεις Διπλωματικών / Έγκριση</button></li>
                         <br>
                         <li>
                             <form id="chat" action="chat.php" method="post">

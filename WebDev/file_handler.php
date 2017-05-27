@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <?php session_start(); ?>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-        <title>WebDev - File Hanlder</title>
-        <link rel="icon" href="img/trasp.png">
+    <title>WebDev - File Hanlder</title>
+    <link rel="icon" href="img/trasp.png">
 
-        <meta name="description" content="Your Description Here">
-        <meta name="keywords" content="bootstrap themes, portfolio, responsive theme">
-        <meta name="author" content="ThemeForces.Com">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <meta name="description" content="Your Description Here">
+    <meta name="keywords" content="bootstrap themes, portfolio, responsive theme">
+    <meta name="author" content="ThemeForces.Com">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
         <!-- Favicons
         ================================================== -->
@@ -43,57 +43,64 @@
     </head>
     
     <?php
-        
-        if (!empty($_POST["confirm"])){
-            $_SESSION["confirm"]=$_POST["confirm"];
-        }
-        
+
+    if (!empty($_POST["confirm"])){
+        $_SESSION["confirm"]=$_POST["confirm"];
+    }
+
     ?>
     <h3 style=" text-align: center; font-size:45px;">Ανέβασε ένα αρχείο</h3>
-                    <ul style="list-style-type:none; align-content:center; ">
-    <body style="background-color: #d6d6c2">
-        <div id="tf-service" style="background-color: #d6d6c2" >
-            <table width="80%" border="1">
-                <tr>
-                <td>File Name</td>
-                <td>File Type</td>
-                <td>File Size(KB)</td>
-                <td>View</td>
-                </tr>
-                <?php
-                $servername = "localhost";
-                $username = "root";
-                $dbname = "webdev";
-                $conn = new mysqli($servername, $username,'', $dbname);
+    <ul style="list-style-type:none; align-content:center; ">
+        <body style="background-color: #d6d6c2">
+            <div id="tf-service" style="background-color: #d6d6c2" >
+                <table width="80%" border="1">
+                    <tr>
+                        <td>File Name</td>
+                        <td>File Type</td>
+                        <td>File Size(KB)</td>
+                        <td>View</td>
+                    </tr>
+                    <?php
+                    $servername = "localhost";
+                    $username = "root";
+                    $dbname = "webdev";
+                    $conn = new mysqli($servername, $username,'', $dbname);
                     if ($conn->connect_error) {
                         die("Connection failed: " . $conn->connect_error);
                     }
 
                     $username=$_SESSION["username"];
-                    $sql = "SELECT uploads.folder as folder,uploads.file as file FROM users,projects,uploads WHERE users.username='$username' AND username=projects.student1 and uploads.project=projects.projectID";
+                    
+                    if($_SESSION["type"]=='teacher'){
+                        $projectID=$_SESSION["projectID"];
+                        $folder=$_SESSION["folder"];
+                        $sql = "SELECT uploads.folder as folder,uploads.file as file FROM users,projects,uploads WHERE users.username='$username' AND projects.projectID='$projectID' AND uploads.project=projects.projectID AND users.username=projects.teacher AND uploads.folder='$folder' ";
+                    }else if($_SESSION["type"]=='student'){
+                        $sql = "SELECT uploads.folder as folder,uploads.file as file FROM users,projects,uploads WHERE users.username='$username' AND uploads.project=projects.projectID AND (projects.student1=users.username OR projects.student2=users.username )";
+                    }
+                    
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
-                            $_SESSION["file"]=$row["folder"];
                             ?>
                             <tr>
-                            <td><?php echo $row["file"] ?></td>
-                            <td><?php echo 'PDF' ?></td>
-                            <td><?php echo '12TB' ?></td>
-                            <td><a href="/webdev/WebDev/uploads/<?php echo $row["folder"] ?>/<?php echo $row["file"] ?><?php echo '' ?>" >view file</a></td>
+                                <td><?php echo $row["file"] ?></td>
+                                <td><?php echo 'PDF' ?></td>
+                                <td><?php echo '12TB' ?></td>
+                                <td><a href="/webdev/WebDev/uploads/<?php echo $row["folder"] ?>/<?php echo $row["file"] ?><?php echo '' ?>" >view file</a></td>
                             </tr>
                             <?php
                         }
                     } else {
                         echo "0 results";
                     }
-              ?>
-            </table>
-        </div>
-        <form action="upload.php" method="post" enctype="multipart/form-data">
-            <input type="file" name="file" size="50" />
-            <br />
-            <input type="submit" value="Upload" />
-        </form>
-    </body>
-</html>
+                    ?>
+                </table>
+            </div>
+            <form action="upload.php" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" size="50" />
+                <br />
+                <input type="submit" value="Upload" />
+            </form>
+        </body>
+        </html>

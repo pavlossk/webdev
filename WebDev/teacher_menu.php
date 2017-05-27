@@ -59,6 +59,13 @@
                             <form id="chat" action="select_project.php" method="post">
                                 <input name="chat" type="submit" class=" button5" style=" width:300px; vertical-align:middle" value="Πλατφόρμα επικοινωνίας">
                             </form>
+                        </li>
+                        <br>
+                        <li>
+                            <form id="file_handler" action="select_project.php" method="post">
+                                <input name="file_handler" type="submit" class=" button5" style=" width:300px; vertical-align:middle" value="Ανέβασμα αρχείων για διπλωματική">
+                            </form>
+                        </li>
                         <br>
                         <li><button class="button5" onclick="location.href = 'gantt.php';" style=" width:300px; vertical-align:middle">Πρόοδος Διπλωματικών </button></li>
                         <br>                          
