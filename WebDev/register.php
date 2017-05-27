@@ -41,69 +41,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
-    <script type="text/javascript">
-
-        function checkForm(form)
-        {
-            if (form.username.value == "") {
-                alert("Error: Username cannot be blank!");
-                form.username.focus();
-                return false;
-            }
-            re = /^\w+$/;
-            if (!re.test(form.username.value)) {
-                alert("Error: Username must contain only letters, numbers and underscores!");
-                form.username.focus();
-                return false;
-            }
-
-            if (form.pwd1.value != "" && form.pwd1.value == form.pwd2.value) {
-                if (form.pwd1.value.length < 6) {
-                    alert("Error: Password must contain at least six characters!");
-                    form.pwd1.focus();
-                    return false;
-                }
-                if (form.pwd1.value == form.username.value) {
-                    alert("Error: Password must be different from Username!");
-                    form.pwd1.focus();
-                    return false;
-                }
-                re = /[0-9]/;
-                if (!re.test(form.pwd1.value)) {
-                    alert("Error: password must contain at least one number (0-9)!");
-                    form.pwd1.focus();
-                    return false;
-                }
-                re = /[a-z]/;
-                if (!re.test(form.pwd1.value)) {
-                    alert("Error: password must contain at least one lowercase letter (a-z)!");
-                    form.pwd1.focus();
-                    return false;
-                }
-                re = /[A-Z]/;
-                if (!re.test(form.pwd1.value)) {
-                    alert("Error: password must contain at least one uppercase letter (A-Z)!");
-                    form.pwd1.focus();
-                    return false;
-                }
-                if (form.math.value != "8") {
-                    alert("Error: den kanei toso oute me aitisi !!!");
-                    form.math.focus();
-                    return false;
-                }
-
-            } else {
-                alert("Error: Please check that you've entered and confirmed your password!");
-                form.pwd1.focus();
-                return false;
-            }
-
-            alert("You entered a valid password: " + form.pwd1.value);
-            return true;
-        }
-
-    </script>
-
     <body style="">
         <div id="tf-service" style="background-color: #d6d6c2" >
             <?php
@@ -122,7 +59,7 @@
                 }
 
                 $user = $_POST["username"];
-                $pass = $_POST["password"];
+                $pass = $_POST["pwd1"];
                 $email = $_POST["email"];
 
                 function generateRandomString($length = 10) {
@@ -147,15 +84,12 @@
 
                 mysqli_close($conn);
 
-
-
                 //KWDIKAS GIA MAIL 
-
                 require '/PHPMailer-master/PHPMailerAutoload.php';
 
                 $mail = new PHPMailer;
 
-//$mail->SMTPDebug = 3;                               // Enable verbose debug output
+//$mail->SMTPDebug = 3;                         
 
                 $mail->isSMTP();                                      // Set mailer to use SMTP
                 $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
@@ -193,19 +127,19 @@
                     <h3 style=" text-align: center; font-size:45px;">Register Page</h3>
                     <ul style="list-style-type:none; align-content:center; ">
 
-                        <form onsubmit="return checkForm(this);" method="post">
+                        <form method="post" onsubmit="return checkForm(this);">
                             <h3 style="font-size:20px; font:bold;">Username: </h3>                           
                             <input style="width:300px;" type="text" name="username">
 
                             <h3 style="font-size:20px; font:bold;">Password:  </h3> 
-                            <input style="width:300px;" type="password" style="width:300px;" name="password">
+                            <input style="width:300px;" type="password" style="width:300px;" name="pwd1">
 
                             <h3 style="font-size:20px; font:bold;">Confirm Password:</h3>
-                            <input style="width:300px;"  type="password" name="password">
+                            <input style="width:300px;"  type="password" name="pwd2">
 
-                            <h3 style="font-size:20px; font:bold;">Do the math: </h3>
+                            <h3 style="font-size:20px; font:bold;">Do the math: <?php $number1=rand(1,9);$number2=rand(1,9);echo $number1."+".$number2;$_SESSION["summ"]=$number1+$number2?></h3>
                             <input style="width:300px;" type="text" name="math">
-
+                            <?php echo $_SESSION["summ"];?>
                             <h3 style="font-size:20px; font:bold;">Email:</h3>
                             <input style="width:300px;" type="text"  name="email">
 
@@ -219,5 +153,79 @@
                     </ul>
                 </div>
             </div>
+            <script type="text/javascript">
+
+                function checkForm(form)
+                {
+                    if (form.username.value == "") {
+                        alert("Error: Username cannot be blank!");
+                        form.username.focus();
+                        return false;
+                    }
+                    re = /^\w+$/;
+                    if (!re.test(form.username.value)) {
+                        alert("Error: Username must contain only letters, numbers and underscores!");
+                        form.username.focus();
+                        return false;
+                    }
+
+                    if (form.pwd1.value != "" && form.pwd1.value == form.pwd2.value) {
+                        if (form.pwd1.value.length < 6) {
+                            alert("Error: Password must contain at least six characters!");
+                            form.pwd1.focus();
+                            return false;
+                        }
+                        if (form.pwd1.value == form.username.value) {
+                            alert("Error: Password must be different from Username!");
+                            form.pwd1.focus();
+                            return false;
+                        }
+                        re = /[0-9]/;
+                        if (!re.test(form.pwd1.value)) {
+                            alert("Error: password must contain at least one number (0-9)!");
+                            form.pwd1.focus();
+                            return false;
+                        }
+                        re = /[a-z]/;
+                        if (!re.test(form.pwd1.value)) {
+                            alert("Error: password must contain at least one lowercase letter (a-z)!");
+                            form.pwd1.focus();
+                            return false;
+                        }
+                        re = /[A-Z]/;
+                        if (!re.test(form.pwd1.value)) {
+                            alert("Error: password must contain at least one uppercase letter (A-Z)!");
+                            form.pwd1.focus();
+                            return false;
+                        }
+                        if (form.math.value != "<?php echo $_SESSION["summ"];?>") {
+                            alert("Error: den kanei toso oute me aitisi !!!");
+                            form.math.focus();
+                            return false;
+                        }
+                        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(form.email.value))  
+                        {  
+                            alert("You have entered an valid email address!")
+                            //return (true)  
+                        }
+                        else{
+                            alert("You have entered an invalid email address!")  
+                        }  
+                        return false;  
+
+                    } else {
+                        alert("Error: Please check that you've entered and confirmed your password!");
+                        form.pwd1.focus();
+                        return false;
+                    }
+
+                    alert("You entered a valid password: " + form.pwd1.value);
+                    return true;
+                }
+                function ValidateEmail(mail)   
+                {  
+
+                }  
+            </script>
         </body>
         </html>
