@@ -39,7 +39,8 @@
     $valid = 0;
     $choice = 0;
     if (!empty($_POST["epelekse"]) && $_SESSION["type"] == "student") {
-        $servername = "localhost";
+        echo $_POST["student2"];
+        /*$servername = "localhost";
         $username = "root";
         $dbname = "webdev";
         $conn = new mysqli($servername, $username, '', $dbname);
@@ -88,8 +89,9 @@
             $sql = "UPDATE projects SET status='applied' WHERE projectID='$id'";
             mysqli_query($conn, $sql);
         }
-        mysqli_close($conn);
+        mysqli_close($conn);*/
     }
+
     ?>
     <body>
         <div class="container">
@@ -194,7 +196,7 @@
                                                         }
 
 
-                                                        $sql1 = "SELECT * FROM users WHERE type='student' ";
+                                                        $sql1 = "SELECT * FROM users WHERE type='student' OR type='empty'";
                                                         $result1 = $conn->query($sql1);
 
                                                         if ($result1->num_rows > 0) {
@@ -210,6 +212,7 @@
                                                         ?>
                                                     </select>
                                                 </div>
+                                                
                                             </div>
 
                                             <div class="col-md-4 ">
@@ -221,6 +224,7 @@
                                             <input type="hidden" name="teacher" value="<?php echo $row["teacher"] ?>">
                                             <input type="hidden" name="pro_name" value="<?php echo $row["projectname"] ?>">
                                             <input type="hidden" name="summ" value="<?php echo $row["summary"] ?>">
+                                            <input type="hidden" name="student2" value="<?php echo $row1["username"] ?>">
                                         </form>
                                     </div>
                                 </div>
@@ -253,7 +257,7 @@
                                                         }
 
 
-                                                        $sql1 = "SELECT * FROM users WHERE type='student' ";
+                                                        $sql1 = "SELECT * FROM users WHERE type='student' OR type='empty'";
                                                         $result1 = $conn->query($sql1);
 
                                                         if ($result1->num_rows > 0) {

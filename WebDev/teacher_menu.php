@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <?php session_start(); ?>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>WebDev - Teacher Menu</title>
-        <link rel="icon" href="img/trasp.png">
+    <title>WebDev - Teacher Menu</title>
+    <link rel="icon" href="img/trasp.png">
 
-        <meta name="description" content="Your Description Here">
-        <meta name="keywords" content="bootstrap themes, portfolio, responsive theme">
-        <meta name="author" content="ThemeForces.Com">
+    <meta name="description" content="Your Description Here">
+    <meta name="keywords" content="bootstrap themes, portfolio, responsive theme">
+    <meta name="author" content="ThemeForces.Com">
 
         <!-- Favicons
         ================================================== -->
@@ -75,7 +75,10 @@
                         <br>
                         <li><button class="button5" onclick="location.href = 'index.php';" style="width:300px; vertical-align:middle">Στατιστικά Στοιχεία</button></li>
                         <br>
-                        <li><button class="button5" onclick="location.href = 'index.php';" style="width:300px; vertical-align:middle">Αποστολή Mail</button></li>
+                        <li><form id="mail" action="mail_teachers.php" method="post">
+                            <input name="mail" type="submit" class=" button5" style=" width:300px; vertical-align:middle" value="Αίτηση έγγρισης διπλωματικής">
+                        </form>
+                        
                         <br>                     
                         <li><button class="button5" onclick="location.href = 'index.php';" style=" width:300px; vertical-align:middle">Charts</button></li>
                         <br> 
@@ -91,4 +94,4 @@
 
 
     </body>
-</html>
+    </html>

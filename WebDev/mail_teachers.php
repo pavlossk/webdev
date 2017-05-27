@@ -1,19 +1,21 @@
 
 <!DOCTYPE html>
-<?php session_start(); ?>
+<?php session_start(); 
+require '/PHPMailer-master/PHPMailerAutoload.php';
+?>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>WebDev</title>
-        <link rel="icon" href="img/trasp.png">
+    <title>WebDev</title>
+    <link rel="icon" href="img/trasp.png">
 
-        <meta name="description" content="Your Description Here">
-        <meta name="keywords" content="bootstrap themes, portfolio, responsive theme">
-        <meta name="author" content="ThemeForces.Com">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <meta name="description" content="Your Description Here">
+    <meta name="keywords" content="bootstrap themes, portfolio, responsive theme">
+    <meta name="author" content="ThemeForces.Com">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
         <!-- Favicons
         ================================================== -->
@@ -44,18 +46,87 @@
 
     <?php
     if (!empty($_POST["ready"])) {
-
         $servername = "localhost";
         $username = "root";
         $dbname = "webdev";
-        $first = $_POST["first"];
-        $second = $_POST["second"];
-        $third = $_POST["third"];
+        function test_input($data) {
+            $data = trim($data);
+            $data = stripslashes($data);
+            $data = htmlspecialchars($data);
+            return $data;
+        }
+        function generateRandomString($length = 10) {
+            $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $charactersLength = strlen($characters);
+            $randomString = '';
+            for ($i = 0; $i < $length; $i++) {
+                $randomString .= $characters[rand(0, $charactersLength - 1)];
+            }
+            return $randomString;
+        }
 
+        function sendEmail($email,$user){
 
-        $conn = new mysqli($servername, $username, '', $dbname);
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
+            $mail = new PHPMailer;     
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = TRUE; 
+            $mail->Username = 'skpa3201@gmail.com';
+            $mail->Password = '%Z57y0@3'; 
+            $mail->Port = 25;
+
+            $mail->setFrom('skpa3201@gmail.com', 'Mailer');
+            $mail->addAddress($email, $user);
+            $mail->addReplyTo('skpa3201@gmail.com', 'Information');
+
+            $mail->Subject = 'Account Confirmation';
+            $random = generateRandomString();
+            $mail->Body = $user.' hello, enter this link to verify your account'.'  http://localhost/webdev/WebDev/confirm.php?confirm='.$random;
+            $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+            if (!$mail->send()) {
+                $path=(string)"uploads/log.html";
+                $fp = fopen($path, 'a');
+                fwrite($fp, "<div class='msgln'>(".date("g:i A").") <b>".$_SESSION["username"]."</b>: ".stripslashes(htmlspecialchars($mail->ErrorInfo))."<br></div>");
+                fclose($fp);
+                echo 'Message could not be sent.';
+                echo 'Mailer Error: ' . $mail->ErrorInfo;
+            } else {
+                echo 'Message has been sent';
+            }
+        }
+        $first = test_input($_POST["first"]);
+        $second = test_input($_POST["second"]);
+        $third = test_input($_POST["third"]);
+        if($first=='' || $second=='' || $third==''){
+            $message = "Δώσε τρεις καθηγητές";
+            echo "<script type='text/javascript'>alert('$message'); </script>";
+        }
+        else if($first==$second || $second==$third || $first==$third){
+            $message = "Δώσε τρεις διαφορετικούς καθηγητές";
+            echo "<script type='text/javascript'>alert('$message'); </script>";
+        }else{
+            $conn = new mysqli($servername, $username, '', $dbname);
+            if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+            }
+            $sql = "SELECT COUNT(*) as count FROM users WHERE type='teacher' AND (username='$first' OR username='$second' OR username='$third' )";
+            $result = $conn->query($sql);
+            $row = $result->fetch_assoc();
+            if($row["count"]==3){
+                $sql1 = "SELECT username,email FROM users WHERE type='teacher' AND (username='$first' OR username='$second' OR username='$third' )";
+                $result1 = $conn->query($sql1);
+                $row1 = $result1->fetch_assoc();
+                while ($row1 = $result1->fetch_assoc()) {
+                    sendEmail($row1[email],$row1[username]);
+                }
+                $message = "Η αίτηση σου καταχωρήθηκε.";
+                echo "<script type='text/javascript'>alert('$message'); window.location.href = '/webdev/WebDev/teachers_menu.php';</script>";
+            }else{
+                $message = "Δεν βρέθηκαν και οι τρεις καθηγητές";
+                echo "<script type='text/javascript'>alert('$message'); window.location.href = '/webdev/WebDev/teachers_menu.php';</script>";
+            }
+            
         }
     }
     ?>
@@ -84,5 +155,5 @@
                     </ul>
                 </div>
             </div>
-    </body>
-</html>
+        </body>
+        </html>

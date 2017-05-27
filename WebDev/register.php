@@ -86,24 +86,17 @@
 
                 //KWDIKAS GIA MAIL 
                 require '/PHPMailer-master/PHPMailerAutoload.php';
-
-                $mail = new PHPMailer;
-
-//$mail->SMTPDebug = 3;                         
-
-                $mail->isSMTP();                                      // Set mailer to use SMTP
-                $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
-                $mail->SMTPAuth = TRUE; // Authentication must be disabled
+                $mail = new PHPMailer;     
+                $mail->isSMTP();
+                $mail->Host = 'smtp.gmail.com';
+                $mail->SMTPAuth = TRUE; 
                 $mail->Username = 'skpa3201@gmail.com';
-                $mail->Password = '%Z57y0@3'; // Leave this blank
-                $mail->Port = 25;                                       // TCP port to connect to
+                $mail->Password = '%Z57y0@3'; 
+                $mail->Port = 25;
 
                 $mail->setFrom('skpa3201@gmail.com', 'Mailer');
-                $mail->addAddress($email, $user);     // Add a recipient
-                // Name is optional
+                $mail->addAddress($email, $user);
                 $mail->addReplyTo('skpa3201@gmail.com', 'Information');
-
-                // Set email format to HTML
 
                 $mail->Subject = 'Account Confirmation';
                 $mail->Body = $user.' hello, enter this link to verify your account'.'  http://localhost/webdev/WebDev/confirm.php?confirm='.$random;
