@@ -40,7 +40,7 @@
     $choice = 0;
     if (!empty($_POST["epelekse"]) && $_SESSION["type"] == "student") {
         echo $_POST["student2"];
-        /*$servername = "localhost";
+        $servername = "localhost";
         $username = "root";
         $dbname = "webdev";
         $conn = new mysqli($servername, $username, '', $dbname);
@@ -89,7 +89,7 @@
             $sql = "UPDATE projects SET status='applied' WHERE projectID='$id'";
             mysqli_query($conn, $sql);
         }
-        mysqli_close($conn);*/
+        mysqli_close($conn);
     }
 
     ?>

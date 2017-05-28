@@ -1,34 +1,35 @@
 <!DOCTYPE html>
 <?php session_start(); ?>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-    <title>WebDev - Insert Project</title>
-    <link rel="icon" href="img/trasp.png">
+        <title>WebDev - Insert Project</title>
+        <link rel="icon" href="img/trasp.png">
 
-    <meta name="description" content="Your Description Here">
-    <meta name="keywords" content="bootstrap themes, portfolio, responsive theme">
-    <meta name="author" content="ThemeForces.Com">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <meta name="description" content="Your Description Here">
+        <meta name="keywords" content="bootstrap themes, portfolio, responsive theme">
+        <meta name="author" content="ThemeForces.Com">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
         <!-- Favicons
-        ================================================== -->
+            ================================================== -->
         <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
         <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
         <link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72.png">
         <link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114.png">
 
         <!-- Bootstrap -->
-        <link rel="stylesheet" type="text/css"  href="css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="fonts/font-awesome/css/font-awesome.css">
 
         <!-- Stylesheet
-        ================================================== -->
-        <link rel="stylesheet" type="text/css"  href="css/style.css">
+            ================================================== -->
+        <link rel="stylesheet" type="text/css" href="css/style.css">
         <link rel="stylesheet" type="text/css" href="css/responsive.css">
 
         <script type="text/javascript" src="js/modernizr.custom.js"></script>
@@ -42,9 +43,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <script type="text/javascript">
-
-        function checkForm(form)
-        {
+        function checkForm(form) {
             if (form.username.value == "") {
                 alert("Error: Username cannot be blank!");
                 form.username.focus();
@@ -101,11 +100,10 @@
             alert("You entered a valid password: " + form.pwd1.value);
             return true;
         }
-
     </script>
 
     <body style="background-color:powderblue;">
-        <div id="tf-service" style="background-color: #d6d6c2" >
+        <div id="tf-service" style="background-color: #d6d6c2">
             <?php
             if (!empty($_POST["ready"])) {
 
@@ -121,15 +119,15 @@
 
                 $title = $_POST["title"];
                 $teacher = $_POST["teacher"];
-                $students= $_POST["students"];
-                $aim= $_POST["aim"];
-                $summary= $_POST["summ"];
-                $lessons= $_POST["lessons"];
-                $knowledge= $_POST["knowledge"];
-                $date_publish= $_POST["date_publish"];
-                $date_take= $_POST["date_take"];
-                $grade_= $_POST["grade"];
-                
+                $students = $_POST["students"];
+                $aim = $_POST["aim"];
+                $summary = $_POST["summ"];
+                $lessons = $_POST["lessons"];
+                $knowledge = $_POST["knowledge"];
+                $date_publish = $_POST["date_publish"];
+                $date_take = $_POST["date_take"];
+                $grade_ = $_POST["grade"];
+
 
 
 
@@ -153,45 +151,46 @@
                     <ul style="list-style-type:none; align-content:center; ">
 
                         <form onsubmit="return checkForm(this);" method="post">
-                            <h3 style="font-size:20px; font:bold;">Τίτλος: </h3>                           
+                            <h3 style="font-size:20px; font:bold;">Τίτλος: </h3>
                             <input style="width:300px;" type="text" name="title">
 
-                            <h3 style="font-size:20px; font:bold;">Καθηγητής:  </h3> 
+                            <h3 style="font-size:20px; font:bold;">Καθηγητής: </h3>
                             <input style="width:300px;" type="text" style="width:300px;" name="teacher">
 
                             <h3 style="font-size:20px; font:bold;">Αριθμός Φοιτητών:</h3>
-                            <input style="width:300px;"  type="number" name="students">
+                            <input style="width:300px;" type="number" name="students">
 
                             <h3 style="font-size:20px; font:bold;">Στόχος Διπλωματικής: </h3>
                             <input style="width:300px;" type="text" name="aim">
 
                             <h3 style="font-size:20px; font:bold;">Περίληψη:</h3>
-                            <input style="width:300px;" type="text"  name="summ">
+                            <input style="width:300px;" type="text" name="summ">
 
                             <h3 style="font-size:20px; font:bold;">Προαπαιτούμενα μαθήματα:</h3>
-                            <input style="width:300px;" type="text"  name="lessons">
+                            <input style="width:300px;" type="text" name="lessons">
 
                             <h3 style="font-size:20px; font:bold;">Προαπαιτούμενες γνώσεις:</h3>
-                            <input style="width:300px;" type="text"  name="knowledge">
+                            <input style="width:300px;" type="text" name="knowledge">
 
                             <h3 style="font-size:20px; font:bold;">Ημερομηνία Δημοσιοποίησης:</h3>
-                            <input style="width:300px;" type="date"  name="date_publish">
+                            <input style="width:300px;" type="date" name="date_publish">
 
                             <h3 style="font-size:20px; font:bold;">Ημερομηνία Ανάληψης:</h3>
-                            <input style="width:300px;" type="date"  name="date_take">
+                            <input style="width:300px;" type="date" name="date_take">
 
                             <h3 style="font-size:20px; font:bold;">Βαθμός:</h3>
-                            <input style="width:300px;" type="number"  name="grade">
-                            
+                            <input style="width:300px;" type="number" name="grade">
+
                             <br>
                             <br>
                             <input name="ready" class="button5" type="submit" value="Εισαγωγή Στοιχείων">
                             <br>
                             <br>
-                            <li><a  href="login.php">if you have already an account click here to login </a></li>
+                            <li><a href="login.php">if you have already an account click here to login </a></li>
                         </form>
                     </ul>
                 </div>
             </div>
-        </body>
-        </html>
+    </body>
+
+</html>

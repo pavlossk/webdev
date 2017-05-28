@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 27, 2017 at 01:12 PM
+-- Generation Time: May 28, 2017 at 02:23 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -33,15 +33,6 @@ CREATE TABLE `applications` (
   `status` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `applications`
---
-
-INSERT INTO `applications` (`applicationID`, `projectID`, `studentID`, `status`) VALUES
-(8, 2, 'Nikos', 'approved'),
-(9, 3, 'Nikos', 'applied'),
-(11, 2, 'nikos2', 'approved');
-
 -- --------------------------------------------------------
 
 --
@@ -53,6 +44,7 @@ CREATE TABLE `projects` (
   `teacher` varchar(20) NOT NULL,
   `student1` varchar(20) DEFAULT NULL,
   `student2` varchar(20) DEFAULT NULL,
+  `student3` varchar(20) NOT NULL,
   `projectname` varchar(20) NOT NULL,
   `summary` varchar(500) NOT NULL,
   `status` varchar(20) NOT NULL,
@@ -67,12 +59,37 @@ CREATE TABLE `projects` (
 -- Dumping data for table `projects`
 --
 
-INSERT INTO `projects` (`projectID`, `teacher`, `student1`, `student2`, `projectname`, `summary`, `status`, `grade`, `folder`, `date_creation`, `date_approved`, `date_finished`) VALUES
-(0, 'maragkoudakis', 'nikos', 'pavlos', 'data mining techniqu', 'Modern techniques of data mining and information retrieval via rapid miner', 'complete', 10, 'project0', '2017-05-25 10:07:37', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(2, 'Soras', 'nikos2', 'Soras', 'EllhnwnSynelefsh', 'Polla Lefta', 'approved', NULL, 'project2', '2017-05-26 18:00:04', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(3, 'Soras', 'nikos', 'Soras', 'thes na se dhrw', 'polu ksulo h fash', 'approved', NULL, 'project3', '2017-05-26 18:00:10', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(4, 'Maragkoudakis', 'Maragkoudakis', 'Maragkoudakis', 'WebDev', 'Project sta plaisia tou programmatismou sto diadiktio', 'approved', NULL, 'project4', '2017-05-25 10:07:50', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(7, 'Soras', 'Soras', 'Soras', 'opou se vrw', 'fapes mia zwh', 'ready', NULL, 'project7', '2017-05-25 10:07:54', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+INSERT INTO `projects` (`projectID`, `teacher`, `student1`, `student2`, `student3`, `projectname`, `summary`, `status`, `grade`, `folder`, `date_creation`, `date_approved`, `date_finished`) VALUES
+(0, 'maragkoudakis', 'empty', 'empty', 'empty', 'data mining techniqu', 'Modern techniques of data mining and information retrieval via rapid miner', 'not applied', NULL, 'project0', '2017-05-27 14:45:59', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, 'Soras', 'empty', 'empty', 'empty', 'EllhnwnSynelefsh', 'Polla Lefta', 'not applied', NULL, 'project2', '2017-05-27 14:45:59', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(3, 'Soras', 'empty', 'empty', 'empty', 'thes na se dhrw', 'polu ksulo h fash', 'not applied', NULL, 'project3', '2017-05-27 14:45:59', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(4, 'Maragkoudakis', 'empty', 'empty', 'empty', 'WebDev', 'Project sta plaisia tou programmatismou sto diadiktio', 'not applied', NULL, 'project4', '2017-05-27 14:45:59', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(7, 'Soras', 'empty', 'empty', 'empty', 'opou se vrw', 'fapes mia zwh', 'not applied', NULL, 'project7', '2017-05-27 14:45:59', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `project_confirms`
+--
+
+CREATE TABLE `project_confirms` (
+  `confirmID` int(6) NOT NULL,
+  `project` int(11) NOT NULL,
+  `teacher` varchar(20) NOT NULL,
+  `confirm` varchar(20) NOT NULL,
+  `confirmed` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `project_confirms`
+--
+
+INSERT INTO `project_confirms` (`confirmID`, `project`, `teacher`, `confirm`, `confirmed`) VALUES
+(2, 0, 'soras', 'asdd', 0),
+(3, 3, 'soras', 'asdd', 0),
+(4, 3, 'Maragkoudakis', 'qVKpL5Gn5a', 1),
+(5, 3, 'Soras', 'BzKEAdAwe2', 0),
+(6, 3, 'tselepis', 'WeDfFKoz5x', 0);
 
 -- --------------------------------------------------------
 
@@ -94,8 +111,7 @@ CREATE TABLE `uploads` (
 --
 
 INSERT INTO `uploads` (`uploadID`, `uploader`, `project`, `date_creation`, `folder`, `file`) VALUES
-(17, 'Soras', 2, '2017-05-26 21:00:00', 'project2', 'IMG_20170124_135205.jpg'),
-(18, 'Soras', 3, '2017-05-26 21:00:00', 'project3', 'IMG_20170304_143547.jpg');
+(17, 'Soras', 2, '2017-05-26 21:00:00', 'project2', 'IMG_20170124_135205.jpg');
 
 -- --------------------------------------------------------
 
@@ -116,13 +132,16 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`username`, `password`, `email`, `type`, `confirm`) VALUES
-('Maragkoudakis', '123', 'maragkoudakis@gmail.', 'teacher', 'confirmed'),
-('Nikos', '123', 'nickfortune@windowslive.com', 'student', 'confirmed'),
-('nikos2', 'E#4acyxg', 'nikos.fourtounis95@gmail.com', 'student', 'confirmed'),
+('empty', 'empty', 'empty', 'empty', 'empty'),
+('giwrgos', '123', 'giwrgos@gmail.com', 'student', 'confirmed'),
+('Maragkoudakis', '123', 'nikos.fourtounis95@gmail.com', 'teacher', 'confirmed'),
+('Nikos', '123', 'nikos@gmail.com', 'student', 'confirmed'),
+('nikos2', '123', 'nikos2@gmail.com', 'student', 'confirmed'),
+('papadimos', '123', 'papadimos@gmail.com', 'teacher', 'confirmed'),
 ('pavlos', '123', 'pavlaras@gmail', 'student', 'confirmed'),
-('sd', '', '', '', '2mDljTIpH8'),
-('sdasdd', 'asd123A', 'dd', '', 'WoCwBkwOVz'),
-('Soras', '123', 'soras123@gmail.com', 'teacher', 'confirmed');
+('Soras', '123', 'nickfortune@windowslive.com', 'teacher', 'confirmed'),
+('stergiou', '123', 'stergiou@gmail.com', 'teacher', 'confirmed'),
+('tselepis', '123', 'icsd13195@icsd.aegean.gr', 'teacher', 'confirmed');
 
 --
 -- Indexes for dumped tables
@@ -144,6 +163,14 @@ ALTER TABLE `projects`
   ADD KEY `teacher` (`teacher`),
   ADD KEY `student1` (`student1`),
   ADD KEY `student2` (`student2`);
+
+--
+-- Indexes for table `project_confirms`
+--
+ALTER TABLE `project_confirms`
+  ADD PRIMARY KEY (`confirmID`),
+  ADD KEY `project` (`project`),
+  ADD KEY `teacher` (`teacher`);
 
 --
 -- Indexes for table `uploads`
@@ -169,12 +196,17 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `applications`
 --
 ALTER TABLE `applications`
-  MODIFY `applicationID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `applicationID` int(20) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `project_confirms`
+--
+ALTER TABLE `project_confirms`
+  MODIFY `confirmID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `uploads`
 --
 ALTER TABLE `uploads`
-  MODIFY `uploadID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `uploadID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- Constraints for dumped tables
 --
@@ -192,6 +224,13 @@ ALTER TABLE `projects`
   ADD CONSTRAINT `projects_ibfk_1` FOREIGN KEY (`student1`) REFERENCES `users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `projects_ibfk_2` FOREIGN KEY (`student2`) REFERENCES `users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `user_FK` FOREIGN KEY (`teacher`) REFERENCES `users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `project_confirms`
+--
+ALTER TABLE `project_confirms`
+  ADD CONSTRAINT `project_confirms_ibfk_1` FOREIGN KEY (`project`) REFERENCES `projects` (`projectID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `project_confirms_ibfk_2` FOREIGN KEY (`teacher`) REFERENCES `users` (`username`);
 
 --
 -- Constraints for table `uploads`

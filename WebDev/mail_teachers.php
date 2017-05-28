@@ -45,10 +45,10 @@ require '/PHPMailer-master/PHPMailerAutoload.php';
     </head>
 
     <?php
+    $servername = "localhost";
+    $username = "root";
+    $dbname = "webdev";
     if (!empty($_POST["ready"])) {
-        $servername = "localhost";
-        $username = "root";
-        $dbname = "webdev";
         function test_input($data) {
             $data = trim($data);
             $data = stripslashes($data);
@@ -81,9 +81,18 @@ require '/PHPMailer-master/PHPMailerAutoload.php';
 
             $mail->Subject = 'Account Confirmation';
             $random = generateRandomString();
-            $mail->Body = $user.' hello, enter this link to verify your account'.'  http://localhost/webdev/WebDev/confirm.php?confirm='.$random;
+            $mail->Body = $user.' hello, enter this link to verify your account'.'  http://localhost/webdev/WebDev/confirmproject.php?confirm='.$random;
             $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-
+            $servername = "localhost";
+            $username = "root";
+            $dbname = "webdev";
+            $conn = new mysqli($servername, $username, '', $dbname);
+            if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+            }
+            $project=$_SESSION["projectID"];
+            $sql = "INSERT INTO project_confirms(project, teacher, confirm) VALUES ($project,'$user','$random')";
+            $conn->query($sql);
             if (!$mail->send()) {
                 $path=(string)"uploads/log.html";
                 $fp = fopen($path, 'a');
@@ -116,12 +125,11 @@ require '/PHPMailer-master/PHPMailerAutoload.php';
             if($row["count"]==3){
                 $sql1 = "SELECT username,email FROM users WHERE type='teacher' AND (username='$first' OR username='$second' OR username='$third' )";
                 $result1 = $conn->query($sql1);
-                $row1 = $result1->fetch_assoc();
                 while ($row1 = $result1->fetch_assoc()) {
                     sendEmail($row1[email],$row1[username]);
                 }
                 $message = "Η αίτηση σου καταχωρήθηκε.";
-                echo "<script type='text/javascript'>alert('$message'); window.location.href = '/webdev/WebDev/teachers_menu.php';</script>";
+                echo "<script type='text/javascript'>alert('$message'); window.location.href = '/webdev/WebDev/teacher_menu.php';</script>";
             }else{
                 $message = "Δεν βρέθηκαν και οι τρεις καθηγητές";
                 echo "<script type='text/javascript'>alert('$message'); window.location.href = '/webdev/WebDev/teachers_menu.php';</script>";
