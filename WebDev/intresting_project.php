@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <?php session_start(); ?>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>WebDev</title>
-    <meta name="description" content="Your Description Here">
-    <meta name="keywords" content="bootstrap themes, portfolio, responsive theme">
-    <meta name="author" content="ThemeForces.Com">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <title>WebDev</title>
+        <meta name="description" content="Your Description Here">
+        <meta name="keywords" content="bootstrap themes, portfolio, responsive theme">
+        <meta name="author" content="ThemeForces.Com">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
         <!-- Favicons
         ================================================== -->
@@ -177,6 +177,17 @@
             ?>
 
 
+        </div>
+
+        <div class="container">
+            <div class="col-md-12" style="padding:3%">
+
+                <form id="pp" action="<?php echo $_SESSION["path"]; ?>" method="post">
+                    <input name="log" type="submit" class="button5" style="align-content:center; border-color:#ffa31a;color:black; background-color:orange;" value="Back">
+                </form>
+
+
+            </div>
         </div>
 
     </body>

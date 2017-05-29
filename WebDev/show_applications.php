@@ -39,7 +39,7 @@
     </head>
 
     <body>
-        <div class="container" style="zoom:70%;">
+        <div class="container" style="zoom:90%;">
             <br></br>
             <?php
             $servername = "localhost";
@@ -85,28 +85,28 @@
                 while ($row = $result->fetch_assoc()) {
                     if ($counter % 2 == 0) {
                         ?>
-                        <div class="container" style=" border-radius: 4px;  border: 1px solid #ccccb3; background-color:#b8b894; padding:2%; text-align:center;" >
-                            <div class="row" style="min-height: 100px;" >
+                        <div class="container" style=" border-radius: 4px; border: 5px solid #999999;   padding:2%; background-color:#b8b894; text-align:center;" >
 
-                                <form id="1" action="" method="post">
-                                    <div class="col-md-3" >
-                                        <h3 style="font-size:25px;  font-weight: bold;"><?php echo $row["applicationID"] ?></h3> 
-                                    </div>
-                                    <div class="col-md-3 ">
-                                        <h3 style="font-size: 16px;">  <?php echo $row["projectname"] ?> </h3>
-                                    </div>
 
-                                    <div class="col-md-3 ">
-                                        <h3 style="padding-top: 18px; font-size: 18px;">  <?php echo $row["studentID"] ?></h3>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <input name="egkrish" type="submit" class="button button4" style="padding-top:18px; align-content:center; border-color:#ffa31a;background-color:#ffa31a; color:black;" value="Έγκριση">
-                                    </div>
+                            <form id="1" action="" method="post">
+                                <div class="col-md-3" >
+                                    <h3 style="font-size:25px;  font-weight: bold;"><?php echo $row["applicationID"] ?></h3> 
+                                </div>
+                                <div class="col-md-3 ">
+                                    <h3 style="font-size: 16px;">  <?php echo $row["projectname"] ?> </h3>
+                                </div>
 
-                                    <input type="hidden" name="applicationid" value="<?php echo $row["applicationID"] ?>">
-                                    <input type="hidden" name="studentid" value="<?php echo $row["studentID"] ?>">
-                                </form>
-                            </div>
+                                <div class="col-md-3 ">
+                                    <h3 style=" font-size: 18px;">  <?php echo $row["studentID"] ?></h3>
+                                </div>
+                                <div class="col-md-3">
+                                    <input name="egkrish" type="submit" class="button button4" style=" align-content:center; border-color:#ffa31a;background-color:#ffa31a; color:black;" value="Έγκριση">
+                                </div>
+
+                                <input type="hidden" name="applicationid" value="<?php echo $row["applicationID"] ?>">
+                                <input type="hidden" name="studentid" value="<?php echo $row["studentID"] ?>">
+                            </form>
+
                         </div>
                         <br>
                         <?php
@@ -124,10 +124,10 @@
                                     </div>
 
                                     <div class="col-md-3">
-                                        <h3 style="padding-top: 18px; font-size: 18px;">  <?php echo $row["studentID"] ?></h3>
+                                        <h3 style=" font-size: 18px;">  <?php echo $row["studentID"] ?></h3>
                                     </div>
                                     <div class="col-md-3">
-                                        <input name="egkrish" type="submit" class="button button4" style="padding-top:18px; align-content:center; border-color:#ffa31a;background-color:#ffa31a; color:black;" value="Έγκριση">
+                                        <input name="egkrish" type="submit" class="button button4" style=" align-content:center; border-color:#ffa31a;background-color:#ffa31a; color:black;" value="Έγκριση">
                                     </div>
 
                                     <input type="hidden" name="applicationid" value="<?php echo $row["applicationID"] ?>">
@@ -190,8 +190,8 @@
         <div class="container">
             <div class="col-md-12" style="padding:3%">
 
-                <form id="pp" action="teacher_menu.php" method="post">
-                    <input name="log" type="submit" class="button5" style="align-content:center; border-color:#ffa31a;color:black; background-color:orange;" value="LogOut">
+                <form id="pp" action="<?php echo $_SESSION["path"]; ?>" method="post">
+                    <input name="log" type="submit" class="button5" style="align-content:center; border-color:#ffa31a;color:black; background-color:orange;" value="Back">
                 </form>
 
 
