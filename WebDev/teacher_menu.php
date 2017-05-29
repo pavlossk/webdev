@@ -43,7 +43,10 @@
 
             <div class="container">
                 <div class="content" style="text-align: center">
+<<<<<<< HEAD
                     <?php $_SESSION["path"]= "teacher_menu.php" ;?>
+=======
+>>>>>>> origin/master
 
                     <ul style="list-style-type:none; align-content:center;">
                         <h3 style="font-size:45px;">Dashboard Καθηγητή</h3>
@@ -59,6 +62,7 @@
                                 <input name="chat" type="submit" class=" button5" style=" width:300px; vertical-align:middle" value="Πλατφόρμα επικοινωνίας">
                             </form>
                         </li>
+<<<<<<< HEAD
                         <br>
                         <li>
                             <form id="file_handler" action="select_project.php" method="post">
@@ -66,12 +70,26 @@
                             </form>
                         </li>
                         <br>
+=======
+                        <br>
+                        <li>
+                            <form id="file_handler" action="select_project.php" method="post">
+                                <input name="file_handler" type="submit" class=" button5" style=" width:300px; vertical-align:middle" value="Ανέβασμα αρχείων για διπλωματική">
+                            </form>
+                        </li>
+                        <br>
+>>>>>>> origin/master
                         <li><button class="button5" onclick="location.href = 'gantt.php';" style=" width:300px; vertical-align:middle">Πρόοδος Διπλωματικών </button></li>
                         <br>
                         <li><button class="button5" onclick="location.href = 'gantt2.php';" style=" width:300px; vertical-align:middle">Στατιστικά Στοιχεία</button></li>
                         <br>
                         <li><button class="button5" onclick="location.href = 'index.php';" style="width:300px; vertical-align:middle">Δημιουργία Εγγράφου PDF</button></li>
                         <br>
+<<<<<<< HEAD
+=======
+                        <li><button class="button5" onclick="location.href = 'index.php';" style="width:300px; vertical-align:middle">Στατιστικά Στοιχεία</button></li>
+                        <br>
+>>>>>>> origin/master
                         <li>
                             <form id="confirm_project" action="select_project.php" method="post">
                                 <input name="confirm_project" type="submit" class=" button5" style=" width:300px; vertical-align:middle" value="Αίτηση έγγρισης διπλωματικής">

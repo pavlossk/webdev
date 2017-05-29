@@ -310,6 +310,27 @@
 
                     <div class="col-md-12" style="padding:3%; zoom:85%;">
                         <div id="demo12" class="collapse">
+<<<<<<< HEAD
+=======
+
+                            <form id="pp" action="" method="post">
+                                ID Διπλωματικής:<br>
+                                <input style="font-size:20px;" type="text" size="15" name="id">  
+                                <br>
+                                2ο Όνομα Φοιτητή:<br>
+                                <input style="font-size:20px;" type="text" size="15" name="second">   
+                                <br>
+                                3ο Όνομα Φοιτητή:<br>
+                                <input style="font-size:20px;" type="text" size="15" name="third">   
+                                <br>
+                                <input name="epelekse" type="submit" class="button button4" style="align-content:center; border-color:#ffa31a;color:black; background-color:#ffa31a; font-color:black;" value="Επικύρωση">
+                            </form>
+                        </div>
+                    </div>
+
+
+                </div>
+>>>>>>> origin/master
 
                             <form id="pp" action="" method="post">
                                 ID Διπλωματικής:<br>

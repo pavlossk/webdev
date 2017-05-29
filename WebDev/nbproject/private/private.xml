@@ -3,8 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/xampp/htdocs/webdev/WebDev/gantt.php</file>
             <file>file:/C:/xampp/htdocs/webdev/WebDev/gantt2.php</file>
+=======
+            <file>file:/C:/xampp/htdocs/webdev/WebDev/other_charts.php</file>
+>>>>>>> origin/master
         </group>
     </open-files>
 </project-private>
