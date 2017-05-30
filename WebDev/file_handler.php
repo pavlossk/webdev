@@ -49,6 +49,7 @@
             }
             ?>
             <h3 style=" text-align: center; font-size:45px;">Ανέβασε ένα αρχείο</h3>
+<<<<<<< HEAD
 
             <br>
             <br>
@@ -121,16 +122,40 @@
                 <input class="" type="file" name="file" size="50" />
                 <br />
 
+=======
+         
+            <br>
+            <br>
+                <div class="container" style="text-align:center;">
+
+                    <div class="col-md-3" >
+                        <h3 style="font-size:18px; font-weight: bold;">File Name</h3>
+                    </div>
+                    <div class="col-md-3" >
+                        <h3 style="font-size:18px; font-weight: bold;">File Type</h3>
+                    </div>
+                    <div class="col-md-3" >
+                        <h3 style="font-size:18px; font-weight: bold;">File Size(KB)</h3>
+                    </div>
+                    <div class="col-md-3" >
+                        <h3 style="font-size:18px; font-weight: bold;">View</h3>
+                    </div>
+                </div>
+>>>>>>> origin/master
                 <?php
                 $servername = "localhost";
                 $username = "root";
                 $dbname = "webdev";
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
                 $conn = new mysqli($servername, $username, '', $dbname);
                 if ($conn->connect_error) {
                     die("Connection failed: " . $conn->connect_error);
                 }
 
+<<<<<<< HEAD
                     $projectID = $_SESSION["projectID"];
                     $sql = "SELECT * FROM project_stages WHERE projectID='$projectID' ORDER BY stage_number ASC";
                 
@@ -156,6 +181,57 @@
 
         </div>
 
+=======
+                $username = $_SESSION["username"];
+
+                if ($_SESSION["type"] == 'teacher') {
+                    $projectID = $_SESSION["projectID"];
+                    $folder = $_SESSION["folder"];
+                    $sql = "SELECT uploads.folder as folder,uploads.file as file FROM users,projects,uploads WHERE users.username='$username' AND projects.projectID='$projectID' AND uploads.project=projects.projectID AND users.username=projects.teacher AND uploads.folder='$folder' ";
+                } else if ($_SESSION["type"] == 'student') {
+                    $sql = "SELECT uploads.folder as folder,uploads.file as file FROM users,projects,uploads WHERE users.username='$username' AND uploads.project=projects.projectID AND (projects.student1=users.username OR projects.student2=users.username )";
+                }
+
+                $result = $conn->query($sql);
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        ?>
+                        <div class="container" style=" border-radius: 4px;  border: 5px solid #999999;  padding:2%; background-color:#b8b894; text-align:center;" >
+                            <div class="col-md-3" >
+                                <h3 style="font-size:18px; font:bold;"><?php echo $row["file"] ?></h3>
+                            </div>
+                            <div class="col-md-3" >
+                                <h3 style="font-size:18px; font:bold;"><?php echo 'PDF' ?></h3>
+                            </div>
+                            <div class="col-md-3" >
+                                <h3 style="font-size:18px; font:bold;"><?php echo '12TB' ?></h3>
+                            </div>
+                            <div class="col-md-3" >
+                                <h3 style="font-size:18px; font:bold;"><a href="/webdev/WebDev/uploads/<?php echo $row["folder"] ?>/<?php echo $row["file"] ?><?php echo '' ?>" >view file</a></h3>
+                            </div> 
+                        </div>
+
+
+                        <?php
+                    }
+                } else {
+                    echo "0 results";
+                }
+                ?>
+
+
+          
+                    <br>
+                    <br>
+                    <form action="upload.php" method="post" enctype="multipart/form-data">
+                        <input class="" type="file" name="file" size="50" />
+                        <br />
+                        <input class="button4" style="background-color:#ff6600 " type="submit" value="Upload" />
+                    </form>
+              
+        </div>
+        
+>>>>>>> origin/master
         <div class="container">
             <div class="col-md-12" style="padding:3%">
 
