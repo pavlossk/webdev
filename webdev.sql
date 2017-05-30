@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 28, 2017 at 02:23 PM
+-- Generation Time: May 30, 2017 at 11:55 AM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -62,7 +62,7 @@ CREATE TABLE `projects` (
 INSERT INTO `projects` (`projectID`, `teacher`, `student1`, `student2`, `student3`, `projectname`, `summary`, `status`, `grade`, `folder`, `date_creation`, `date_approved`, `date_finished`) VALUES
 (0, 'maragkoudakis', 'empty', 'empty', 'empty', 'data mining techniqu', 'Modern techniques of data mining and information retrieval via rapid miner', 'not applied', NULL, 'project0', '2017-05-27 14:45:59', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (2, 'Soras', 'empty', 'empty', 'empty', 'EllhnwnSynelefsh', 'Polla Lefta', 'not applied', NULL, 'project2', '2017-05-27 14:45:59', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(3, 'Soras', 'empty', 'empty', 'empty', 'thes na se dhrw', 'polu ksulo h fash', 'not applied', NULL, 'project3', '2017-05-27 14:45:59', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(3, 'Soras', 'empty', 'empty', 'empty', 'thes na se dhrw', 'polu ksulo h fash', 'complete', NULL, 'project3', '2017-05-28 17:04:21', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (4, 'Maragkoudakis', 'empty', 'empty', 'empty', 'WebDev', 'Project sta plaisia tou programmatismou sto diadiktio', 'not applied', NULL, 'project4', '2017-05-27 14:45:59', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (7, 'Soras', 'empty', 'empty', 'empty', 'opou se vrw', 'fapes mia zwh', 'not applied', NULL, 'project7', '2017-05-27 14:45:59', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
@@ -94,6 +94,20 @@ INSERT INTO `project_confirms` (`confirmID`, `project`, `teacher`, `confirm`, `c
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `project_stages`
+--
+
+CREATE TABLE `project_stages` (
+  `project_stagesID` int(6) NOT NULL,
+  `projectID` int(11) NOT NULL,
+  `stage_name` varchar(50) NOT NULL,
+  `stage_summary` varchar(50) NOT NULL,
+  `stage_number` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `uploads`
 --
 
@@ -103,15 +117,9 @@ CREATE TABLE `uploads` (
   `project` int(6) NOT NULL,
   `date_creation` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `folder` varchar(50) NOT NULL,
-  `file` varchar(50) NOT NULL
+  `file` varchar(50) NOT NULL,
+  `project_stage` int(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `uploads`
---
-
-INSERT INTO `uploads` (`uploadID`, `uploader`, `project`, `date_creation`, `folder`, `file`) VALUES
-(17, 'Soras', 2, '2017-05-26 21:00:00', 'project2', 'IMG_20170124_135205.jpg');
 
 -- --------------------------------------------------------
 
@@ -173,13 +181,21 @@ ALTER TABLE `project_confirms`
   ADD KEY `teacher` (`teacher`);
 
 --
+-- Indexes for table `project_stages`
+--
+ALTER TABLE `project_stages`
+  ADD PRIMARY KEY (`project_stagesID`),
+  ADD KEY `projectID` (`projectID`);
+
+--
 -- Indexes for table `uploads`
 --
 ALTER TABLE `uploads`
   ADD PRIMARY KEY (`uploadID`),
   ADD UNIQUE KEY `file` (`file`),
   ADD KEY `uploader` (`uploader`),
-  ADD KEY `project` (`project`);
+  ADD KEY `project` (`project`),
+  ADD KEY `project_stage` (`project_stage`);
 
 --
 -- Indexes for table `users`
@@ -202,6 +218,11 @@ ALTER TABLE `applications`
 --
 ALTER TABLE `project_confirms`
   MODIFY `confirmID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `project_stages`
+--
+ALTER TABLE `project_stages`
+  MODIFY `project_stagesID` int(6) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `uploads`
 --
@@ -233,11 +254,18 @@ ALTER TABLE `project_confirms`
   ADD CONSTRAINT `project_confirms_ibfk_2` FOREIGN KEY (`teacher`) REFERENCES `users` (`username`);
 
 --
+-- Constraints for table `project_stages`
+--
+ALTER TABLE `project_stages`
+  ADD CONSTRAINT `project_stages_ibfk_1` FOREIGN KEY (`projectID`) REFERENCES `projects` (`projectID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `uploads`
 --
 ALTER TABLE `uploads`
   ADD CONSTRAINT `uploads_ibfk_1` FOREIGN KEY (`project`) REFERENCES `projects` (`projectID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `uploads_ibfk_2` FOREIGN KEY (`uploader`) REFERENCES `users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `uploads_ibfk_2` FOREIGN KEY (`uploader`) REFERENCES `users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `uploads_ibfk_3` FOREIGN KEY (`project_stage`) REFERENCES `project_stages` (`project_stagesID`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
