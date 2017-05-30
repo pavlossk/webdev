@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 30, 2017 at 12:35 PM
+-- Generation Time: May 30, 2017 at 02:16 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -102,15 +102,18 @@ CREATE TABLE `project_stages` (
   `projectID` int(11) NOT NULL,
   `stage_name` varchar(50) NOT NULL,
   `stage_summary` varchar(50) NOT NULL,
-  `stage_number` tinyint(4) NOT NULL
+  `stage_number` tinyint(4) NOT NULL,
+  `status` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `project_stages`
 --
 
-INSERT INTO `project_stages` (`project_stagesID`, `projectID`, `stage_name`, `stage_summary`, `stage_number`) VALUES
-(1, 2, 'Vivliografia', '...', 1);
+INSERT INTO `project_stages` (`project_stagesID`, `projectID`, `stage_name`, `stage_summary`, `stage_number`, `status`) VALUES
+(1, 2, 'Vivliografia', '...', 1, 'done'),
+(3, 2, 'Sxediasmos', '...', 2, 'pending'),
+(4, 2, 'Ylopoihsh', '...', 3, 'pending');
 
 -- --------------------------------------------------------
 
@@ -238,7 +241,7 @@ ALTER TABLE `project_confirms`
 -- AUTO_INCREMENT for table `project_stages`
 --
 ALTER TABLE `project_stages`
-  MODIFY `project_stagesID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `project_stagesID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `uploads`
 --
