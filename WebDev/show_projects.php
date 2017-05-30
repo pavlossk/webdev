@@ -80,25 +80,24 @@
                             <h3 style="font-weight: bold;">Διπλωματικές που δεν έχουν ανατεθεί.</h3>
                         <?php } ?>
 
-                        <div class="container" style=" border-radius: 4px;  border: 1px solid #ccccb3; background-color:#b8b894; padding:2%; text-align:center;" >
-                            <div class="row" style="min-height: 100px;" >
+                        <div class="container" style=" border-radius: 4px; border: 5px solid #999999;   padding:2%; background-color:#b8b894; text-align:center;" >
 
+                            <form id="1" action="" method="post">
+                                <div class="col-md-4" >
+                                    <h3 style="font-size:25px;  font-weight: bold;"><?php echo $row["projectname"] ?></h3> 
+                                </div>
+                                <div class="col-md-4">
+                                    <h3 style="font-size: 16px;">  <?php echo $row["summary"] ?> </h3>
+                                </div>
+                                <div class="col-md-4">
+                                    <h3 style="padding-top: 18px; font-size: 18px;">  <?php echo $row["status"] ?></h3>
+                                </div>
+                                <input type="hidden" name="applicationid" value="<?php echo $row["applications.studentID"] ?>">
+                                <input type="hidden" name="studentid" value="<?php echo $row["applications.studentID"] ?>">
+                            </form>
 
-                                <form id="1" action="" method="post">
-                                    <div class="col-md-4" >
-                                        <h3 style="font-size:25px;  font-weight: bold;"><?php echo $row["projectname"] ?></h3> 
-                                    </div>
-                                    <div class="col-md-4">
-                                        <h3 style="font-size: 16px;">  <?php echo $row["summary"] ?> </h3>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <h3 style="padding-top: 18px; font-size: 18px;">  <?php echo $row["status"] ?></h3>
-                                    </div>
-                                    <input type="hidden" name="applicationid" value="<?php echo $row["applications.studentID"] ?>">
-                                    <input type="hidden" name="studentid" value="<?php echo $row["applications.studentID"] ?>">
-                                </form>
-                            </div>
                         </div>
+
                         <br>
 
                         <?php
@@ -121,26 +120,27 @@
                             <h3 style="font-weight: bold;">Διπλωματικές που βρίσκονται υπό έγκριση.</h3>
                         <?php } ?>
 
-                        <div class="container" style=" border-radius: 4px;  border: 1px solid #ccccb3; background-color:#b8b894; padding:2%; text-align:center;" >
-                            <div class="row" style="min-height: 100px;" >
-
-                                <form id="1" action="" method="post">
-                                    <div class="col-md-4" >
-                                        <h3 style="font-size:25px;  font-weight: bold;"><?php echo $array[$i]["projectname"] ?></h3> 
-                                    </div>
-                                    <div class="col-md-4">
-                                        <h3 style="font-size: 16px;">  <?php echo $array[$i]["summary"] ?> </h3>
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <h3 style="padding-top: 18px; font-size: 18px;">  <?php echo $array[$i]["status"] ?></h3>
-                                    </div>
+                        <div class="container" style=" border-radius: 4px;  border: 5px solid #999999;  padding:2%; background-color:#b8b894; text-align:center;" >
 
 
-                                    <input type="hidden" name="applicationid" value="<?php echo $array[$i]["studentID"] ?>">
-                                    <input type="hidden" name="studentid" value="<?php echo $array[$i]["studentID"] ?>">
-                                </form>
-                            </div>
+                            <form id="1" action="" method="post">
+                                <div class="col-md-4" >
+                                    <h3 style="font-size:25px;  font-weight: bold;"><?php echo $array[$i]["projectname"] ?></h3> 
+                                </div>
+                                <div class="col-md-4">
+                                    <h3 style="font-size: 16px;">  <?php echo $array[$i]["summary"] ?> </h3>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <h3 style="font-size: 18px;">  <?php echo $array[$i]["status"] ?></h3>
+                                </div>
+
+
+                                <input type="hidden" name="applicationid" value="<?php echo $array[$i]["studentID"] ?>">
+                                <input type="hidden" name="studentid" value="<?php echo $array[$i]["studentID"] ?>">
+                            </form>
+
+
                         </div>
                         <br>
                         <?php
@@ -159,25 +159,25 @@
                             <h3 style="font-weight: bold;" >Διπλωματικές που έχουν ανατεθεί.</h3>
                         <?php } ?>
 
-                        <div class="container" style=" border-radius: 4px;  border: 1px solid #ccccb3; background-color:#b8b894; padding:2%; text-align:center;" >
-                            <div class="row" style="min-height: 100px;" >
-                                <form id="1" action="" method="post">
-                                    <div class="col-md-4" >
-                                        <h3 style="font-size:25px;  font-weight: bold;"><?php echo $array[$i]["projectname"] ?></h3> 
-                                    </div>
-                                    <div class="col-md-4">
-                                        <h3 style="font-size: 16px;">  <?php echo $array[$i]["summary"] ?> </h3>
-                                    </div>
+                        <div class="container" style=" border-radius: 4px; border: 5px solid #999999;  background-color:#b8b894; padding:2%; text-align:center;" >
 
-                                    <div class="col-md-4">
-                                        <h3 style="padding-top: 18px; font-size: 18px;">  <?php echo $array[$i]["status"] ?></h3>
-                                    </div>
+                            <form id="1" action="" method="post">
+                                <div class="col-md-4" >
+                                    <h3 style="font-size:25px;  font-weight: bold;"><?php echo $array[$i]["projectname"] ?></h3> 
+                                </div>
+                                <div class="col-md-4">
+                                    <h3 style="font-size: 16px;">  <?php echo $array[$i]["summary"] ?> </h3>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <h3 style=" font-size: 18px;">  <?php echo $array[$i]["status"] ?></h3>
+                                </div>
 
 
-                                    <input type="hidden" name="applicationid" value="<?php echo $array[$i]["studentID"] ?>">
-                                    <input type="hidden" name="studentid" value="<?php echo $array[$i]["studentID"] ?>">
-                                </form>
-                            </div>
+                                <input type="hidden" name="applicationid" value="<?php echo $array[$i]["studentID"] ?>">
+                                <input type="hidden" name="studentid" value="<?php echo $array[$i]["studentID"] ?>">
+                            </form>
+
                         </div>
                         <br>
                         <?php
@@ -195,27 +195,27 @@
                             <br>
                             <h3 style="font-weight: bold;" >Διπλωματικές που έτοιμες για παρουσίαση.</h3>
                         <?php } ?>
-                        <div class="container" style=" border-radius: 4px;  border: 1px solid #ccccb3; background-color:#b8b894; padding:2%; text-align:center;" >
-                            <div class="row" style="min-height: 100px;" >
-                                <form id="1" action="" method="post">
+                        <div class="container" style=" border-radius: 4px;  border: 5px solid #999999;  padding:2%; background-color:#b8b894; padding:2%; text-align:center;" >
 
-                                    <div class="col-md-4" >
-                                        <h3 style="font-size:25px;  font-weight: bold;"><?php echo $array[$i]["projectname"] ?></h3> 
-                                    </div>
-                                    <div class="col-md-4">
-                                        <h3 style="font-size: 16px;">  <?php echo $array[$i]["summary"] ?> </h3>
-                                    </div>
+                            <form id="1" action="" method="post">
 
-                                    <div class="col-md-4">
-                                        <h3 style="padding-top: 18px; font-size: 18px;">  <?php echo $array[$i]["status"] ?></h3>
-                                    </div>
+                                <div class="col-md-4" >
+                                    <h3 style="font-size:25px;  font-weight: bold;"><?php echo $array[$i]["projectname"] ?></h3> 
+                                </div>
+                                <div class="col-md-4">
+                                    <h3 style="font-size: 16px;">  <?php echo $array[$i]["summary"] ?> </h3>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <h3 style=" font-size: 18px;">  <?php echo $array[$i]["status"] ?></h3>
+                                </div>
 
 
-                                    <input type="hidden" name="applicationid" value="<?php echo $row["studentID"] ?>">
-                                    <input type="hidden" name="studentid" value="<?php echo $row["studentID"] ?>">
-                                </form>
-                            </div>
+                                <input type="hidden" name="applicationid" value="<?php echo $row["studentID"] ?>">
+                                <input type="hidden" name="studentid" value="<?php echo $row["studentID"] ?>">
+                            </form>
                         </div>
+
                         <br>
                         <?php
                     }
@@ -233,25 +233,25 @@
                             <h3 style="font-weight: bold;" >Διπλωματικές που έχουν ολοκληρωθεί πλήρως.</h3>
                         <?php } ?>
 
-                        <div class="container" style=" border-radius: 4px;  border: 1px solid #ccccb3; background-color:#b8b894; padding:2%; text-align:center;" >
-                            <div class="row" style="min-height: 100px;" >
-                                <form id="1" action="" method="post">
-                                    <div class="col-md-4" >
-                                        <h3 style="font-size:25px;  font-weight: bold;"><?php echo $array[$i]["projectname"] ?></h3> 
-                                    </div>
-                                    <div class="col-md-4">
-                                        <h3 style="font-size: 16px;">  <?php echo $array[$i]["summary"] ?> </h3>
-                                    </div>
+                        <div class="container" style=" border-radius: 4px;  border: 5px solid #999999; background-color:#b8b894; padding:2%; text-align:center;" >
 
-                                    <div class="col-md-4">
-                                        <h3 style="padding-top: 18px; font-size: 18px;">  <?php echo $array[$i]["status"] ?></h3>
-                                    </div>
+                            <form id="1" action="" method="post">
+                                <div class="col-md-4" >
+                                    <h3 style="font-size:25px;  font-weight: bold;"><?php echo $array[$i]["projectname"] ?></h3> 
+                                </div>
+                                <div class="col-md-4">
+                                    <h3 style="font-size: 16px;">  <?php echo $array[$i]["summary"] ?> </h3>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <h3 style="font-size: 18px;">  <?php echo $array[$i]["status"] ?></h3>
+                                </div>
 
 
-                                    <input type="hidden" name="applicationid" value="<?php echo $row["studentID"] ?>">
-                                    <input type="hidden" name="studentid" value="<?php echo $row["studentID"] ?>">
-                                </form>
-                            </div>
+                                <input type="hidden" name="applicationid" value="<?php echo $row["studentID"] ?>">
+                                <input type="hidden" name="studentid" value="<?php echo $row["studentID"] ?>">
+                            </form>
+
                         </div>
                         <br>
 
@@ -267,8 +267,8 @@
         <div class="container">
             <div class="col-md-12" style="padding:3%">
 
-                <form id="pp" action="students_menu.php" method="post">
-                    <input name="log" type="submit" class="button5" style="align-content:center; border-color:#ffa31a;color:black; background-color:orange;" value="LogOut">
+                <form id="pp" action="<?php echo $_SESSION["path"]; ?>" method="post">
+                    <input name="log" type="submit" class="button5" style="align-content:center; border-color:#ffa31a;color:black; background-color:orange;" value="Back">
                 </form>
 
 

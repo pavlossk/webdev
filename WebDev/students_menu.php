@@ -48,6 +48,7 @@
 
         <div id="tf-service" style="background-color: #d6d6c2" >
             <?php
+            $_SESSION["path"]= "students_menu.php" ;
             echo "Καλώς ήρθες ".$_SESSION["username"];
             $servername = "localhost";
             $username = "root";

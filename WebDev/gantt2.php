@@ -154,8 +154,8 @@ if ($result2->num_rows > 0) {
         <div class="container">
             <div class="col-md-12" style="padding:3%">
 
-                <form id="pp" action="teacher_menu.php" method="post">
-                    <input name="log" type="submit" class="button5" style="align-content:center; border-color:#ffa31a;color:black; background-color:orange;" value="LogOut">
+                <form id="pp" action="<?php echo $_SESSION["path"]; ?>" method="post">
+                    <input name="log" type="submit" class="button5" style="align-content:center; border-color:#ffa31a;color:black; background-color:orange;" value="Back">
                 </form>
 
 

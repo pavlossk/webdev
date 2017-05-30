@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <?php session_start(); ?>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-    <title>WebDev - File Hanlder</title>
-    <link rel="icon" href="img/trasp.png">
+        <title>WebDev - File Hanlder</title>
+        <link rel="icon" href="img/trasp.png">
 
-    <meta name="description" content="Your Description Here">
-    <meta name="keywords" content="bootstrap themes, portfolio, responsive theme">
-    <meta name="author" content="ThemeForces.Com">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <meta name="description" content="Your Description Here">
+        <meta name="keywords" content="bootstrap themes, portfolio, responsive theme">
+        <meta name="author" content="ThemeForces.Com">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
         <!-- Favicons
         ================================================== -->
@@ -41,66 +41,206 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
-    
-    <?php
+    <body style="background-color: #d6d6c2">
+        <div class="container">
+            <?php
+            if (!empty($_POST["confirm"])) {
+                $_SESSION["confirm"] = $_POST["confirm"];
+            }
+            ?>
+            <h3 style=" text-align: center; font-size:45px;">Ανέβασε ένα αρχείο</h3>
 
-    if (!empty($_POST["confirm"])){
-        $_SESSION["confirm"]=$_POST["confirm"];
-    }
+            <br>
+            <br>
+            <div class="container" style="text-align:center;">
 
-    ?>
-    <h3 style=" text-align: center; font-size:45px;">Ανέβασε ένα αρχείο</h3>
-    <ul style="list-style-type:none; align-content:center; ">
-        <body style="background-color: #d6d6c2">
-            <div id="tf-service" style="background-color: #d6d6c2" >
-                <table width="80%" border="1">
-                    <tr>
-                        <td>File Name</td>
-                        <td>File Type</td>
-                        <td>File Size(KB)</td>
-                        <td>View</td>
-                    </tr>
+                <div class="col-md-3" >
+                    <h3 style="font-size:18px; font-weight: bold;">File Name</h3>
+                </div>
+                <div class="col-md-3" >
+                    <h3 style="font-size:18px; font-weight: bold;">File Type</h3>
+                </div>
+                <div class="col-md-3" >
+                    <h3 style="font-size:18px; font-weight: bold;">File Size(KB)</h3>
+                </div>
+                <div class="col-md-3" >
+                    <h3 style="font-size:18px; font-weight: bold;">View</h3>
+                </div>
+            </div>
+            <?php
+            $servername = "localhost";
+            $username = "root";
+            $dbname = "webdev";
+            $conn = new mysqli($servername, $username, '', $dbname);
+            if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+            }
+
+            $username = $_SESSION["username"];
+
+            if ($_SESSION["type"] == 'teacher') {
+                $projectID = $_SESSION["projectID"];
+                $folder = $_SESSION["folder"];
+                $sql = "SELECT uploads.folder as folder,uploads.file as file FROM users,projects,uploads WHERE users.username='$username' AND projects.projectID='$projectID' AND uploads.project=projects.projectID AND users.username=projects.teacher AND uploads.folder='$folder' ";
+            } else if ($_SESSION["type"] == 'student') {
+                $sql = "SELECT uploads.folder as folder,uploads.file as file FROM users,projects,uploads WHERE users.username='$username' AND uploads.project=projects.projectID AND (projects.student1=users.username OR projects.student2=users.username )";
+            }
+
+            $result = $conn->query($sql);
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    ?>
+                    <div class="container" style=" border-radius: 4px;  border: 5px solid #999999;  padding:1%; background-color:#b8b894; text-align:center;" >
+                        <div class="col-md-3" >
+                            <h3 style="font-size:18px; font:bold;"><?php echo $row["file"] ?></h3>
+                        </div>
+                        <div class="col-md-3" >
+                            <h3 style="font-size:18px; font:bold;"><?php echo 'PDF' ?></h3>
+                        </div>
+                        <div class="col-md-3" >
+                            <h3 style="font-size:18px; font:bold;"><?php echo '12TB' ?></h3>
+                        </div>
+                        <div class="col-md-3" >
+                            <h3 style="font-size:18px; font:bold;"><a href="/webdev/WebDev/uploads/<?php echo $row["folder"] ?>/<?php echo $row["file"] ?><?php echo '' ?>" >view file</a></h3>
+                        </div> 
+                    </div>
+
+
                     <?php
-                    $servername = "localhost";
-                    $username = "root";
-                    $dbname = "webdev";
-                    $conn = new mysqli($servername, $username,'', $dbname);
-                    if ($conn->connect_error) {
-                        die("Connection failed: " . $conn->connect_error);
-                    }
+                }
+            } else {
+                echo "0 results";
+            }
+            ?>
 
-                    $username=$_SESSION["username"];
-                    
-                    if($_SESSION["type"]=='teacher'){
-                        $projectID=$_SESSION["projectID"];
-                        $folder=$_SESSION["folder"];
-                        $sql = "SELECT uploads.folder as folder,uploads.file as file FROM users,projects,uploads WHERE users.username='$username' AND projects.projectID='$projectID' AND uploads.project=projects.projectID AND users.username=projects.teacher AND uploads.folder='$folder' ";
-                    }else if($_SESSION["type"]=='student'){
-                        $sql = "SELECT uploads.folder as folder,uploads.file as file FROM users,projects,uploads WHERE users.username='$username' AND uploads.project=projects.projectID AND (projects.student1=users.username OR projects.student2=users.username )";
-                    }
-                    
+
+
+            <br>
+            <br>
+            <form id="fash" action="upload.php" method="post" enctype="multipart/form-data">
+                <input class="" type="file" name="file" size="50" />
+                <br />
+
+                <?php
+                $servername = "localhost";
+                $username = "root";
+                $dbname = "webdev";
+
+                $conn = new mysqli($servername, $username, '', $dbname);
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                }
+
+                $projectID = $_SESSION["projectID"];
+                $sql = "SELECT * FROM project_stages WHERE projectID='$projectID' ORDER BY stage_number ASC";
+                ?>
+                <select name="fash" id="mySelect1" class="dropbtn1" form="fash">  
+                    <?php
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
-                        while($row = $result->fetch_assoc()) {
+                        $counter = 1;
+                        while ($row = $result->fetch_assoc()) {
                             ?>
-                            <tr>
-                                <td><?php echo $row["file"] ?></td>
-                                <td><?php echo 'PDF' ?></td>
-                                <td><?php echo '12TB' ?></td>
-                                <td><a href="/webdev/WebDev/uploads/<?php echo $row["folder"] ?>/<?php echo $row["file"] ?><?php echo '' ?>" >view file</a></td>
-                            </tr>
+
+                            <option value="<?php echo $row["project_stagesID"]; ?>"><?php
+                                echo "$counter. ";
+                                echo $row["stage_name"];
+                                $counter++;
+                                ?></option>
+
+
                             <?php
                         }
-                    } else {
-                        echo "0 results";
                     }
                     ?>
-                </table>
-            </div>
-            <form action="upload.php" method="post" enctype="multipart/form-data">
-                <input type="file" name="file" size="50" />
-                <br />
-                <input type="submit" value="Upload" />
+                </select>
+                <input class="button4" style="background-color:#ff6600 " type="submit" value="Upload" />
             </form>
-        </body>
-        </html>
+
+        </div>
+
+
+
+
+        <?php
+        $username = $_SESSION["username"];
+        $projectid = $_SESSION["projectID"];
+
+        $servername = "localhost";
+        $username = "root";
+        $dbname = "webdev";
+        $conn = new mysqli($servername, $username, '', $dbname);
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $sql = "SELECT * FROM project_stages WHERE projectID='$projectid' ORDER BY stage_number ASC";
+        $result = $conn->query($sql);
+        ?>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <hr>
+        <h3 style=" font-size:35px; text-align: center">Τα στάδια για την Διπλωματική μέχρι στιγμής</h3>
+        <br>
+        <ul style="list-style-type:none; align-content:center; ">
+
+            <?php
+            if ($result->num_rows > 0) {
+                // output data of   each row
+                while ($row = $result->fetch_assoc()) {
+                    ?>
+                    <div class="container" style=" border-radius: 4px; border: 5px solid #999999; zoom:70%;   padding:1%; background-color:#b8b894; text-align:center;" >
+
+                        <div class="col-md-3" >
+                            <h3 style="font-size:25px;  font-weight: bold;"><?php echo $row["stage_name"] ?></h3> 
+                        </div>
+                        <div class="col-md-3">
+                            <h3 style="font-size: 16px;">  <?php echo $row["stage_summary"] ?> </h3>
+                        </div>
+
+                        <div class="col-md-3 ">
+                            <h3 style=" font-size: 18px;">  <?php echo $row["stage_number"] ?></h3>
+                        </div>
+                        <div class="col-md-3">
+                            <?php if ($row["status"] == 'current') { ?>   
+                                <h3 style="color:black;"> Τρέχουσα</h3>
+
+                            <?php } else if ($row["status"] == 'pending') { ?>
+
+                                <h3 style="color:red;"> Προσεχώς</h3>
+
+                            <?php } else { ?>
+                                <h3 style="color:green;"> Ολοκληρώθηκε</h3>
+
+                            <?php } ?>
+                        </div>
+
+
+
+                    </div>
+                    <br>
+                    <?php
+                }
+            }
+            ?>
+
+
+
+        </ul>
+
+
+        <div class="container">
+            <form id="pp" action="<?php echo $_SESSION["path"]; ?>" method="post">
+                <input name="log" type="submit" class="button5" style="align-content:center; border-color:#ffa31a;color:black; background-color:orange;" value="Back">
+            </form>
+            <br>
+            <br>
+            <br>
+        </div>
+    </div>
+
+</body>
+</html>
