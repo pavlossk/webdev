@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 30, 2017 at 11:55 AM
+-- Generation Time: May 30, 2017 at 12:35 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -61,7 +61,7 @@ CREATE TABLE `projects` (
 
 INSERT INTO `projects` (`projectID`, `teacher`, `student1`, `student2`, `student3`, `projectname`, `summary`, `status`, `grade`, `folder`, `date_creation`, `date_approved`, `date_finished`) VALUES
 (0, 'maragkoudakis', 'empty', 'empty', 'empty', 'data mining techniqu', 'Modern techniques of data mining and information retrieval via rapid miner', 'not applied', NULL, 'project0', '2017-05-27 14:45:59', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(2, 'Soras', 'empty', 'empty', 'empty', 'EllhnwnSynelefsh', 'Polla Lefta', 'not applied', NULL, 'project2', '2017-05-27 14:45:59', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, 'Soras', 'nikos', 'empty', 'empty', 'EllhnwnSynelefsh', 'Polla Lefta', 'not applied', NULL, 'project2', '2017-05-30 10:09:47', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (3, 'Soras', 'empty', 'empty', 'empty', 'thes na se dhrw', 'polu ksulo h fash', 'complete', NULL, 'project3', '2017-05-28 17:04:21', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (4, 'Maragkoudakis', 'empty', 'empty', 'empty', 'WebDev', 'Project sta plaisia tou programmatismou sto diadiktio', 'not applied', NULL, 'project4', '2017-05-27 14:45:59', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (7, 'Soras', 'empty', 'empty', 'empty', 'opou se vrw', 'fapes mia zwh', 'not applied', NULL, 'project7', '2017-05-27 14:45:59', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
@@ -105,6 +105,13 @@ CREATE TABLE `project_stages` (
   `stage_number` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `project_stages`
+--
+
+INSERT INTO `project_stages` (`project_stagesID`, `projectID`, `stage_name`, `stage_summary`, `stage_number`) VALUES
+(1, 2, 'Vivliografia', '...', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -120,6 +127,15 @@ CREATE TABLE `uploads` (
   `file` varchar(50) NOT NULL,
   `project_stage` int(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `uploads`
+--
+
+INSERT INTO `uploads` (`uploadID`, `uploader`, `project`, `date_creation`, `folder`, `file`, `project_stage`) VALUES
+(20, 'nikos', 2, '2017-05-30 10:19:32', 'project2', 'IMG_20170124_135205.jpg', 1),
+(25, 'Nikos', 2, '2017-05-29 21:00:00', 'project2', 'IMG_20170124_135255.jpg', 1),
+(26, 'Nikos', 2, '2017-05-29 21:00:00', 'project2', 'IMG_20170301_212258.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -222,12 +238,12 @@ ALTER TABLE `project_confirms`
 -- AUTO_INCREMENT for table `project_stages`
 --
 ALTER TABLE `project_stages`
-  MODIFY `project_stagesID` int(6) NOT NULL AUTO_INCREMENT;
+  MODIFY `project_stagesID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `uploads`
 --
 ALTER TABLE `uploads`
-  MODIFY `uploadID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `uploadID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 --
 -- Constraints for dumped tables
 --
