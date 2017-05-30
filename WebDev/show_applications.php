@@ -53,8 +53,15 @@
                 die("Connection failed: " . $conn->connect_error);
             }
             $teacher = $_SESSION["username"];
+<<<<<<< HEAD
             $sql = "SELECT applications.applicationID as appid, projects.projectname as name, users.username as user ,users.grade as grade FROM applications,users,projects WHERE (applications.student1=users.username OR applications.student2=users.username OR applications.student3=users.username) AND applications.status='applied' AND applications.projectID=projects.projectID AND projects.teacher='$teacher'";
             $result = $conn->query($sql);
+=======
+            $sql = "SELECT applicationID, projectname, studentID FROM applications,users,projects WHERE applications.projectID = projects.projectID AND users.type='teacher' AND users.username='$teacher' AND applications.status='applied' AND users.username=projects.teacher";
+
+            mysqli_close($conn);
+            header("Refresh:0");
+>>>>>>> origin/master
             ?>
 
 
@@ -86,6 +93,7 @@
             if ($result->num_rows > 0) {
                 // output data of   each row
                 while ($row = $result->fetch_assoc()) {
+<<<<<<< HEAD
                     ?>
 
 
@@ -121,6 +129,61 @@
 
                                 </div>
 
+=======
+                    if ($counter % 2 == 0) {
+                        ?>
+                        <div class="container" style=" border-radius: 4px; border: 5px solid #999999;   padding:2%; background-color:#b8b894; text-align:center;" >
+
+
+                            <form id="1" action="" method="post">
+                                <div class="col-md-3" >
+                                    <h3 style="font-size:25px;  font-weight: bold;"><?php echo $row["applicationID"] ?></h3> 
+                                </div>
+                                <div class="col-md-3 ">
+                                    <h3 style="font-size: 16px;">  <?php echo $row["projectname"] ?> </h3>
+                                </div>
+
+                                <div class="col-md-3 ">
+                                    <h3 style=" font-size: 18px;">  <?php echo $row["studentID"] ?></h3>
+                                </div>
+                                <div class="col-md-3">
+                                    <input name="egkrish" type="submit" class="button button4" style=" align-content:center; border-color:#ffa31a;background-color:#ffa31a; color:black;" value="Έγκριση">
+                                </div>
+
+                                <input type="hidden" name="applicationid" value="<?php echo $row["applicationID"] ?>">
+                                <input type="hidden" name="studentid" value="<?php echo $row["studentID"] ?>">
+                            </form>
+
+                        </div>
+                        <br>
+                        <?php
+                    } else {
+                        ?>
+                        <div class="container" style="  border-radius: 4px; border: 1px solid #ccccb3; background-color:#ccccb3; padding:2%; text-align:center;" >
+                            <div class="row" style="min-height: 100px;">
+
+                                <form id="2" action="" method="post">
+                                    <div class="col-md-3" >
+                                        <h3 style="font-size:25px;  font-weight: bold;"><?php echo $row["applicationID"] ?></h3> 
+                                    </div>
+                                    <div class="col-md-3 ">
+                                        <h3 style="font-size: 16px;">  <?php echo $row["projectname"] ?> </h3>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <h3 style=" font-size: 18px;">  <?php echo $row["studentID"] ?></h3>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input name="egkrish" type="submit" class="button button4" style=" align-content:center; border-color:#ffa31a;background-color:#ffa31a; color:black;" value="Έγκριση">
+                                    </div>
+
+                                    <input type="hidden" name="applicationid" value="<?php echo $row["applicationID"] ?>">
+                                    <input type="hidden" name="studentid" value="<?php echo $row["studentID"] ?>">
+                                </form>
+                            </div>
+                        </div>  
+                        <br>
+>>>>>>> origin/master
 
                                 <div class="col-md-3 ">
                                     <h3 style=" font-size: 18px;">  <?php

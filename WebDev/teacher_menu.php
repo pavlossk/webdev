@@ -39,6 +39,7 @@
 
     <body>
 
+<<<<<<< HEAD
         <div id="tf-service" style=" zoom:70%;background-color: #d6d6c2">
 
             <div class="container" style="text-align: center">
@@ -82,12 +83,96 @@
                         <form id="confirm_project" action="select_project.php" method="post">
                             <input name="confirm_project" type="submit" class=" button5" style=" width:300px; vertical-align:middle" value="Αίτηση έγγρισης διπλωματικής">
                         </form>
+=======
+        <div id="tf-service" style="background-color: #d6d6c2">
 
+            <div class="container">
+                <div class="content" style="text-align: center">
+<<<<<<< HEAD
+                    <?php $_SESSION["path"] = "teacher_menu.php"; ?>
+=======
+<<<<<<< HEAD
+                    <?php $_SESSION["path"]= "teacher_menu.php" ;?>
+=======
+>>>>>>> origin/master
+>>>>>>> origin/master
+>>>>>>> origin/master
+
+                    <ul style="list-style-type:none; align-content:center;">
+                        <h3 style="font-size:45px;">Dashboard Καθηγητή</h3>
                         <br>
+                        <li><button class="button5" onclick="location.href = 'insert_project.php';" style=" width:300px; vertical-align:middle">Δημιουργία Διπλωματικής</button></li>
+                        <br>
+                        <li><button class="button5" onclick="location.href = 'show_projects.php';" style=" width:300px; vertical-align:middle">Διπλωματικές ανά τρέχουσα κατάσταση</button></li>
+                        <br>
+                        <li><button class="button5" onclick="location.href = 'show_applications.php'" style=" width:300px; vertical-align:middle">Αιτήσεις Διπλωματικών / Έγκριση</button></li>
+                        <br>
+                        <li>
+                            <form id="chat" action="select_project.php" method="post">
+                                <input name="chat" type="submit" class=" button5" style=" width:300px; vertical-align:middle" value="Πλατφόρμα επικοινωνίας">
+                            </form>
+                        </li>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> origin/master
+                        <br>
+                        <li>
+                            <form id="file_handler" action="select_project.php" method="post">
+                                <input name="file_handler" type="submit" class=" button5" style=" width:300px; vertical-align:middle" value="Ανέβασμα αρχείων για διπλωματική">
+                            </form>
+                        </li>
+<<<<<<< HEAD
+                        <br>
+                        <li>
+                            <form id="chat" action="select_project.php" method="post">
+                                <input name="stage" type="submit" class=" button5" style=" width:300px; vertical-align:middle" value="Στάδια Διπλωματικής">
+                            </form>
+                        </li>
+                        <br>
+=======
+                        <br>
+<<<<<<< HEAD
                     <li><button class="button5" onclick="location.href = 'other_charts.php';" style=" width:300px; vertical-align:middle">Charts</button></li>
                     <br>
                 </ul>
 
+=======
+=======
+                        <br>
+                        <li>
+                            <form id="file_handler" action="select_project.php" method="post">
+                                <input name="file_handler" type="submit" class=" button5" style=" width:300px; vertical-align:middle" value="Ανέβασμα αρχείων για διπλωματική">
+                            </form>
+                        </li>
+                        <br>
+>>>>>>> origin/master
+>>>>>>> origin/master
+                        <li><button class="button5" onclick="location.href = 'gantt.php';" style=" width:300px; vertical-align:middle">Πρόοδος Διπλωματικών </button></li>
+                        <br>
+                        <li><button class="button5" onclick="location.href = 'gantt2.php';" style=" width:300px; vertical-align:middle">Στατιστικά Στοιχεία</button></li>
+                        <br>
+                        <li><button class="button5" onclick="location.href = 'index.php';" style="width:300px; vertical-align:middle">Δημιουργία Εγγράφου PDF</button></li>
+                        <br>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+                        <li><button class="button5" onclick="location.href = 'index.php';" style="width:300px; vertical-align:middle">Στατιστικά Στοιχεία</button></li>
+                        <br>
+>>>>>>> origin/master
+>>>>>>> origin/master
+                        <li>
+                            <form id="confirm_project" action="select_project.php" method="post">
+                                <input name="confirm_project" type="submit" class=" button5" style=" width:300px; vertical-align:middle" value="Αίτηση έγγρισης διπλωματικής">
+                            </form>
+
+                            <br>
+                        <li><button class="button5" onclick="location.href = 'other_charts.php';" style=" width:300px; vertical-align:middle">Charts</button></li>
+                        <br>
+                    </ul>
+                </div>
+>>>>>>> origin/master
             </div>
         </div>
     </body>

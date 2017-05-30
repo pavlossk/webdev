@@ -66,8 +66,16 @@
             echo "<script type='text/javascript'> window.location.href = '/webdev/WebDev/file_handler.php';</script>";
         } else if ($_SESSION["location"] == "confirm_project") {
             echo "<script type='text/javascript'> window.location.href = '/webdev/WebDev/mail_teachers.php';</script>";
+<<<<<<< HEAD
         } else if ($_SESSION["location"] == "stage") {
             echo "<script type='text/javascript'> window.location.href = '/webdev/WebDev/stage.php';</script>";
+=======
+<<<<<<< HEAD
+        } else if ($_SESSION["location"] == "stage") {
+            echo "<script type='text/javascript'> window.location.href = '/webdev/WebDev/stage.php';</script>";
+=======
+>>>>>>> origin/master
+>>>>>>> origin/master
         }
     }
     ?>
@@ -103,10 +111,19 @@
                 $_SESSION["location"] = "confirm_project";
                 $sql = "SELECT * FROM projects WHERE teacher='$username'";
                 $result = $conn->query($sql);
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> origin/master
             } else if (!empty($_POST["stage"])) {
                 $_SESSION["location"] = "stage";
                 $sql = "SELECT * FROM projects WHERE teacher='$username'";
                 $result = $conn->query($sql);
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> origin/master
+>>>>>>> origin/master
             }
             ?>
 

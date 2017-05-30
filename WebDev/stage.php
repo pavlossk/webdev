@@ -98,7 +98,10 @@
                             $username = $_SESSION["username"];
                             $projectid = $_SESSION["projectID"];
                             $stageid = $_POST["stageid"];
+<<<<<<< HEAD
                             $stagenumber = $_POST["stagenumber"] + 1;
+=======
+>>>>>>> origin/master
 
                             $servername = "localhost";
                             $username = "root";
@@ -109,9 +112,13 @@
                             }
 
 
+<<<<<<< HEAD
                             $sql = "UPDATE project_stages SET status='done',end_date= CURRENT_DATE WHERE projectID='$projectid' AND project_stagesid='$stageid' ";
                             $sql1 = " UPDATE project_stages SET status='current',start_date = CURRENT_DATE WHERE projectID='$projectid' AND stage_number='$stagenumber' ";
 
+=======
+                            $sql = "UPDATE project_status SET status='done' WHERE projectID='$projectid' AND project_stagesid='$stageid' ";
+>>>>>>> origin/master
                             if (mysqli_query($conn, $sql)) {
 
                                 echo "Record updated successfully";
@@ -119,6 +126,7 @@
                             } else {
                                 echo "Error updating record: " . mysqli_error($conn);
                             }
+<<<<<<< HEAD
                             if (mysqli_query($conn, $sql1)) {
 
                                 echo "Record updated successfully";
@@ -126,12 +134,21 @@
                             } else {
                                 echo "Error updating record: " . mysqli_error($conn);
                             }
+=======
+>>>>>>> origin/master
 
                             mysqli_close($conn);
                             header("Refresh:0");
                         }
+<<<<<<< HEAD
                         ?>
                         <?php
+=======
+
+
+
+
+>>>>>>> origin/master
                         $username = $_SESSION["username"];
                         $projectid = $_SESSION["projectID"];
 
@@ -149,11 +166,19 @@
                         <h3 style=" font-size:45px;">Τα στάδια για την Διπλωματική μέχρι στιγμής</h3>
                         <ul style="list-style-type:none; align-content:center; ">
 
+<<<<<<< HEAD
 <?php
 if ($result->num_rows > 0) {
     // output data of   each row
     while ($row = $result->fetch_assoc()) {
         ?>
+=======
+                            <?php
+                            if ($result->num_rows > 0) {
+                                // output data of   each row
+                                while ($row = $result->fetch_assoc()) {
+                                    ?>
+>>>>>>> origin/master
                                     <div class="container" style=" border-radius: 4px; border: 5px solid #999999;   padding:2%; background-color:#b8b894; text-align:center;" >
 
 
@@ -169,6 +194,7 @@ if ($result->num_rows > 0) {
                                                 <h3 style=" font-size: 18px;">  <?php echo $row["stage_number"] ?></h3>
                                             </div>
                                             <div class="col-md-4">
+<<<<<<< HEAD
         <?php if ($row["status"] == 'current') { ?>
                                                     <input name="complete" type="submit" class="button button4" style=" align-content:center; border-color:#ffa31a;background-color:#ffa31a; color:black;" value="Ολοκλήρωση">
                                                 <?php } else if ($row["status"] == 'pending') { ?>
@@ -178,19 +204,33 @@ if ($result->num_rows > 0) {
         <?php } else { ?>
                                                     <h3 style="color:green;"> Ολοκληρώθηκε</h3>
 
+=======
+                                                <?php if ($row["status"] != 'done') { ?>
+                                                    <input name="complete" type="submit" class="button button4" style=" align-content:center; border-color:#ffa31a;background-color:#ffa31a; color:black;" value="Ολοκλήρωση">
+>>>>>>> origin/master
                                                 <?php } ?>
                                             </div>
 
                                             <input type="hidden" name="stageid" value="<?php echo $row["project_stagesID"] ?>">
+<<<<<<< HEAD
                                             <input type="hidden" name="stagenumber" value="<?php echo $row["stage_number"] ?>">
+=======
+>>>>>>> origin/master
                                         </form>
 
                                     </div>
                                     <br>
+<<<<<<< HEAD
         <?php
     }
 }
 ?>
+=======
+                                    <?php
+                                }
+                            }
+                            ?>
+>>>>>>> origin/master
 
 
 
@@ -199,6 +239,7 @@ if ($result->num_rows > 0) {
                 </div>
             </div>
 
+<<<<<<< HEAD
             <div class="container">
                 <div class="col-md-12" style="padding:3%">
 
@@ -211,6 +252,8 @@ if ($result->num_rows > 0) {
             </div>
         </div>
 
+=======
+>>>>>>> origin/master
 
     </body>
 </html>
