@@ -17,7 +17,8 @@
     $username=$_SESSION["username"];
     $file=$_FILES['file']['name'];
     echo $projectID." ".$folder." ".$file." ".$username;
-    $sql = "INSERT INTO `uploads`( `uploader`, `project`, `date_creation`, `folder`, `file`) VALUES ('$username','$projectID',CURRENT_DATE,'$folder','$file')";
+    $sql = "INSERT INTO `uploads`( `uploader`, `project`, `date_creation`, `folder`, `file`,`project_stage`) VALUES ('$username',$projectID,CURRENT_DATE,'$folder','$file',1)";
+    echo $sql;
     $conn->query($sql);
     $conn->close();
     if ($file_type=="application/pdf" || $file_type=="image/gif" || $file_type=="image/jpeg") {
