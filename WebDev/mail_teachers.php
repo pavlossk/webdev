@@ -81,7 +81,7 @@ require '/PHPMailer-master/PHPMailerAutoload.php';
 
             $mail->Subject = 'Account Confirmation';
             $random = generateRandomString();
-            $mail->Body = $user.' hello, enter this link to verify your account'.'  http://localhost/webdev/WebDev/confirmproject.php?confirm='.$random;
+            $mail->Body = 'Hello '.$user.', the user '.$_SESSION["username"].' has invited you to participate to the commission of the project:'.'  http://localhost/webdev/WebDev/confirm_project.php?confirm='.$random;
             $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
             $servername = "localhost";
             $username = "root";

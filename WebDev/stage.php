@@ -2,19 +2,19 @@
 <?php session_start(); ?>
 <html lang="en">
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>WebDev</title>
-        <link rel="icon" href="img/trasp.png">
+    <title>WebDev</title>
+    <link rel="icon" href="img/trasp.png">
 
-        <meta name="description" content="Your Description Here">
-        <meta name="keywords" content="bootstrap themes, portfolio, responsive theme">
-        <meta name="author" content="ThemeForces.Com">
+    <meta name="description" content="Your Description Here">
+    <meta name="keywords" content="bootstrap themes, portfolio, responsive theme">
+    <meta name="author" content="ThemeForces.Com">
 
         <!-- Favicons
-            ================================================== -->
+        ================================================== -->
         <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
         <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
         <link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72.png">
@@ -25,7 +25,7 @@
         <link rel="stylesheet" type="text/css" href="fonts/font-awesome/css/font-awesome.css">
 
         <!-- Stylesheet
-            ================================================== -->
+        ================================================== -->
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <link rel="stylesheet" type="text/css" href="css/responsive.css">
 
@@ -55,12 +55,7 @@
             if ($conn->connect_error) {
                 die("Connection failed: " . $conn->connect_error);
             }
-
-
-
-
-
-            $sql = "INSERT INTO `project_stages`(`projectID`, `stage_name`, `stage_summary`, `stage_number`) VALUES ('$projectid','$stage','$summary','$number')";
+            $sql = "INSERT INTO `project_stages`(`projectID`, `stage_name`, `stage_summary`, `stage_number`,status) VALUES ('$projectid','$stage','$summary','$number','pending')";
             $conn->query($sql);
             $conn->close();
         }
@@ -98,10 +93,7 @@
                             $username = $_SESSION["username"];
                             $projectid = $_SESSION["projectID"];
                             $stageid = $_POST["stageid"];
-<<<<<<< HEAD
                             $stagenumber = $_POST["stagenumber"] + 1;
-=======
->>>>>>> origin/master
 
                             $servername = "localhost";
                             $username = "root";
@@ -112,13 +104,9 @@
                             }
 
 
-<<<<<<< HEAD
                             $sql = "UPDATE project_stages SET status='done',end_date= CURRENT_DATE WHERE projectID='$projectid' AND project_stagesid='$stageid' ";
                             $sql1 = " UPDATE project_stages SET status='current',start_date = CURRENT_DATE WHERE projectID='$projectid' AND stage_number='$stagenumber' ";
 
-=======
-                            $sql = "UPDATE project_status SET status='done' WHERE projectID='$projectid' AND project_stagesid='$stageid' ";
->>>>>>> origin/master
                             if (mysqli_query($conn, $sql)) {
 
                                 echo "Record updated successfully";
@@ -126,7 +114,6 @@
                             } else {
                                 echo "Error updating record: " . mysqli_error($conn);
                             }
-<<<<<<< HEAD
                             if (mysqli_query($conn, $sql1)) {
 
                                 echo "Record updated successfully";
@@ -134,21 +121,12 @@
                             } else {
                                 echo "Error updating record: " . mysqli_error($conn);
                             }
-=======
->>>>>>> origin/master
 
                             mysqli_close($conn);
                             header("Refresh:0");
                         }
-<<<<<<< HEAD
                         ?>
                         <?php
-=======
-
-
-
-
->>>>>>> origin/master
                         $username = $_SESSION["username"];
                         $projectid = $_SESSION["projectID"];
 
@@ -166,19 +144,11 @@
                         <h3 style=" font-size:45px;">Τα στάδια για την Διπλωματική μέχρι στιγμής</h3>
                         <ul style="list-style-type:none; align-content:center; ">
 
-<<<<<<< HEAD
-<?php
-if ($result->num_rows > 0) {
-    // output data of   each row
-    while ($row = $result->fetch_assoc()) {
-        ?>
-=======
                             <?php
                             if ($result->num_rows > 0) {
-                                // output data of   each row
+    // output data of   each row
                                 while ($row = $result->fetch_assoc()) {
                                     ?>
->>>>>>> origin/master
                                     <div class="container" style=" border-radius: 4px; border: 5px solid #999999;   padding:2%; background-color:#b8b894; text-align:center;" >
 
 
@@ -194,43 +164,28 @@ if ($result->num_rows > 0) {
                                                 <h3 style=" font-size: 18px;">  <?php echo $row["stage_number"] ?></h3>
                                             </div>
                                             <div class="col-md-4">
-<<<<<<< HEAD
-        <?php if ($row["status"] == 'current') { ?>
-                                                    <input name="complete" type="submit" class="button button4" style=" align-content:center; border-color:#ffa31a;background-color:#ffa31a; color:black;" value="Ολοκλήρωση">
+                                                <?php if ($row["status"] == 'current') { ?>
+                                                <input name="complete" type="submit" class="button button4" style=" align-content:center; border-color:#ffa31a;background-color:#ffa31a; color:black;" value="Ολοκλήρωση">
                                                 <?php } else if ($row["status"] == 'pending') { ?>
 
-                                                    <h3 style="color:red;"> Προσεχώς</h3>
+                                                <h3 style="color:red;"> Προσεχώς</h3>
 
-        <?php } else { ?>
-                                                    <h3 style="color:green;"> Ολοκληρώθηκε</h3>
+                                                <?php } else { ?>
+                                                <h3 style="color:green;"> Ολοκληρώθηκε</h3>
 
-=======
-                                                <?php if ($row["status"] != 'done') { ?>
-                                                    <input name="complete" type="submit" class="button button4" style=" align-content:center; border-color:#ffa31a;background-color:#ffa31a; color:black;" value="Ολοκλήρωση">
->>>>>>> origin/master
                                                 <?php } ?>
                                             </div>
 
                                             <input type="hidden" name="stageid" value="<?php echo $row["project_stagesID"] ?>">
-<<<<<<< HEAD
                                             <input type="hidden" name="stagenumber" value="<?php echo $row["stage_number"] ?>">
-=======
->>>>>>> origin/master
                                         </form>
 
                                     </div>
                                     <br>
-<<<<<<< HEAD
-        <?php
-    }
-}
-?>
-=======
                                     <?php
                                 }
                             }
                             ?>
->>>>>>> origin/master
 
 
 
@@ -239,7 +194,6 @@ if ($result->num_rows > 0) {
                 </div>
             </div>
 
-<<<<<<< HEAD
             <div class="container">
                 <div class="col-md-12" style="padding:3%">
 
@@ -252,8 +206,6 @@ if ($result->num_rows > 0) {
             </div>
         </div>
 
-=======
->>>>>>> origin/master
 
     </body>
-</html>
+    </html>
