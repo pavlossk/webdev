@@ -55,6 +55,7 @@
             while ($row = $result->fetch_assoc()) {
                 $_SESSION["folder"] = $row["folder"];
                 $_SESSION["projectID"] = $row["projectID"];
+                $_SESSION["name"] = $row["projectname"];
             }
         } else {
             echo "0 results";
@@ -68,6 +69,8 @@
             echo "<script type='text/javascript'> window.location.href = '/webdev/WebDev/mail_teachers.php';</script>";
         } else if ($_SESSION["location"] == "stage") {
             echo "<script type='text/javascript'> window.location.href = '/webdev/WebDev/stage.php';</script>";
+        }else if ($_SESSION["location"] == "grade") {
+            echo "<script type='text/javascript'> window.location.href = '/webdev/WebDev/grade.php';</script>";
         }
     }
     ?>
@@ -105,6 +108,11 @@
                 $result = $conn->query($sql);
             } else if (!empty($_POST["stage"])) {
                 $_SESSION["location"] = "stage";
+                $sql = "SELECT * FROM projects WHERE teacher='$username'";
+                $result = $conn->query($sql);
+            }
+            else if (!empty($_POST["grade"])) {
+                $_SESSION["location"] = "grade";
                 $sql = "SELECT * FROM projects WHERE teacher='$username'";
                 $result = $conn->query($sql);
             }
@@ -170,7 +178,7 @@
 
                                             <input type="hidden" name="id" value="<?php echo $row["projectID"] ?>">
                                             <input type="hidden" name="teacher" value="<?php echo $row["teacher"] ?>">
-                                            <input type="hidden" name="pro_name" value="<?php echo $row["projectname"] ?>">
+                                            <input type="hidden" name="proname" value="<?php echo $row["projectname"] ?>">
                                             <input type="hidden" name="summ" value="<?php echo $row["summary"] ?>">
                                         </form>
                                     </div>
