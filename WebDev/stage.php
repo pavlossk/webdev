@@ -55,13 +55,20 @@
             if ($conn->connect_error) {
                 die("Connection failed: " . $conn->connect_error);
             }
-            $sql = "INSERT INTO `project_stages`(`projectID`, `stage_name`, `stage_summary`, `stage_number`,status) VALUES ('$projectid','$stage','$summary','$number','pending')";
-            $conn->query($sql);
+            $sql = "SELECT status FROM project_stages WHERE projectID='$projectid' and status='current'";
+            $result=mysqli_query($conn, $sql);
+            $count = mysqli_num_rows($result);
+            if ($count>0){
+                $sql1 = "INSERT INTO `project_stages`(`projectID`, `stage_name`, `stage_summary`, `stage_number`,status) VALUES ('$projectid','$stage','$summary','$number','pending')";
+            }else{
+                $sql1 = "INSERT INTO `project_stages`(`projectID`, `stage_name`, `stage_summary`, `stage_number`,status) VALUES ('$projectid','$stage','$summary','$number','current')";
+            }
+            $conn->query($sql1);
             $conn->close();
         }
         ?>
 
-        <div id="tf-service" style="background-color: #d6d6c2" >
+        <div id="tf-service" style="background-color: #d6d6c2; zoom:70%;" >
             <div class="container " style="text-align: center">
                 <div class="content" style=" ">
 

@@ -207,8 +207,6 @@
                             <br>
                             <input name="ready" class="button5" type="submit" value="Εισαγωγή Στοιχείων">
                             <br>
-                            <br>
-                            <li><a href="login.php">if you have already an account click here to login </a></li>
                         </form>
                     </ul>
                 </div>
