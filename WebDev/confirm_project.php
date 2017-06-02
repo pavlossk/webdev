@@ -82,11 +82,11 @@
                     $result=mysqli_query($conn, $sql1);
                     $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
                     if($row[count]==3){
-                        $message = "Η έγγριση έγινε με επιτυχία";   
-                        echo "<script type='text/javascript'>alert('$message'); window.location.href = '/webdev/WebDev/teacher_menu.php';</script>";
                         $sql1 = "UPDATE projects SET status='approved' WHERE `projectID`=(SELECT project FROM `project_confirms` WHERE confirm='$confirm')";
                         mysqli_query($conn, $sql1);
                     }
+                    $message = "Η έγγριση έγινε με επιτυχία";   
+                        echo "<script type='text/javascript'>alert('$message'); window.location.href = '/webdev/WebDev/teacher_menu.php';</script>";
                     
                     
                 } else {

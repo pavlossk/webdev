@@ -71,6 +71,7 @@
                             <input name="stage" type="submit" class=" button5" style=" width:300px; vertical-align:middle" value="Στάδια Διπλωματικής">
                         </form>
                     </li>
+                    <br>
                     <li>
                         <form id="grade" action="select_project.php" method="post">
                             <input name="grade" type="submit" class=" button5" style=" width:300px; vertical-align:middle" value="Ολοκλήρωση διπλωματικής">

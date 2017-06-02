@@ -106,7 +106,8 @@
                     echo 'Message could not be sent.';
                     echo 'Mailer Error: ' . $mail->ErrorInfo;
                 } else {
-                    echo 'Message has been sent';
+                    $message = "Στάλθηκε email επιβεβαίωσης";
+                    echo "<script type='text/javascript'>alert('$message'); window.location.href = '/webdev/WebDev/login.php';</script>";
                 }
 
 
@@ -196,15 +197,10 @@
                             form.math.focus();
                             return false;
                         }
-                        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(form.email.value))  
+                        if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(form.email.value)))  
                         {  
-                            alert("You have entered an valid email address!")
-                            //return (true)  
+                             alert("You have entered an invalid email address!")
                         }
-                        else{
-                            alert("You have entered an invalid email address!")  
-                        }  
-                        return false;  
 
                     } else {
                         alert("Error: Please check that you've entered and confirmed your password!");

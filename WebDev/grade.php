@@ -158,7 +158,7 @@ require '/PHPMailer-master/PHPMailerAutoload.php';?>
         <div class="container " style="text-align: center">
             <div class="content" style=" ">
 
-                <h3 style=" font-size:45px;">Πρόσθεσε τον τελικό θαθμό για την διπλωματική <?php echo $_SESSION["name"]; ?></h3>
+                <h3 style=" font-size:45px;">Πρόσθεσε τον τελικό θαθμό για την διπλωματική <?php echo $_SESSION["projectID"]; ?></h3>
                 <ul style="list-style-type:none; align-content:center; ">
 
                     <form action="" method="post"> 

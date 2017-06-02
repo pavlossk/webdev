@@ -67,8 +67,6 @@
                     $_SESSION["folder"]=$row["folder"];
                     $_SESSION["projectID"]=$row["projectID"];
                 }
-            } else {
-                echo "0 results";
             }
             $conn->close();
             if (!empty($_POST["file_handler"])){
