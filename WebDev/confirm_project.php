@@ -85,7 +85,7 @@
                         $message = "Η έγγριση έγινε με επιτυχία";   
                         echo "<script type='text/javascript'>alert('$message'); window.location.href = '/webdev/WebDev/teacher_menu.php';</script>";
                         $sql1 = "UPDATE projects SET status='approved' WHERE `projectID`=(SELECT project FROM `project_confirms` WHERE confirm='$confirm')";
-                        $result=mysqli_query($conn, $sql1);
+                        mysqli_query($conn, $sql1);
                     }
                     
                     

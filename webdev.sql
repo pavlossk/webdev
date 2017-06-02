@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 30, 2017 at 02:16 PM
+-- Generation Time: Jun 02, 2017 at 09:43 AM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -29,9 +29,18 @@ SET time_zone = "+00:00";
 CREATE TABLE `applications` (
   `applicationID` int(20) NOT NULL,
   `projectID` int(11) NOT NULL,
-  `studentID` varchar(20) NOT NULL,
+  `student1` varchar(20) NOT NULL,
+  `student2` varchar(30) NOT NULL,
+  `student3` varchar(30) NOT NULL,
   `status` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `applications`
+--
+
+INSERT INTO `applications` (`applicationID`, `projectID`, `student1`, `student2`, `student3`, `status`) VALUES
+(10, 2, 'Nikos', 'pavlos', 'giwrgos', 'approved');
 
 -- --------------------------------------------------------
 
@@ -42,13 +51,14 @@ CREATE TABLE `applications` (
 CREATE TABLE `projects` (
   `projectID` int(11) NOT NULL,
   `teacher` varchar(20) NOT NULL,
+  `students_number` tinyint(4) NOT NULL,
   `student1` varchar(20) DEFAULT NULL,
   `student2` varchar(20) DEFAULT NULL,
   `student3` varchar(20) NOT NULL,
   `projectname` varchar(20) NOT NULL,
   `summary` varchar(500) NOT NULL,
   `status` varchar(20) NOT NULL,
-  `grade` int(4) DEFAULT NULL,
+  `grade` float DEFAULT NULL,
   `folder` varchar(20) NOT NULL,
   `date_creation` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `date_approved` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
@@ -59,12 +69,12 @@ CREATE TABLE `projects` (
 -- Dumping data for table `projects`
 --
 
-INSERT INTO `projects` (`projectID`, `teacher`, `student1`, `student2`, `student3`, `projectname`, `summary`, `status`, `grade`, `folder`, `date_creation`, `date_approved`, `date_finished`) VALUES
-(0, 'maragkoudakis', 'empty', 'empty', 'empty', 'data mining techniqu', 'Modern techniques of data mining and information retrieval via rapid miner', 'not applied', NULL, 'project0', '2017-05-27 14:45:59', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(2, 'Soras', 'nikos', 'empty', 'empty', 'EllhnwnSynelefsh', 'Polla Lefta', 'not applied', NULL, 'project2', '2017-05-30 10:09:47', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(3, 'Soras', 'empty', 'empty', 'empty', 'thes na se dhrw', 'polu ksulo h fash', 'complete', NULL, 'project3', '2017-05-28 17:04:21', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(4, 'Maragkoudakis', 'empty', 'empty', 'empty', 'WebDev', 'Project sta plaisia tou programmatismou sto diadiktio', 'not applied', NULL, 'project4', '2017-05-27 14:45:59', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(7, 'Soras', 'empty', 'empty', 'empty', 'opou se vrw', 'fapes mia zwh', 'not applied', NULL, 'project7', '2017-05-27 14:45:59', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+INSERT INTO `projects` (`projectID`, `teacher`, `students_number`, `student1`, `student2`, `student3`, `projectname`, `summary`, `status`, `grade`, `folder`, `date_creation`, `date_approved`, `date_finished`) VALUES
+(0, 'maragkoudakis', 2, 'empty', 'empty', 'empty', 'data mining techniqu', 'Modern techniques of data mining and information retrieval via rapid miner', 'not applied', NULL, 'project0', '2017-05-31 12:31:53', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, 'Soras', 3, 'giwrgos', 'Nikos', 'pavlos', 'EllhnwnSynelefsh', 'Polla Lefta', 'not applied', 9.5, 'project2', '2017-06-01 15:04:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(3, 'Soras', 1, 'empty', 'empty', 'empty', 'thes na se dhrw', 'polu ksulo h fash', 'not applied', NULL, 'project3', '2017-05-31 11:55:06', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(4, 'Maragkoudakis', 2, 'empty', 'empty', 'empty', 'WebDev', 'Project sta plaisia tou programmatismou sto diadiktio', 'not applied', NULL, 'project4', '2017-05-31 11:55:06', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(7, 'Soras', 3, 'empty', 'empty', 'empty', 'opou se vrw', 'fapes mia zwh', 'not applied', NULL, 'project7', '2017-05-31 11:55:06', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -85,11 +95,38 @@ CREATE TABLE `project_confirms` (
 --
 
 INSERT INTO `project_confirms` (`confirmID`, `project`, `teacher`, `confirm`, `confirmed`) VALUES
-(2, 0, 'soras', 'asdd', 0),
-(3, 3, 'soras', 'asdd', 0),
-(4, 3, 'Maragkoudakis', 'qVKpL5Gn5a', 1),
-(5, 3, 'Soras', 'BzKEAdAwe2', 0),
-(6, 3, 'tselepis', 'WeDfFKoz5x', 0);
+(16, 2, 'Maragkoudakis', 'o84V0eUYQw', 1),
+(17, 2, 'stergiou', 'XugtkJ72Cn', 1),
+(18, 2, 'tselepis', 'JHUEYpOiaE', 1),
+(52, 2, 'Maragkoudakis', 'Eyj3uiMaOM', 0),
+(53, 2, 'stergiou', '6bIc55Lj6k', 0),
+(54, 2, 'tselepis', '4iZReT4ckj', 0),
+(55, 2, 'Maragkoudakis', 'zbhTJPS25H', 0),
+(56, 2, 'stergiou', 'YM6TLWJZYS', 0),
+(57, 2, 'tselepis', 'r5OqeN1Wxc', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `project_grades`
+--
+
+CREATE TABLE `project_grades` (
+  `project_gradeID` int(6) NOT NULL,
+  `project` int(11) NOT NULL,
+  `teacher` varchar(20) NOT NULL,
+  `grade` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `project_grades`
+--
+
+INSERT INTO `project_grades` (`project_gradeID`, `project`, `teacher`, `grade`) VALUES
+(13, 2, 'tselepis', 10),
+(14, 2, 'Soras', 10),
+(15, 2, 'Maragkoudakis', 9),
+(16, 2, 'stergiou', 9);
 
 -- --------------------------------------------------------
 
@@ -103,17 +140,25 @@ CREATE TABLE `project_stages` (
   `stage_name` varchar(50) NOT NULL,
   `stage_summary` varchar(50) NOT NULL,
   `stage_number` tinyint(4) NOT NULL,
-  `status` varchar(20) NOT NULL
+  `status` varchar(20) NOT NULL,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `project_stages`
 --
 
-INSERT INTO `project_stages` (`project_stagesID`, `projectID`, `stage_name`, `stage_summary`, `stage_number`, `status`) VALUES
-(1, 2, 'Vivliografia', '...', 1, 'done'),
-(3, 2, 'Sxediasmos', '...', 2, 'pending'),
-(4, 2, 'Ylopoihsh', '...', 3, 'pending');
+INSERT INTO `project_stages` (`project_stagesID`, `projectID`, `stage_name`, `stage_summary`, `stage_number`, `status`, `start_date`, `end_date`) VALUES
+(1, 2, 'Vivliografia', '...', 1, 'done', '2017-04-02', '2017-05-04'),
+(5, 0, 'vivliografia', '...', 1, 'done', '2017-04-18', '2017-05-17'),
+(6, 0, 'Ylopoihsh', '...', 2, 'done', '2017-05-17', '2017-05-31'),
+(10, 0, 'erevna', '...', 3, 'done', '2017-05-31', '2017-05-31'),
+(11, 0, 'telikh analysh', '...', 4, 'current', '2017-05-31', '0000-00-00'),
+(12, 3, 'vivliografia', '...', 1, 'done', '2017-05-01', '2017-05-17'),
+(13, 3, 'Ylopoihsh', '...', 2, 'current', '2017-05-17', '2017-05-31'),
+(35, 2, 'Ylopoihsh', '...', 2, 'done', '0000-00-00', '2017-06-01'),
+(36, 2, 'teliko', '...', 3, 'done', '2017-06-01', '2017-06-01');
 
 -- --------------------------------------------------------
 
@@ -138,7 +183,9 @@ CREATE TABLE `uploads` (
 INSERT INTO `uploads` (`uploadID`, `uploader`, `project`, `date_creation`, `folder`, `file`, `project_stage`) VALUES
 (20, 'nikos', 2, '2017-05-30 10:19:32', 'project2', 'IMG_20170124_135205.jpg', 1),
 (25, 'Nikos', 2, '2017-05-29 21:00:00', 'project2', 'IMG_20170124_135255.jpg', 1),
-(26, 'Nikos', 2, '2017-05-29 21:00:00', 'project2', 'IMG_20170301_212258.jpg', 1);
+(26, 'Nikos', 2, '2017-05-29 21:00:00', 'project2', 'IMG_20170301_212258.jpg', 1),
+(28, 'Nikos', 0, '2017-05-30 21:00:00', 'project0', 'NickFourtounisCV.pdf', 5),
+(29, 'pavlos', 0, '2017-05-30 21:00:00', 'project0', 'Î’ÎµÎ²Î±Î¯Ï‰ÏƒÎ·_Î£Ï€Î¿Ï…Î´ÏŽÎ½.pdf', 5);
 
 -- --------------------------------------------------------
 
@@ -151,24 +198,25 @@ CREATE TABLE `users` (
   `password` varchar(20) NOT NULL,
   `email` varchar(50) NOT NULL,
   `type` varchar(20) NOT NULL,
-  `confirm` varchar(20) NOT NULL
+  `confirm` varchar(20) NOT NULL,
+  `grade` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`username`, `password`, `email`, `type`, `confirm`) VALUES
-('empty', 'empty', 'empty', 'empty', 'empty'),
-('giwrgos', '123', 'giwrgos@gmail.com', 'student', 'confirmed'),
-('Maragkoudakis', '123', 'nikos.fourtounis95@gmail.com', 'teacher', 'confirmed'),
-('Nikos', '123', 'nikos@gmail.com', 'student', 'confirmed'),
-('nikos2', '123', 'nikos2@gmail.com', 'student', 'confirmed'),
-('papadimos', '123', 'papadimos@gmail.com', 'teacher', 'confirmed'),
-('pavlos', '123', 'pavlaras@gmail', 'student', 'confirmed'),
-('Soras', '123', 'nickfortune@windowslive.com', 'teacher', 'confirmed'),
-('stergiou', '123', 'stergiou@gmail.com', 'teacher', 'confirmed'),
-('tselepis', '123', 'icsd13195@icsd.aegean.gr', 'teacher', 'confirmed');
+INSERT INTO `users` (`username`, `password`, `email`, `type`, `confirm`, `grade`) VALUES
+('empty', 'empty', 'empty', 'empty', 'empty', NULL),
+('giwrgos', '123', 'giwrgos@gmail.com', 'student', 'confirmed', 7),
+('Maragkoudakis', '123', 'nikos.fourtounis95@gmail.com', 'teacher', 'confirmed', NULL),
+('Nikos', '123', 'nikos@gmail.com', 'student', 'confirmed', 6),
+('nikos2', '123', 'nikos2@gmail.com', 'student', 'confirmed', 5),
+('papadimos', '123', 'papadimos@gmail.com', 'teacher', 'confirmed', NULL),
+('pavlos', '123', 'pavlaras@gmail', 'student', 'confirmed', 9),
+('Soras', '123', 'test@windowslive.com', 'teacher', 'confirmed', NULL),
+('stergiou', '123', 'nickfortune@windowslive.com', 'teacher', 'confirmed', NULL),
+('tselepis', '123', 'icsd13195@icsd.aegean.gr', 'teacher', 'confirmed', NULL);
 
 --
 -- Indexes for dumped tables
@@ -179,7 +227,10 @@ INSERT INTO `users` (`username`, `password`, `email`, `type`, `confirm`) VALUES
 --
 ALTER TABLE `applications`
   ADD PRIMARY KEY (`applicationID`),
-  ADD KEY `projectID` (`projectID`);
+  ADD KEY `projectID` (`projectID`),
+  ADD KEY `student1` (`student1`),
+  ADD KEY `student2` (`student2`),
+  ADD KEY `student3` (`student3`);
 
 --
 -- Indexes for table `projects`
@@ -189,13 +240,22 @@ ALTER TABLE `projects`
   ADD UNIQUE KEY `projectname` (`projectname`),
   ADD KEY `teacher` (`teacher`),
   ADD KEY `student1` (`student1`),
-  ADD KEY `student2` (`student2`);
+  ADD KEY `student2` (`student2`),
+  ADD KEY `student3` (`student3`);
 
 --
 -- Indexes for table `project_confirms`
 --
 ALTER TABLE `project_confirms`
   ADD PRIMARY KEY (`confirmID`),
+  ADD KEY `project` (`project`),
+  ADD KEY `teacher` (`teacher`);
+
+--
+-- Indexes for table `project_grades`
+--
+ALTER TABLE `project_grades`
+  ADD PRIMARY KEY (`project_gradeID`),
   ADD KEY `project` (`project`),
   ADD KEY `teacher` (`teacher`);
 
@@ -231,22 +291,27 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `applications`
 --
 ALTER TABLE `applications`
-  MODIFY `applicationID` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `applicationID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `project_confirms`
 --
 ALTER TABLE `project_confirms`
-  MODIFY `confirmID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `confirmID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+--
+-- AUTO_INCREMENT for table `project_grades`
+--
+ALTER TABLE `project_grades`
+  MODIFY `project_gradeID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `project_stages`
 --
 ALTER TABLE `project_stages`
-  MODIFY `project_stagesID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `project_stagesID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 --
 -- AUTO_INCREMENT for table `uploads`
 --
 ALTER TABLE `uploads`
-  MODIFY `uploadID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `uploadID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 --
 -- Constraints for dumped tables
 --
@@ -255,7 +320,10 @@ ALTER TABLE `uploads`
 -- Constraints for table `applications`
 --
 ALTER TABLE `applications`
-  ADD CONSTRAINT `applications_ibfk_1` FOREIGN KEY (`projectID`) REFERENCES `projects` (`projectID`);
+  ADD CONSTRAINT `applications_ibfk_1` FOREIGN KEY (`projectID`) REFERENCES `projects` (`projectID`),
+  ADD CONSTRAINT `applications_ibfk_2` FOREIGN KEY (`student1`) REFERENCES `users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `applications_ibfk_3` FOREIGN KEY (`student2`) REFERENCES `users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `applications_ibfk_4` FOREIGN KEY (`student3`) REFERENCES `users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `projects`
@@ -263,6 +331,7 @@ ALTER TABLE `applications`
 ALTER TABLE `projects`
   ADD CONSTRAINT `projects_ibfk_1` FOREIGN KEY (`student1`) REFERENCES `users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `projects_ibfk_2` FOREIGN KEY (`student2`) REFERENCES `users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `projects_ibfk_6` FOREIGN KEY (`student3`) REFERENCES `users` (`username`),
   ADD CONSTRAINT `user_FK` FOREIGN KEY (`teacher`) REFERENCES `users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
@@ -271,6 +340,13 @@ ALTER TABLE `projects`
 ALTER TABLE `project_confirms`
   ADD CONSTRAINT `project_confirms_ibfk_1` FOREIGN KEY (`project`) REFERENCES `projects` (`projectID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `project_confirms_ibfk_2` FOREIGN KEY (`teacher`) REFERENCES `users` (`username`);
+
+--
+-- Constraints for table `project_grades`
+--
+ALTER TABLE `project_grades`
+  ADD CONSTRAINT `project_grades_ibfk_1` FOREIGN KEY (`project`) REFERENCES `projects` (`projectID`),
+  ADD CONSTRAINT `project_grades_ibfk_2` FOREIGN KEY (`teacher`) REFERENCES `users` (`username`);
 
 --
 -- Constraints for table `project_stages`
