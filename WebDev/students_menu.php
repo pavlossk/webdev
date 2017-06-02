@@ -125,12 +125,6 @@
                                 <input name="folder" type="submit" class=" button5" style=" width:300px; vertical-align:middle" value="Ανέβασμα αρχείων για διπλωματική">
                             </form>
                         </li>
-                        <br>
-                        <li>
-                            <form id="file_handler" action="file_handler.php" method="post">
-                                <input name="folder" type="submit" class=" button5" style=" width:300px; vertical-align:middle" value="Ανέβασμα αρχείων για διπλωματική">
-                            </form>
-                        </li>
                         <br>    
                         <li><button class="button5" onclick="location.href = 'index.php';" style=" width:300px; vertical-align:middle">Charts</button></li>
                         <br> 
