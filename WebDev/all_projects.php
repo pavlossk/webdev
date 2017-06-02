@@ -130,7 +130,7 @@ if (!empty($_POST["epelekse"]) && $_SESSION["type"] == "student") {
         } else {
         }
         ?>
-        <div class="col-md-12" style="zoom:85%;" >
+        <div class="col-md-12" style="zoom:75%;" >
             <div class="hidden-xs container" style=" padding:1%; text-align:center;" >
                 <?php if ($choice == 1) { ?>
                 <h3 style="color:black; font-weight:bold; font-size:40px; "> Όλες οι διπλωματικές.</h3>

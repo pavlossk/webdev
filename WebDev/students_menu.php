@@ -126,6 +126,12 @@
                                 <input name="folder" type="submit" class=" button5" style=" width:300px; vertical-align:middle" value="Ανέβασμα αρχείων για διπλωματική">
                             </form>
                         </li>
+                        <br>                        
+                        <li>
+                            <form id="profile" action="profile.php" method="get">
+                                <input name="userprofile" type="submit" class=" button5" style=" width:300px; vertical-align:middle" value="<?php echo $_SESSION["username"]?>">
+                            </form>
+                        </li>
                         <br>    
                         <li><button class="button5" onclick="location.href = 'index.php';" style=" width:300px; vertical-align:middle">Charts</button></li>
                         <br> 

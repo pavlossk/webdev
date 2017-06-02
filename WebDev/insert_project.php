@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <?php session_start(); ?>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>WebDev</title>
-        <link rel="icon" href="img/trasp.png">
+    <title>WebDev</title>
+    <link rel="icon" href="img/trasp.png">
 
-        <meta name="description" content="Your Description Here">
-        <meta name="keywords" content="bootstrap themes, portfolio, responsive theme">
-        <meta name="author" content="ThemeForces.Com">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <meta name="description" content="Your Description Here">
+    <meta name="keywords" content="bootstrap themes, portfolio, responsive theme">
+    <meta name="author" content="ThemeForces.Com">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
         <!-- Favicons
         ================================================== -->
@@ -120,7 +120,6 @@
                 $summary = $_POST["summ"];
 
 
-
                 if (!empty($_POST["1"])) {
                     $cloud = $_POST["1"];
                 } if (!empty($_POST["2"])) {
@@ -133,11 +132,8 @@
                     $asfaleia = $_POST["5"];
                 }
 
-
-
-
-
-                $sql = "INSERT INTO projects(projectID, teacher, studentsnumber, status, projectname, summary, date_creation) VALUES(10,'$teacher','$students','$title','not applied'.'$summary',CURRENT_TIMESTAMP)";
+                mkdir("uploads/".$title, 0700);
+                $sql = "INSERT INTO projects(teacher, students_number, status, projectname, summary, date_creation,student1,student2,student3,folder) VALUES('$teacher','$students','not applied','$title','$summary',CURRENT_TIMESTAMP,'empty','empty','empty','$title')";
                 if (mysqli_query($conn, $sql)) {
                     echo "Record updated successfully";
                     $message = "Η αίτηση σου καταχωρήθηκε.";
@@ -211,6 +207,6 @@
                     </ul>
                 </div>
             </div>
-    </body>
+        </body>
 
-</html>
+        </html>

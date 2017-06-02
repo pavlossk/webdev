@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 02, 2017 at 09:43 AM
+-- Generation Time: Jun 02, 2017 at 12:22 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -40,7 +40,12 @@ CREATE TABLE `applications` (
 --
 
 INSERT INTO `applications` (`applicationID`, `projectID`, `student1`, `student2`, `student3`, `status`) VALUES
-(10, 2, 'Nikos', 'pavlos', 'giwrgos', 'approved');
+(10, 2, 'Nikos', 'pavlos', 'giwrgos', 'approved'),
+(13, 3, 'Nikos', 'empty', 'empty', 'applied'),
+(14, 4, 'Nikos', 'pavlos', 'empty', 'applied'),
+(15, 7, 'Nikos', 'pavlos', 'giwrgos', 'applied'),
+(16, 3, 'paul', 'empty', 'empty', 'approved'),
+(18, 0, 'Nikos', 'pavlos', 'empty', 'applied');
 
 -- --------------------------------------------------------
 
@@ -70,11 +75,11 @@ CREATE TABLE `projects` (
 --
 
 INSERT INTO `projects` (`projectID`, `teacher`, `students_number`, `student1`, `student2`, `student3`, `projectname`, `summary`, `status`, `grade`, `folder`, `date_creation`, `date_approved`, `date_finished`) VALUES
-(0, 'maragkoudakis', 2, 'empty', 'empty', 'empty', 'data mining techniqu', 'Modern techniques of data mining and information retrieval via rapid miner', 'not applied', NULL, 'project0', '2017-05-31 12:31:53', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(2, 'Soras', 3, 'giwrgos', 'Nikos', 'pavlos', 'EllhnwnSynelefsh', 'Polla Lefta', 'not applied', 9.5, 'project2', '2017-06-01 15:04:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(3, 'Soras', 1, 'empty', 'empty', 'empty', 'thes na se dhrw', 'polu ksulo h fash', 'not applied', NULL, 'project3', '2017-05-31 11:55:06', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(4, 'Maragkoudakis', 2, 'empty', 'empty', 'empty', 'WebDev', 'Project sta plaisia tou programmatismou sto diadiktio', 'not applied', NULL, 'project4', '2017-05-31 11:55:06', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(7, 'Soras', 3, 'empty', 'empty', 'empty', 'opou se vrw', 'fapes mia zwh', 'not applied', NULL, 'project7', '2017-05-31 11:55:06', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+(0, 'Maragkoudakis', 2, 'empty', 'empty', 'empty', 'data mining techniqu', 'Modern techniques of data mining and information retrieval via rapid miner', 'applied', NULL, 'project0', '2017-06-02 08:51:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, 'Soras', 3, 'giwrgos', 'Nikos', 'pavlos', 'EllhnwnSynelefsh', 'Polla Lefta', 'complete', 9.5, 'project2', '2017-06-02 08:40:41', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(3, 'Soras', 1, 'paul', 'empty', 'empty', 'thes na se dhrw', 'polu ksulo h fash', 'approved', 9.25, 'project3', '2017-06-02 09:16:18', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(4, 'Maragkoudakis', 2, 'empty', 'empty', 'empty', 'WebDev', 'Project sta plaisia tou programmatismou sto diadiktio', 'applied', NULL, 'project4', '2017-06-02 08:46:27', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(7, 'Soras', 3, 'empty', 'empty', 'empty', 'opou se vrw', 'fapes mia zwh', 'applied', NULL, 'project7', '2017-06-02 08:47:32', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -103,7 +108,13 @@ INSERT INTO `project_confirms` (`confirmID`, `project`, `teacher`, `confirm`, `c
 (54, 2, 'tselepis', '4iZReT4ckj', 0),
 (55, 2, 'Maragkoudakis', 'zbhTJPS25H', 0),
 (56, 2, 'stergiou', 'YM6TLWJZYS', 0),
-(57, 2, 'tselepis', 'r5OqeN1Wxc', 0);
+(57, 2, 'tselepis', 'r5OqeN1Wxc', 0),
+(58, 3, 'Maragkoudakis', '0rc4SM9jrY', 1),
+(59, 3, 'stergiou', 'ge0wD2soRr', 1),
+(60, 3, 'tselepis', '611GOpJsU1', 1),
+(61, 3, 'Maragkoudakis', '0EpqpT8P0v', 0),
+(62, 3, 'stergiou', 'xo6XGmAebq', 0),
+(63, 3, 'tselepis', 'LL8Ouz7f74', 0);
 
 -- --------------------------------------------------------
 
@@ -126,7 +137,11 @@ INSERT INTO `project_grades` (`project_gradeID`, `project`, `teacher`, `grade`) 
 (13, 2, 'tselepis', 10),
 (14, 2, 'Soras', 10),
 (15, 2, 'Maragkoudakis', 9),
-(16, 2, 'stergiou', 9);
+(16, 2, 'stergiou', 9),
+(17, 3, 'Soras', 10),
+(18, 3, 'Soras', 10),
+(19, 3, 'stergiou', 9),
+(20, 3, 'Maragkoudakis', 8);
 
 -- --------------------------------------------------------
 
@@ -156,9 +171,10 @@ INSERT INTO `project_stages` (`project_stagesID`, `projectID`, `stage_name`, `st
 (10, 0, 'erevna', '...', 3, 'done', '2017-05-31', '2017-05-31'),
 (11, 0, 'telikh analysh', '...', 4, 'current', '2017-05-31', '0000-00-00'),
 (12, 3, 'vivliografia', '...', 1, 'done', '2017-05-01', '2017-05-17'),
-(13, 3, 'Ylopoihsh', '...', 2, 'current', '2017-05-17', '2017-05-31'),
+(13, 3, 'Ylopoihsh', '...', 2, 'done', '2017-05-17', '2017-06-02'),
 (35, 2, 'Ylopoihsh', '...', 2, 'done', '0000-00-00', '2017-06-01'),
-(36, 2, 'teliko', '...', 3, 'done', '2017-06-01', '2017-06-01');
+(36, 2, 'teliko', '...', 3, 'done', '2017-06-01', '2017-06-01'),
+(37, 3, 'teliko', '....', 3, 'done', '2017-06-02', '2017-06-02');
 
 -- --------------------------------------------------------
 
@@ -185,7 +201,11 @@ INSERT INTO `uploads` (`uploadID`, `uploader`, `project`, `date_creation`, `fold
 (25, 'Nikos', 2, '2017-05-29 21:00:00', 'project2', 'IMG_20170124_135255.jpg', 1),
 (26, 'Nikos', 2, '2017-05-29 21:00:00', 'project2', 'IMG_20170301_212258.jpg', 1),
 (28, 'Nikos', 0, '2017-05-30 21:00:00', 'project0', 'NickFourtounisCV.pdf', 5),
-(29, 'pavlos', 0, '2017-05-30 21:00:00', 'project0', 'Î’ÎµÎ²Î±Î¯Ï‰ÏƒÎ·_Î£Ï€Î¿Ï…Î´ÏŽÎ½.pdf', 5);
+(29, 'pavlos', 0, '2017-05-30 21:00:00', 'project0', 'Î’ÎµÎ²Î±Î¯Ï‰ÏƒÎ·_Î£Ï€Î¿Ï…Î´ÏŽÎ½.pdf', 5),
+(30, 'paul', 3, '2017-06-01 21:00:00', 'project3', 'Î•ÏÎ³Î±ÏƒÎ¹ÌÎ± 2016-17.pdf', 13),
+(31, 'Soras', 3, '2017-06-01 21:00:00', 'project3', '', 13),
+(32, 'Soras', 3, '2017-06-01 21:00:00', 'project3', 'Î‘Î¦Îœ.pdf', 13),
+(33, 'Soras', 3, '2017-06-01 21:00:00', 'project3', 'analytiki vathmologia (1).pdf', 12);
 
 -- --------------------------------------------------------
 
@@ -213,6 +233,7 @@ INSERT INTO `users` (`username`, `password`, `email`, `type`, `confirm`, `grade`
 ('Nikos', '123', 'nikos@gmail.com', 'student', 'confirmed', 6),
 ('nikos2', '123', 'nikos2@gmail.com', 'student', 'confirmed', 5),
 ('papadimos', '123', 'papadimos@gmail.com', 'teacher', 'confirmed', NULL),
+('paul', '1234567Aa', 'pavlos_sk@hotmail.com', 'student', 'confirmed', NULL),
 ('pavlos', '123', 'pavlaras@gmail', 'student', 'confirmed', 9),
 ('Soras', '123', 'test@windowslive.com', 'teacher', 'confirmed', NULL),
 ('stergiou', '123', 'nickfortune@windowslive.com', 'teacher', 'confirmed', NULL),
@@ -291,27 +312,27 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `applications`
 --
 ALTER TABLE `applications`
-  MODIFY `applicationID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `applicationID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `project_confirms`
 --
 ALTER TABLE `project_confirms`
-  MODIFY `confirmID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `confirmID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 --
 -- AUTO_INCREMENT for table `project_grades`
 --
 ALTER TABLE `project_grades`
-  MODIFY `project_gradeID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `project_gradeID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `project_stages`
 --
 ALTER TABLE `project_stages`
-  MODIFY `project_stagesID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `project_stagesID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 --
 -- AUTO_INCREMENT for table `uploads`
 --
 ALTER TABLE `uploads`
-  MODIFY `uploadID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `uploadID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 --
 -- Constraints for dumped tables
 --
