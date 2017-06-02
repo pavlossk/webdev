@@ -2,6 +2,7 @@
 <?php session_start(); 
     //if($_SESSION["username"]==null)
 ?>
+<?php if(!empty($_SESSION["username"])){ ?>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -128,6 +129,11 @@
                         <br>    
                         <li><button class="button5" onclick="location.href = 'index.php';" style=" width:300px; vertical-align:middle">Charts</button></li>
                         <br> 
+                         <li>
+                            <form id="file_handler" action="Logout.php" method="post">
+                                <input name="folder" type="submit" class=" button5" style=" width:300px; vertical-align:middle" value="Logout">
+                            </form>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -141,4 +147,8 @@
 
     </body>
 </html>
+<?php }else{
+ header("Location:index.php");
+}
+?>
 

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <?php session_start(); ?>
+<?php if(!empty($_SESSION["username"])){ ?>
 <html lang="en">
 
     <head>
@@ -92,6 +93,11 @@
                         <br>
                     <li><button class="button5" onclick="location.href = 'other_charts.php';" style=" width:300px; vertical-align:middle">Charts</button></li>
                     <br>
+                      <li>
+                          <form id="grade" action="Logout.php" method="post">
+                            <input name="grade" type="submit" class=" button5" style=" width:300px; vertical-align:middle" value="Logout">
+                        </form>
+                    </li>
                 </ul>
 
             </div>
@@ -99,3 +105,7 @@
     </body>
 
 </html>
+<?php }else{
+ header("Location:index.php");
+}
+?>
