@@ -44,8 +44,22 @@
     <body style="background-color: #d6d6c2">
         <div class="container">
             <?php
-            if (!empty($_POST["confirm"])) {
-                $_SESSION["confirm"] = $_POST["confirm"];
+            $servername = "localhost";
+            $username = "root";
+            $dbname = "webdev";
+            $conn = new mysqli($servername, $username, '', $dbname);
+            $username = $_SESSION["username"];
+
+            if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+            }
+            if (!empty($_GET["userprofile"])) {
+                $userprofile = $_GET["userprofile"];
+            }
+            if (!empty($_POST["ready"])) {
+                $grade = $_POST["number"];
+                $sql = "UPDATE users SET grade='$grade' WHERE username='$username' ";
+                $conn->query($sql);
             }
             ?>
             <h3 style=" text-align: center; font-size:45px;">Προφίλ χρήστη</h3>
@@ -65,25 +79,17 @@
                 </div>
             </div>
             <?php
-            $servername = "localhost";
-            $username = "root";
-            $dbname = "webdev";
-            $conn = new mysqli($servername, $username, '', $dbname);
-            if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
-            }
-
-            $username = $_SESSION["username"];
-
-            $sql = "SELECT profile,grade FROM users WHERE users.username='$username' ";
             
+            
+            $sql = "SELECT profile,grade FROM users WHERE users.username='$userprofile' ";
             $result = $conn->query($sql);
+
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     ?>
                     <div class="container" style=" border-radius: 4px;  border: 5px solid #999999;  padding:1%; background-color:#b8b894; text-align:center;" >
                         <div class="col-md-4" >
-                            <h3 style="font-size:18px; font:bold;"><?php echo $username ?></h3>
+                            <h3 style="font-size:18px; font:bold;"><?php echo $userprofile ?></h3>
                         </div>
                         <div class="col-md-4" >
                             <h3 style="font-size:18px; font:bold;"><?php echo $row["grade"] ?></h3>
@@ -100,45 +106,38 @@
             ?>
             <br>
             <br>
-            <?php if($_SESSION["username"]==$_GET["userprofile"]) : ?>
-            <form id="fash" action="upload.php" method="post" enctype="multipart/form-data">
-                <input class="" type="file" name="file" size="50" />
-                <br />
+            <div>
+                <?php if($_SESSION["username"]==$userprofile) : ?>
+                    <form id="profile" action="upload.php" method="post" enctype="multipart/form-data">
+                        <input class="" type="file" name="file" size="50" />
+                        <br />
 
-                <?php
-                $servername = "localhost";
-                $username = "root";
-                $dbname = "webdev";
+                        <?php
+                        $servername = "localhost";
+                        $username = "root";
+                        $dbname = "webdev";
 
-                $conn = new mysqli($servername, $username, '', $dbname);
-                if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
-                }
-
-                $projectID = $_SESSION["projectID"];
-                $sql = "SELECT * FROM project_stages WHERE projectID='$projectID' ORDER BY stage_number ASC";
-                ?>
-                <select name="fash" id="mySelect1" class="dropbtn1" form="fash">  
-                    <?php
-                    $result = $conn->query($sql);
-                    if ($result->num_rows > 0) {
-                        $counter = 1;
-                        while ($row = $result->fetch_assoc()) {
-                            ?>
-
-                            <option value="<?php echo $row["project_stagesID"]; ?>"><?php
-                                echo "$counter. ";
-                                echo $row["stage_name"];
-                                $counter++;
-                                ?></option>
-
-                                <?php
-                            }
+                        $conn = new mysqli($servername, $username, '', $dbname);
+                        if ($conn->connect_error) {
+                            die("Connection failed: " . $conn->connect_error);
                         }
                         ?>
-                    </select>
-                    <input class="button4" style="background-color:#ff6600 " type="submit" value="Upload" />
-                </form>
+                        <select name="profile" id="mySelect1" class="dropbtn1" form="profile">  
+
+                            <option value="Βιογραφικό">Βιογραφικό</option>
+                        </select>
+                        <input class="button4" style="background-color:#ff6600 " type="submit" value="Upload" />
+                    </form>
+
+                    <ul style="list-style-type:none; align-content:left; ">
+                        <form action="" method="post"> 
+                            <h3 style="font-size:20px; font:bold;">Πρόσθεσε τον μέσο όρο σου</h3> 
+                            <input style="width:300px;" type="number" name="number">
+                            <br> 
+                            <input name="ready" class="button5" type="submit">
+                            <br>
+                        </form>
+                    </ul>
                 <?php endif; ?>
             </div>
             <br>

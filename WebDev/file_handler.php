@@ -105,15 +105,12 @@
                         </div> 
                     </div>
 
-
                     <?php
                 }
             } else {
                 echo "0 results";
             }
             ?>
-
-
 
             <br>
             <br>
@@ -147,7 +144,6 @@
                                 echo $row["stage_name"];
                                 $counter++;
                                 ?></option>
-
 
                             <?php
                         }
@@ -217,9 +213,6 @@
 
                             <?php } ?>
                         </div>
-
-
-
                     </div>
                     <br>
                     <?php
@@ -227,11 +220,7 @@
             }
             ?>
 
-
-
         </ul>
-
-
         <div class="container">
             <form id="pp" action="<?php echo $_SESSION["path"]; ?>" method="post">
                 <input name="log" type="submit" class="button5" style="align-content:center; border-color:#ffa31a;color:black; background-color:orange;" value="Back">

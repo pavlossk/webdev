@@ -115,7 +115,7 @@
                                 <div class="col-md-3 ">
                                     <h3 style=" font-size: 18px;">  <?php
                                         if ($row["user"] != 'empty') {
-                                            echo $row["user"];
+                                            echo "<a href='http://localhost/webdev/WebDev/profile.php?userprofile=".$row["user"]."'>".$row["user"]."</a>";
                                             echo "   Βαθμός:  {$row['grade'] } ";
                                             $array[$count] = $row["user"];
                                             $count++;
@@ -137,7 +137,7 @@
                                 <div class="col-md-3 ">
                                     <h3 style=" font-size: 18px;">  <?php
                                         if ($row["user"] != 'empty') {
-                                            echo $row["user"];
+                                            echo "<a href='http://localhost/webdev/WebDev/profile.php?userprofile=".$row["user"]."'>".$row["user"]."</a>";
                                             echo " Βαθμός:  {$row['grade'] } ";
                                             $array[$count] = $row["user"];
                                             $count++;
@@ -180,7 +180,7 @@
                                 <div class="col-md-3 ">
                                     <h3 style=" font-size: 18px;">  <?php
                                         if ($row["user"] != 'empty') {
-                                            echo $row["user"];
+                                            echo "<a href='http://localhost/webdev/WebDev/profile.php?userprofile=".$row["user"]."'>".$row["user"]."</a>";
                                             echo "   Βαθμός:  {$row['grade'] } ";
                                             $array1[$count1] = $row["user"];
                                             $count1++;
@@ -202,7 +202,7 @@
                                 <div class="col-md-3 ">
                                     <h3 style=" font-size: 18px;">  <?php
                                         if ($row["user"] != 'empty') {
-                                            echo $row["user"];
+                                            echo "<a href='http://localhost/webdev/WebDev/profile.php?userprofile=".$row["user"]."'>".$row["user"]."</a>";
                                             echo " Βαθμός:  {$row['grade'] } ";
                                             $array1[$count1] = $row["user"];
                                             $count1++;
