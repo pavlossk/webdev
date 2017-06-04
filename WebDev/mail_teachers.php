@@ -91,8 +91,12 @@ require '/PHPMailer-master/PHPMailerAutoload.php';
                 die("Connection failed: " . $conn->connect_error);
             }
             $project=$_SESSION["projectID"];
-            $sql = "INSERT INTO project_confirms(project, teacher, confirm) VALUES ($project,'$user','$random')";
-            $conn->query($sql);
+            $sql1 = "SELECT applicationID FROM projects,applications WHERE applications.projectID=projects.projectID and projects.projectID='$project' AND applications.status='teacher_approved'";
+            $result1 = $conn->query($sql1);
+            $row1 = $result1->fetch_assoc();
+
+            $sql2 = "INSERT INTO project_confirms(project, teacher, confirm,application) VALUES ('$project','$user','$random','$row1[applicationID]')";
+            $conn->query($sql2);
             if (!$mail->send()) {
                 $path=(string)"uploads/log.html";
                 $fp = fopen($path, 'a');

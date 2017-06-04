@@ -81,9 +81,8 @@
             <?php
             
             
-            $sql = "SELECT profile,grade FROM users WHERE users.username='$userprofile' ";
+            $sql = "SELECT profile,grade FROM users WHERE username='$userprofile' AND profile<>'' ";
             $result = $conn->query($sql);
-
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     ?>
@@ -100,8 +99,6 @@
                     </div>
                     <?php
                 }
-            } else {
-                echo "0 results";
             }
             ?>
             <br>

@@ -78,17 +78,17 @@
                 $confirm=$_SESSION["confirm"];
                 $sql = "UPDATE project_confirms SET confirmed=1 WHERE confirm='$confirm'";
                 if (mysqli_query($conn, $sql)) {
-                    $sql1 = "SELECT COUNT(*) as count FROM project_confirms WHERE project=(SELECT project FROM project_confirms WHERE confirm='$confirm')  AND confirmed=1";
+                    $sql1 = "SELECT COUNT(*) as count,application FROM project_confirms WHERE project=(SELECT project FROM project_confirms WHERE confirm='$confirm')  AND confirmed=1";
                     $result=mysqli_query($conn, $sql1);
                     $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
                     if($row[count]==3){
                         $sql1 = "UPDATE projects SET status='approved' WHERE `projectID`=(SELECT project FROM `project_confirms` WHERE confirm='$confirm')";
                         mysqli_query($conn, $sql1);
+                        $sql2 = "UPDATE applications SET status='approved' WHERE applicationID='$row[application]'";
+                        mysqli_query($conn, $sql2);
                     }
                     $message = "Η έγγριση έγινε με επιτυχία";   
-                        echo "<script type='text/javascript'>alert('$message'); window.location.href = '/webdev/WebDev/teacher_menu.php';</script>";
-                    
-                    
+                    echo "<script type='text/javascript'>alert('$message'); window.location.href = '/webdev/WebDev/';</script>";
                 } else {
                     echo "Error updating record: " . mysqli_error($conn);
                 }

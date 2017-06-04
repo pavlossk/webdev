@@ -134,7 +134,7 @@
                     die("Connection failed: " . $conn->connect_error);
                 }
                 $message=$appid;
-                $sql = "SELECT `students_number` FROM `projects`,applications WHERE applications.projectID=projects.projectID and applications.applicationID=2";
+                $sql = "SELECT `students_number` FROM `projects`,applications WHERE applications.projectID=projects.projectID and applications.applicationID='$appid'";
                 $result = $conn->query($sql);
                 $row = $result->fetch_assoc();
                 if ($row['students_number'] == 1) {
