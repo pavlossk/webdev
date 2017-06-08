@@ -54,13 +54,16 @@
             <br>
             <div class="container" style="text-align:center;">
 
-                <div class="col-md-4 " >
+                <div class="col-md-3" >
                     <h3 style="font-size:18px; font-weight: bold;">File Name</h3>
                 </div>
-                <div class="col-md-4" >
-                    <h3 style="font-size:18px; font-weight: bold;">Stage</h3>
+                <div class="col-md-3" >
+                    <h3 style="font-size:18px; font-weight: bold;">File Type</h3>
                 </div>
-                <div class="col-md-4" >
+                <div class="col-md-3" >
+                    <h3 style="font-size:18px; font-weight: bold;">File Size(KB)</h3>
+                </div>
+                <div class="col-md-3" >
                     <h3 style="font-size:18px; font-weight: bold;">View</h3>
                 </div>
             </div>
@@ -88,13 +91,16 @@
                 while ($row = $result->fetch_assoc()) {
                     ?>
                     <div class="container" style=" border-radius: 4px;  border: 5px solid #999999;  padding:1%; background-color:#b8b894; text-align:center;" >
-                        <div class="col-md-4" >
+                        <div class="col-md-3" >
                             <h3 style="font-size:18px; font:bold;"><?php echo $row["file"] ?></h3>
                         </div>
-                        <div class="col-md-4" >
-                            <h3 style="font-size:18px; font:bold;"><?php echo $row["project_stage"]?></h3>
+                        <div class="col-md-3" >
+                            <h3 style="font-size:18px; font:bold;"><?php echo 'PDF' ?></h3>
                         </div>
-                        <div class="col-md-4" >
+                        <div class="col-md-3" >
+                            <h3 style="font-size:18px; font:bold;"><?php echo '12TB' ?></h3>
+                        </div>
+                        <div class="col-md-3" >
                             <h3 style="font-size:18px; font:bold;"><a href="/webdev/WebDev/uploads/<?php echo $row["folder"] ?>/<?php echo $row["file"] ?><?php echo '' ?>" >view file</a></h3>
                         </div> 
                     </div>
@@ -169,8 +175,11 @@
         ?>
         <br>
         <br>
+        <br>
+        <br>
+        <br>
         <hr>
-        <h3 style=" font-size:30px; text-align: center">Τα στάδια για την Διπλωματική μέχρι στιγμής</h3>
+        <h3 style=" font-size:35px; text-align: center">Τα στάδια για την Διπλωματική μέχρι στιγμής</h3>
         <br>
         <ul style="list-style-type:none; align-content:center; ">
 
@@ -179,18 +188,17 @@
                 // output data of   each row
                 while ($row = $result->fetch_assoc()) {
                     ?>
-                    <div class="container" style=" zoom:80%; border-radius: 4px; border: 5px solid #999999; zoom:70%;   padding:1%; background-color:#b8b894; text-align:center;" >
+                    <div class="container" style=" border-radius: 4px; border: 5px solid #999999; zoom:70%;   padding:1%; background-color:#b8b894; text-align:center;" >
 
                         <div class="col-md-3" >
-                            <h3 style=" font-size: 18px;">  <?php echo $row["stage_number"] ?></h3>
-
+                            <h3 style="font-size:25px;  font-weight: bold;"><?php echo $row["stage_name"] ?></h3> 
                         </div>
                         <div class="col-md-3">
-                            <h3 style="font-size:25px;  font-weight: bold;"><?php echo $row["stage_name"] ?></h3> 
+                            <h3 style="font-size: 16px;">  <?php echo $row["stage_summary"] ?> </h3>
                         </div>
 
                         <div class="col-md-3 ">
-                            <h3 style="font-size: 16px;">  <?php echo $row["stage_summary"] ?> </h3>
+                            <h3 style=" font-size: 18px;">  <?php echo $row["stage_number"] ?></h3>
                         </div>
                         <div class="col-md-3">
                             <?php if ($row["status"] == 'current') { ?>   

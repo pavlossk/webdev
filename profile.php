@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <?php session_start(); ?>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-        <title>WebDev - File Hanlder</title>
-        <link rel="icon" href="img/trasp.png">
+    <title>WebDev - File Hanlder</title>
+    <link rel="icon" href="img/trasp.png">
 
-        <meta name="description" content="Your Description Here">
-        <meta name="keywords" content="bootstrap themes, portfolio, responsive theme">
-        <meta name="author" content="ThemeForces.Com">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <meta name="description" content="Your Description Here">
+    <meta name="keywords" content="bootstrap themes, portfolio, responsive theme">
+    <meta name="author" content="ThemeForces.Com">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
         <!-- Favicons
         ================================================== -->
@@ -79,6 +79,8 @@
                 </div>
             </div>
             <?php
+            
+            
             $sql = "SELECT profile,grade FROM users WHERE username='$userprofile' AND profile<>'' ";
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
@@ -101,8 +103,8 @@
             ?>
             <br>
             <br>
-            <div class="container"> 
-                <?php if ($_SESSION["username"] == $userprofile) : ?>
+            <div>
+                <?php if($_SESSION["username"]==$userprofile) : ?>
                     <form id="profile" action="upload.php" method="post" enctype="multipart/form-data">
                         <input class="" type="file" name="file" size="50" />
                         <br />
@@ -124,17 +126,15 @@
                         <input class="button4" style="background-color:#ff6600 " type="submit" value="Upload" />
                     </form>
 
-                    <br>
-                    <br>
-                    <form action="" method="post"> 
-                        <h3 style="font-size:20px; font:bold;">Πρόσθεσε τον μέσο όρο σου</h3> 
-                        <input style="width:300px;" type="number" name="number">
-                        <br> 
-                        <br> 
-                        <input name="ready" class="button5" type="submit">
-                        <br>
-                    </form>
-
+                    <ul style="list-style-type:none; align-content:left; ">
+                        <form action="" method="post"> 
+                            <h3 style="font-size:20px; font:bold;">Πρόσθεσε τον μέσο όρο σου</h3> 
+                            <input style="width:300px;" type="number" name="number">
+                            <br> 
+                            <input name="ready" class="button5" type="submit">
+                            <br>
+                        </form>
+                    </ul>
                 <?php endif; ?>
             </div>
             <br>
@@ -153,4 +153,4 @@
         </div>
 
     </body>
-</html>
+    </html>
