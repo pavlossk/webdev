@@ -133,7 +133,7 @@
                 }
 
                 mkdir("uploads/".$title, 0700);
-                $sql = "INSERT INTO projects(teacher, students_number, status, projectname, summary, date_creation,student1,student2,student3,folder) VALUES('$teacher','$students','not applied','$title','$summary',CURRENT_TIMESTAMP,'empty','empty','empty','$title')";
+                $sql = "INSERT INTO projects(teacher, students_number, status, projectname, summary, date_creation,student1,student2,student3,folder) VALUES('$teacher','$students','not applied','$title','$summary',CURRENT_DATE,'empty','empty','empty','$title')";
                 if (mysqli_query($conn, $sql)) {
                     echo "Record updated successfully";
                     $message = "Η αίτηση σου καταχωρήθηκε.";

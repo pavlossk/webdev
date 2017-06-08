@@ -16,7 +16,7 @@
         }
 
         $teacher = $_SESSION["username"];
-        $sql = "SELECT project_stages.project_stagesID as id ,project_stages.status as status , projects.projectname as pro ,project_stages.stage_name as name,YEAR(start_date) as yeara, MONTH(start_date) as montha,DAY(start_date) as daya, YEAR(end_date) as yearf, MONTH(end_date) as monthf,DAY(end_date) as dayf  FROM project_confirms, project_stages,projects WHERE project_stages.projectID = projects.projectID AND (projects.teacher='$teacher' OR (project_confirms.teacher='$teacher' AND project_confirms.project=projects.projectID)) and (project_stages.status='done' or project_stages.status='current')";
+        $sql = "SELECT project_stages.project_stagesID as id ,project_stages.status as status , projects.projectname as pro ,project_stages.stage_name as name,YEAR(start_date) as yeara, MONTH(start_date) as montha,DAY(start_date) as daya, YEAR(end_date) as yearf, MONTH(end_date) as monthf,DAY(end_date) as dayf FROM project_confirms, project_stages,projects WHERE project_stages.projectID = projects.projectID AND (projects.teacher='$teacher' OR (project_confirms.teacher='$teacher' AND project_confirms.project=projects.projectID)) and (project_stages.status='done' or project_stages.status='current')";
         $result = $conn->query($sql);
         ?>
         function drawChart() {
@@ -51,7 +51,7 @@
                     }
                     ?>
                     data.addRows([
-                        ['<?php echo $row["id"] ?>', '<?php echo $row["pro"] ?>', '<?php echo $row["status"] ?>',
+                        ['<?php echo $row["id"] ?>', '<?php echo $row["pro"]." - ".$row["name"] ?>', '<?php echo $row["status"] ?>',
                         new Date(<?php echo $row["yeara"]; ?>, <?php echo $row["montha"]; ?>, <?php echo $row["daya"]; ?>), new Date(<?php echo $row["yearf"]; ?>, <?php echo $row["monthf"]; ?>, <?php echo $row["dayf"]; ?>), null, <?php echo $percent; ?>, null],
                         ]);
                     <?php

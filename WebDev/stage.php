@@ -59,9 +59,9 @@
             $result=mysqli_query($conn, $sql);
             $count = mysqli_num_rows($result);
             if ($count>0){
-                $sql1 = "INSERT INTO `project_stages`(`projectID`, `stage_name`, `stage_summary`, `stage_number`,status) VALUES ('$projectid','$stage','$summary','$number','pending')";
+                $sql1 = "INSERT INTO `project_stages`(`projectID`, `stage_name`, `stage_summary`, `stage_number`,status,start_date) VALUES ('$projectid','$stage','$summary','$number','pending',CURRENT_DATE)";
             }else{
-                $sql1 = "INSERT INTO `project_stages`(`projectID`, `stage_name`, `stage_summary`, `stage_number`,status) VALUES ('$projectid','$stage','$summary','$number','current')";
+                $sql1 = "INSERT INTO `project_stages`(`projectID`, `stage_name`, `stage_summary`, `stage_number`,status,start_date) VALUES ('$projectid','$stage','$summary','$number','current',CURRENT_DATE)";
             }
             $conn->query($sql1);
             $conn->close();

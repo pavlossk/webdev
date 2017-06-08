@@ -92,7 +92,6 @@
                     <li><button class="button5" onclick="location.href = 'index.php';" style="width:300px; vertical-align:middle">Δημιουργία Εγγράφου PDF</button></li>
                     <br>
 
-                    <br>
                     <li><button class="button5" onclick="location.href = 'other_charts.php';" style=" width:300px; vertical-align:middle">Charts</button></li>
                     <br>
                     <li>

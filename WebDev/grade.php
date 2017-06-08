@@ -144,7 +144,7 @@ require '/PHPMailer-master/PHPMailerAutoload.php';?>
         $result4=mysqli_query($conn, $sql4);
         $row4 = mysqli_fetch_array($result4,MYSQLI_ASSOC);
         if($row4['count']==4){
-            $sql5 = "UPDATE projects SET grade=(SELECT AVG(`grade`) FROM `project_grades` WHERE `project`='$projectid') WHERE `projectID`='$projectid'";
+            $sql5 = "UPDATE projects SET status='complete',grade=(SELECT AVG(`grade`) FROM `project_grades` WHERE `project`='$projectid'),date_finished=CURRENT_DATE WHERE `projectID`='$projectid'";
             mysqli_query($conn, $sql5);
             //sendEmail($row["email"],$row["teacher"],1);
         }

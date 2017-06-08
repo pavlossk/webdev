@@ -82,7 +82,7 @@
                     $result=mysqli_query($conn, $sql1);
                     $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
                     if($row[count]==3){
-                        $sql1 = "UPDATE projects SET status='approved' WHERE `projectID`=(SELECT project FROM `project_confirms` WHERE confirm='$confirm')";
+                        $sql1 = "UPDATE projects SET status='approved',date_approved=CURRENT_DATE WHERE `projectID`=(SELECT project FROM `project_confirms` WHERE confirm='$confirm')";
                         mysqli_query($conn, $sql1);
                         $sql2 = "UPDATE applications SET status='approved' WHERE applicationID='$row[application]'";
                         mysqli_query($conn, $sql2);
