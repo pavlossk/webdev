@@ -63,8 +63,9 @@ require '/PHPMailer-master/PHPMailerAutoload.php';?>
 
         $mail->Subject = 'Account Confirmation';
         $random = generateRandomString();
+        $project=$_SESSION["projectID"];
         if($text==1){
-            $mail->Body = 'Hello '.$user.', the user '.$_SESSION["username"].' has asked you to put a final grade to the project: '.'  http://localhost/webdev/WebDev/grade.php?confirm='.$random;
+            $mail->Body = 'Hello '.$user.', the user '.$_SESSION["username"].' has asked you to put a final grade to the project: '.$project.'  http://localhost/webdev/WebDev/grade.php?confirm='.$random;
         }else{
 
         }
@@ -77,8 +78,7 @@ require '/PHPMailer-master/PHPMailerAutoload.php';?>
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
-        $project=$_SESSION["projectID"];
-        $sql = "INSERT INTO project_confirms(project, teacher, confirm) VALUES ($project,'$user','$random')";
+        $sql = "INSERT INTO project_confirms(project, teacher, confirm) VALUES ('$project','$user','$random')";
         $conn->query($sql);
         if (!$mail->send()) {
             $path=(string)"uploads/log.html";

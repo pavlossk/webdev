@@ -55,7 +55,7 @@
                 $servername = "localhost";
                 $username = "root";
                 $dbname = "webdev";
-                echo $_POST["typed"];
+                $type=$_POST["typed"];
                 $conn = new mysqli($servername, $username, '', $dbname);
                 // Check connection
                 if ($conn->connect_error) {
@@ -63,11 +63,11 @@
                 }
 
                 $confirm=$_SESSION["confirm"];
-                $sql = "UPDATE users SET type='student',confirm='confirmed' WHERE confirm='$confirm'";
+                $sql = "UPDATE users SET type='$type',confirm='confirmed' WHERE confirm='$confirm'";
 
                 if (mysqli_query($conn, $sql)) {
                     $message = "Η εγγραφή έγινε με επιτυχία";
-                    echo "<script type='text/javascript'>alert('$message'); window.location.href = '/webdev/WebDev/login.php';</script>";
+                    echo "<script type='text/javascript'>alert('$type'); window.location.href = '/webdev/WebDev/login.php';</script>";
                 } else {
                     echo "Error updating record: " . mysqli_error($conn);
                 }

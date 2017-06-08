@@ -3,19 +3,19 @@
 <?php if(!empty($_SESSION["username"])){ ?>
 <html lang="en">
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>WebDev - Teacher Menu</title>
-        <link rel="icon" href="img/trasp.png">
+    <title>WebDev - Teacher Menu</title>
+    <link rel="icon" href="img/trasp.png">
 
-        <meta name="description" content="Your Description Here">
-        <meta name="keywords" content="bootstrap themes, portfolio, responsive theme">
-        <meta name="author" content="ThemeForces.Com">
+    <meta name="description" content="Your Description Here">
+    <meta name="keywords" content="bootstrap themes, portfolio, responsive theme">
+    <meta name="author" content="ThemeForces.Com">
 
         <!-- Favicons
-            ================================================== -->
+        ================================================== -->
         <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
         <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
         <link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72.png">
@@ -26,7 +26,7 @@
         <link rel="stylesheet" type="text/css" href="fonts/font-awesome/css/font-awesome.css">
 
         <!-- Stylesheet
-            ================================================== -->
+        ================================================== -->
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <link rel="stylesheet" type="text/css" href="css/responsive.css">
 
@@ -54,6 +54,12 @@
                     <li><button class="button5" onclick="location.href = 'show_projects.php';" style=" width:300px; vertical-align:middle">Διπλωματικές ανά τρέχουσα κατάσταση</button></li>
                     <br>
                     <li><button class="button5" onclick="location.href = 'show_applications.php'" style=" width:300px; vertical-align:middle">Αιτήσεις Διπλωματικών / Έγκριση</button></li>
+                    <br>
+                    <li>
+                        <form id="confirm_project" action="select_project.php" method="post">
+                            <input name="confirm_project" type="submit" class=" button5" style=" width:300px; vertical-align:middle" value="Αίτηση έγγρισης διπλωματικής">
+                        </form>
+                    </li>
                     <br>
                     <li>
                         <form id="chat" action="select_project.php" method="post">
@@ -85,27 +91,23 @@
                     <br>
                     <li><button class="button5" onclick="location.href = 'index.php';" style="width:300px; vertical-align:middle">Δημιουργία Εγγράφου PDF</button></li>
                     <br>
-                    <li>
-                        <form id="confirm_project" action="select_project.php" method="post">
-                            <input name="confirm_project" type="submit" class=" button5" style=" width:300px; vertical-align:middle" value="Αίτηση έγγρισης διπλωματικής">
-                        </form>
 
-                        <br>
+                    <br>
                     <li><button class="button5" onclick="location.href = 'other_charts.php';" style=" width:300px; vertical-align:middle">Charts</button></li>
                     <br>
-                      <li>
-                          <form id="grade" action="Logout.php" method="post">
-                            <input name="grade" type="submit" class=" button5" style=" width:300px; vertical-align:middle" value="Logout">
-                        </form>
-                    </li>
-                </ul>
+                    <li>
+                      <form id="grade" action="Logout.php" method="post">
+                        <input name="grade" type="submit" class=" button5" style=" width:300px; vertical-align:middle" value="Logout">
+                    </form>
+                </li>
+            </ul>
 
-            </div>
         </div>
-    </body>
+    </div>
+</body>
 
 </html>
 <?php }else{
- header("Location:index.php");
+   header("Location:index.php");
 }
 ?>

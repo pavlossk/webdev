@@ -133,7 +133,6 @@
 
                             <h3 style="font-size:20px; font:bold;">Do the math: <?php $number1=rand(1,9);$number2=rand(1,9);echo $number1."+".$number2;$_SESSION["summ"]=$number1+$number2?></h3>
                             <input style="width:300px;" type="text" name="math">
-                            <?php echo $_SESSION["summ"];?>
                             <h3 style="font-size:20px; font:bold;">Email:</h3>
                             <input style="width:300px;" type="text"  name="email">
 
