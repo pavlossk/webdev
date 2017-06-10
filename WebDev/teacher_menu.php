@@ -89,9 +89,12 @@
                     <br>
                     <li><button class="button5" onclick="location.href = 'gantt2.php';" style=" width:300px; vertical-align:middle">Στατιστικά Στοιχεία</button></li>
                     <br>
-                    <li><button class="button5" onclick="location.href = 'index.php';" style="width:300px; vertical-align:middle">Δημιουργία Εγγράφου PDF</button></li>
+                    <li>
+                        <form id="pdf" action="select_project.php" method="post">
+                            <input name="pdf" type="submit" class=" button5" style=" width:300px; vertical-align:middle" value="Δημιουργία Εγγράφου PDF">
+                        </form>
+                    </li>
                     <br>
-
                     <li><button class="button5" onclick="location.href = 'other_charts.php';" style=" width:300px; vertical-align:middle">Charts</button></li>
                     <br>
                     <li>
