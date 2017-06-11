@@ -113,6 +113,8 @@
 
                             $sql = "UPDATE project_stages SET status='done',end_date= CURRENT_DATE WHERE projectID='$projectid' AND project_stagesid='$stageid' ";
                             $sql1 = " UPDATE project_stages SET status='current',start_date = CURRENT_DATE WHERE projectID='$projectid' AND stage_number='$stagenumber' ";
+                            $sql2 = "UPDATE `projects` SET `status`='ready',date_ready= CURRENT_DATE WHERE `projectID`=(SELECT DISTINCT `projectID` FROM `project_stages` WHERE ((SELECT COUNT(*) FROM project_stages WHERE status='done' AND projectID='$projectid')=(SELECT COUNT(*) FROM project_stages  WHERE projectID='$projectid' )) AND projectID='$projectid')";
+
 
                             if (mysqli_query($conn, $sql)) {
 
@@ -122,6 +124,13 @@
                                 echo "Error updating record: " . mysqli_error($conn);
                             }
                             if (mysqli_query($conn, $sql1)) {
+
+                                echo "Record updated successfully";
+                                header('Location: ' . $_SERVER['REQUEST_URI']);
+                            } else {
+                                echo "Error updating record: " . mysqli_error($conn);
+                            }
+                            if (mysqli_query($conn, $sql2)) {
 
                                 echo "Record updated successfully";
                                 header('Location: ' . $_SERVER['REQUEST_URI']);
