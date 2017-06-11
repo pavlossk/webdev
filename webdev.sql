@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 08, 2017 at 03:06 PM
+-- Generation Time: Jun 11, 2017 at 10:23 AM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -40,7 +40,8 @@ CREATE TABLE `applications` (
 --
 
 INSERT INTO `applications` (`applicationID`, `projectID`, `student1`, `student2`, `student3`, `status`) VALUES
-(8, 2, 'tester', 'paul', 'nikos', 'approved');
+(8, 2, 'dimitris', 'paul', 'nikos', 'approved'),
+(9, 3, 'nikos', 'empty', 'empty', 'teacher_approved');
 
 -- --------------------------------------------------------
 
@@ -97,8 +98,8 @@ CREATE TABLE `projects` (
 
 INSERT INTO `projects` (`projectID`, `teacher`, `students_number`, `student1`, `student2`, `student3`, `projectname`, `summary`, `status`, `grade`, `folder`, `date_creation`, `date_approved`, `date_finished`) VALUES
 (1, 'maragkoudakis', 2, 'empty', 'empty', 'empty', 'data mining techniques', 'Modern techniques of data mining and information retrieval via rapid miner', 'complete', 10, 'project0', '2017-02-01', '2017-03-03', '2017-06-08'),
-(2, 'kambourakis', 3, 'tester', 'paul', 'nikos', 'penetration testing', 'penetration testing on aegean\'s webserver', 'complete', 9.5, 'project2', '2017-01-10', '2017-02-28', '2017-06-08'),
-(3, 'kambourakis', 1, 'empty', 'empty', 'empty', 'firewalls security', 'firewall installation and configuration on aegean webserver', 'not applied', NULL, 'project3', '2017-06-08', '0000-00-00', '0000-00-00'),
+(2, 'kambourakis', 3, 'dimitris', 'paul', 'empty', 'penetration testing', 'penetration testing on aegean\'s webserver', 'complete', 9.5, 'project2', '2017-01-10', '2017-02-28', '2017-06-08'),
+(3, 'kambourakis', 1, 'empty', 'empty', 'empty', 'firewalls security', 'firewall installation and configuration on aegean webserver', 'ready', NULL, 'project3', '2017-06-08', '0000-00-00', '0000-00-00'),
 (4, 'maragkoudakis', 2, 'empty', 'empty', 'empty', 'information retrieval algorithms', 'studying and researching on modern ir algorithms', 'not applied', NULL, 'project4', '2017-06-04', '0000-00-00', '0000-00-00'),
 (7, 'kambourakis', 3, 'empty', 'empty', 'empty', 'forensics techniques', 'research and investigating on recent attacks on aegean websever via forensics', 'not applied', NULL, 'project7', '2017-06-04', '0000-00-00', '0000-00-00');
 
@@ -219,24 +220,25 @@ CREATE TABLE `users` (
   `type` varchar(20) NOT NULL,
   `confirm` varchar(20) NOT NULL,
   `grade` int(11) DEFAULT NULL,
-  `profile` varchar(30) NOT NULL
+  `profile` varchar(30) NOT NULL,
+  `signature` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`username`, `password`, `email`, `type`, `confirm`, `grade`, `profile`) VALUES
-('empty', 'empty', 'empty', 'empty', 'empty', NULL, ''),
-('giwrgos', '123', 'giwrgos@gmail.com', 'student', 'confirmed', 7, ''),
-('kambourakis', '123', 'test@windowslive.com', 'teacher', 'confirmed', NULL, ''),
-('maragkoudakis', '123', 'nikos.fourtounis95@gmail.com', 'teacher', 'confirmed', NULL, ''),
-('nikos', '123asdA', 'nikos.fourtounis957@gmail.com', 'student', 'confirmed', 9, 'NickFourtounisCV.pdf'),
-('papadimos', '123', 'papadimos@gmail.com', 'teacher', 'confirmed', NULL, ''),
-('paul', '1234567Aa', 'pavlos_sk@hotmail.com', 'student', 'confirmed', NULL, ''),
-('stergiou', '123', 'nickfortune@windowslive.com', 'teacher', 'confirmed', NULL, ''),
-('tester', '123asdA', 'citysens.contanct@gmail.com', 'student', 'confirmed', 8, 'analytiki vathmologia (1).pdf'),
-('tselepis', '123', 'icsd13195@icsd.aegean.gr', 'teacher', 'confirmed', NULL, '');
+INSERT INTO `users` (`username`, `password`, `email`, `type`, `confirm`, `grade`, `profile`, `signature`) VALUES
+('dimitris', '123', 'citysens.contanct@gmail.com', 'student', 'confirmed', 8, 'analytiki vathmologia (1).pdf', ''),
+('empty', 'empty', 'empty', 'empty', 'empty', NULL, '', ''),
+('giwrgos', '123', 'giwrgos@gmail.com', 'student', 'confirmed', 7, '', ''),
+('kambourakis', '123', 'test@windowslive.com', 'teacher', 'confirmed', NULL, '', 'signature1'),
+('maragkoudakis', '123', 'nikos.fourtounis95@gmail.com', 'teacher', 'confirmed', NULL, '', 'signature2'),
+('nikos', '123', 'nikos.fourtounis957@gmail.com', 'student', 'confirmed', 9, 'NickFourtounisCV.pdf', ''),
+('papadimos', '123', 'papadimos@gmail.com', 'teacher', 'confirmed', NULL, '', ''),
+('paul', '123', 'pavlos_sk@hotmail.com', 'student', 'confirmed', NULL, '', ''),
+('stergiou', '123', 'nickfortune@windowslive.com', 'teacher', 'confirmed', NULL, '', 'signature3'),
+('tselepis', '123', 'icsd13195@icsd.aegean.gr', 'teacher', 'confirmed', NULL, '', 'signature4');
 
 --
 -- Indexes for dumped tables
@@ -317,7 +319,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `applications`
 --
 ALTER TABLE `applications`
-  MODIFY `applicationID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `applicationID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `lessons`
 --

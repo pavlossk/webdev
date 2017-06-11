@@ -79,10 +79,14 @@ $pdf->Write(0, 'Students:');
 $pdf->SetFont('Helvetica',null,20);
 $pdf->SetXY(125, 60);
 $pdf->Write(0, $student1);
-$pdf->SetXY(125, 70);
-$pdf->Write(0, $student2);
-$pdf->SetXY(125, 80);
-$pdf->Write(0, $student3);
+if($student2!='empty'){
+	$pdf->SetXY(125, 70);
+	$pdf->Write(0, $student2);
+}
+if($student3!='empty'){
+	$pdf->SetXY(125, 80);
+	$pdf->Write(0, $student3);
+}
 $pdf->SetFont('Helvetica','U',20);
 $pdf->SetXY(10, 120);
 $pdf->Write(0, 'Final Grade:');
